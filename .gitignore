@@ -22,7 +22,8 @@ sysinfo.txt
 /*.unityproj
 /*.booproj
 /.idea*/
- 
+
+
 # ============ #
 # OS generated #
 # ============ #
@@ -33,3 +34,10 @@ sysinfo.txt
 ehthumbs.db
 [Tt]humbs.db
 [Dd]esktop.ini
+
+# Executables and Exe_Data
+*.exe
+Leaf_Data/
+
+
+
