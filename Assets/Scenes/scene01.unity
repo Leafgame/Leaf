@@ -324,6 +324,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2033905552}
   - 114: {fileID: 2033905551}
+  - 114: {fileID: 2033905553}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -343,7 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartLocation: {x: 0, y: 10, z: 0}
-  Prefab: {fileID: 1000012559210258, guid: ae658593125f2f242a5078331913d74e, type: 2}
+  Prefab: {fileID: 1000014229097902, guid: 9d71a1f2c19315a4faa11b573265fcd5, type: 2}
 --- !u!4 &2033905552
 Transform:
   m_ObjectHideFlags: 0
@@ -357,3 +358,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &2033905553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2033905550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fed267daf83f9438d193e2d51d13bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpHoldTime: 0.1

@@ -204,14 +204,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCameraView: {fileID: 20000012810312408}
+  _rigidbody: {fileID: 0}
   SmoothFollowSpeed: 10
-  MovementSpeed: 10
-  JumpSpeed: 100
-  Gravity: 1.74
-  GravityForce: 3
-  AirTime: 2
-  Health: 100
-  Damage: 10
+  CameraPanSpeed: 1
 --- !u!124 &124000012381477636
 Behaviour:
   m_ObjectHideFlags: 1
