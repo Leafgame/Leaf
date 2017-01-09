@@ -8,7 +8,7 @@ namespace Assets.Scripts
 		[Header( "Camera" )]
 		public Camera MainCameraView;
 		public Rigidbody2D _rigidbody;
-		public float SmoothFollowSpeed = 10.0f;
+		public float LerpSpeed = 100.0f;
 		public float CameraPanSpeed = 1.0f;
 
 		private bool _isGrounded;
@@ -30,10 +30,12 @@ namespace Assets.Scripts
 			{
 				_referenceVec = new Vector3(transform.position.x, transform.position.y, MainCameraView.transform.position.z);
 				MainCameraView.transform.position = Vector3.Lerp(MainCameraView.transform.position, _referenceVec,
-					SmoothFollowSpeed * Time.deltaTime);
+					LerpSpeed * Time.deltaTime);
 			}
-
-			MainCameraView.transform.Translate(horizontalCamera, verticalCamera, 0);
+			if (transform.localScale.x > 0.0f)
+				MainCameraView.transform.Translate( horizontalCamera, verticalCamera, 0 );
+			else
+				MainCameraView.transform.Translate( -horizontalCamera, verticalCamera, 0 );
 		}
 	}
 }

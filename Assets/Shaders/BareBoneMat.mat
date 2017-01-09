@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: BareBoneMat
+  m_Shader: {fileID: 4800000, guid: 28b129d07875aa643bf733607da7679e, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _Tex
+      second:
+        m_Texture: {fileID: 8900000, guid: a58d450bec5671241a314bed695dda60, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _Exposure
+      second: 1.72
+    - first:
+        name: _Rotation
+      second: 0
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 0.088414244, g: 0.83823526, b: 0.061634954, a: 1}
+    - first:
+        name: _Tint
+      second: {r: 0.78676474, g: 0.046280276, b: 0.046280276, a: 0.5}

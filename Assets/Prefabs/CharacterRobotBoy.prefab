@@ -157,7 +157,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
@@ -197,7 +197,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1000014229097902}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18128a28973302c4fbc140f2ddb5dd0c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: -0.45}
@@ -211,7 +211,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1000014229097902}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18128a28973302c4fbc140f2ddb5dd0c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
   JumpHoldTime: 0.35
   HoldForceMultiplier: 30
 --- !u!114 &114000012229373584
@@ -281,8 +281,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCameraView: {fileID: 20000010400386648}
   _rigidbody: {fileID: 50000010808902228}
-  SmoothFollowSpeed: 10
-  CameraPanSpeed: 1
+  LerpSpeed: 5
+  CameraPanSpeed: 0.3
 --- !u!114 &114000012344497388
 MonoBehaviour:
   m_ObjectHideFlags: 1
