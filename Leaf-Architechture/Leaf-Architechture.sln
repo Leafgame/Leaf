@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Leaf-Architechture", "Leaf-Architechture\Leaf-Architechture.modelproj", "{74CB6F44-4364-410F-B599-20722C2FC6D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leaf-ArchitechtureLib", "Leaf-ArchitechtureLib\Leaf-ArchitechtureLib.csproj", "{19472DD9-E9E2-463D-BEFB-FCA61BA1496D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74CB6F44-4364-410F-B599-20722C2FC6D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74CB6F44-4364-410F-B599-20722C2FC6D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74CB6F44-4364-410F-B599-20722C2FC6D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74CB6F44-4364-410F-B599-20722C2FC6D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19472DD9-E9E2-463D-BEFB-FCA61BA1496D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19472DD9-E9E2-463D-BEFB-FCA61BA1496D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19472DD9-E9E2-463D-BEFB-FCA61BA1496D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19472DD9-E9E2-463D-BEFB-FCA61BA1496D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 
-public class AirLift : MonoBehaviour
+namespace Assets.Scripts
 {
-	protected void OnTriggerStay2D( Collider2D other )
-	{
-		if(other.tag == "Player")
-		{
-			other.GetComponent<Rigidbody2D>().AddForce(new Vector2( 0, 20 ));
-		}
-		
-	}
+    public class AirLift : MonoBehaviour
+    {
+	    public Vector2 WindForce = new Vector2( 0, 20 );
+
+		protected void OnTriggerStay2D( Collider2D other )
+        {
+            if(other.tag == "Player")
+            {
+                other.GetComponent<Rigidbody2D>().AddForce( WindForce );
+            }
+        }
+    }
 }

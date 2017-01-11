@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 14.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/CodeGenLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Code Generation/Text Transformation Log">
+  <MessageClass Name="Message" Label="Message" Option="Show informational messages" />
+  <MessageClass Name="Warning" Label="Warning" Option="Show warnings" />
+  <MessageClass Name="Error" Label="Error" Option="Show errors" />
+  <MessageClass Name="Property" Label="Property" Option="Show metadata" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
+  <Message Timestamp="2017-01-10T13:17:33" Importance="High" Text="Code generation or text transformation started." />
+  <Message Timestamp="2017-01-10T13:17:34" Importance="Diagnostic" Text="Name = ClassTemplate" />
+  <Message Timestamp="2017-01-10T13:17:34" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2017-01-10T13:17:34" Importance="Diagnostic" Text="ProjectPath = ..\Leaf-ArchitechtureLib\Leaf-ArchitechtureLib.csproj" />
+  <Message Timestamp="2017-01-10T13:17:34" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2017-01-10T13:17:34" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2017-01-10T13:17:34" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 14.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2017-01-10T13:17:34" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 14.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2017-01-10T13:17:34" Importance="Medium" Text="Leaf-Architechture's Text Template Binding: 'ClassTemplate' will apply ClassTemplate.t4 to: 'Leaf-Architechture::Character' -  (Class), 'Leaf-Architechture::WindObject' -  (Class), 'Leaf-Architechture::WindPad' -  (Class), 'Leaf-Architechture::Marisa' -  (Class), 'Leaf-Architechture::DarkGust' -  (Class), 'Leaf-Architechture::Selena' -  (Class), 'Leaf-Architechture::MovableWindPad' -  (Class), 'Leaf-Architechture::LeverPad' -  (Class), 'Leaf-Architechture::FloatObject' -  (Class), 'Leaf-Architechture::WindTurn' -  (Class), 'Leaf-Architechture::HeavyObject' -  (Class), 'Leaf-Architechture::FloatingPlatform' -  (Class), 'Leaf-Architechture::FloatingStairs' -  (Class), 'Leaf-Architechture::FloatingRope' -  (Class) " />
+  <Message Timestamp="2017-01-10T13:18:50" Importance="Medium" Text="Project Added: C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\Leaf-ArchitechtureLib.csproj" />
+  <Message Timestamp="2017-01-10T13:18:50" Importance="Medium" Text="'Leaf-Architechture::Character' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\Character.cs" />
+  <Message Timestamp="2017-01-10T13:18:51" Importance="Medium" Text="'Leaf-Architechture::WindObject' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\WindObject.cs" />
+  <Message Timestamp="2017-01-10T13:18:52" Importance="Medium" Text="'Leaf-Architechture::WindPad' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\WindPad.cs" />
+  <Message Timestamp="2017-01-10T13:18:53" Importance="Medium" Text="'Leaf-Architechture::Marisa' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\Marisa.cs" />
+  <Message Timestamp="2017-01-10T13:18:54" Importance="Medium" Text="'Leaf-Architechture::DarkGust' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\DarkGust.cs" />
+  <Message Timestamp="2017-01-10T13:18:57" Importance="Medium" Text="'Leaf-Architechture::Selena' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\Selena.cs" />
+  <Message Timestamp="2017-01-10T13:18:58" Importance="Medium" Text="'Leaf-Architechture::MovableWindPad' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\MovableWindPad.cs" />
+  <Message Timestamp="2017-01-10T13:18:59" Importance="Medium" Text="'Leaf-Architechture::LeverPad' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\LeverPad.cs" />
+  <Message Timestamp="2017-01-10T13:19:00" Importance="Medium" Text="'Leaf-Architechture::FloatObject' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\FloatObject.cs" />
+  <Message Timestamp="2017-01-10T13:19:02" Importance="Medium" Text="'Leaf-Architechture::WindTurn' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\WindTurn.cs" />
+  <Message Timestamp="2017-01-10T13:19:04" Importance="Medium" Text="'Leaf-Architechture::HeavyObject' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\HeavyObject.cs" />
+  <Message Timestamp="2017-01-10T13:19:06" Importance="Medium" Text="'Leaf-Architechture::FloatingPlatform' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\FloatingPlatform.cs" />
+  <Message Timestamp="2017-01-10T13:19:08" Importance="Medium" Text="'Leaf-Architechture::FloatingStairs' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\FloatingStairs.cs" />
+  <Message Timestamp="2017-01-10T13:19:10" Importance="Medium" Text="'Leaf-Architechture::FloatingRope' -  (Class) : success (file created) - C:\Users\kari\Documents\Leaf\Leaf-Architechture\Leaf-ArchitechtureLib\GeneratedCode\FloatingRope.cs" />
+  <Message Timestamp="2017-01-10T13:19:11" Importance="Diagnostic" Text="Name = StructTemplate" />
+  <Message Timestamp="2017-01-10T13:19:11" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2017-01-10T13:19:11" Importance="Diagnostic" Text="ProjectPath = ..\Leaf-ArchitechtureLib\Leaf-ArchitechtureLib.csproj" />
+  <Message Timestamp="2017-01-10T13:19:11" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2017-01-10T13:19:11" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2017-01-10T13:19:11" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 14.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2017-01-10T13:19:11" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 14.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2017-01-10T13:19:11" Importance="Medium" Text="Leaf-Architechture's Text Template Binding: 'StructTemplate' will apply StructTemplate.t4 to: 'Leaf-Architechture::Character' -  (Class), 'Leaf-Architechture::WindObject' -  (Class), 'Leaf-Architechture::WindPad' -  (Class), 'Leaf-Architechture::Marisa' -  (Class), 'Leaf-Architechture::DarkGust' -  (Class), 'Leaf-Architechture::Selena' -  (Class), 'Leaf-Architechture::MovableWindPad' -  (Class), 'Leaf-Architechture::LeverPad' -  (Class), 'Leaf-Architechture::FloatObject' -  (Class), 'Leaf-Architechture::WindTurn' -  (Class), 'Leaf-Architechture::HeavyObject' -  (Class), 'Leaf-Architechture::FloatingPlatform' -  (Class), 'Leaf-Architechture::FloatingStairs' -  (Class), 'Leaf-Architechture::FloatingRope' -  (Class) " />
+  <Message Timestamp="2017-01-10T13:19:12" Importance="Diagnostic" Text="'Leaf-Architechture::Character' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:13" Importance="Diagnostic" Text="'Leaf-Architechture::WindObject' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:13" Importance="Diagnostic" Text="'Leaf-Architechture::WindPad' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:14" Importance="Diagnostic" Text="'Leaf-Architechture::Marisa' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:14" Importance="Diagnostic" Text="'Leaf-Architechture::DarkGust' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:14" Importance="Diagnostic" Text="'Leaf-Architechture::Selena' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:14" Importance="Diagnostic" Text="'Leaf-Architechture::MovableWindPad' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:14" Importance="Diagnostic" Text="'Leaf-Architechture::LeverPad' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:15" Importance="Diagnostic" Text="'Leaf-Architechture::FloatObject' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:15" Importance="Diagnostic" Text="'Leaf-Architechture::WindTurn' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:15" Importance="Diagnostic" Text="'Leaf-Architechture::HeavyObject' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:16" Importance="Diagnostic" Text="'Leaf-Architechture::FloatingPlatform' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:17" Importance="Diagnostic" Text="'Leaf-Architechture::FloatingStairs' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:17" Importance="Diagnostic" Text="'Leaf-Architechture::FloatingRope' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="The selection included 10 elements which were not bound to a template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="'3c5fadf8-45c9-4fd4-96dd-e4a4ec8296e2' -  (Generalization): no bound template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="'20291780-8308-42cc-9d40-3e82218906e1' -  (Generalization): no bound template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="'15293ef3-1608-475a-a72a-1de60b8651a2' -  (Generalization): no bound template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="'Leaf-Architechture::' -  (Association): no bound template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="'7f28453a-01dd-45e8-b76d-d7bcccb42e2b' -  (Generalization): no bound template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="'767b9122-02ea-47a1-85e3-86d0f9fa50e3' -  (Generalization): no bound template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="'affde874-1fb7-4d8b-b591-b849a7198283' -  (Generalization): no bound template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="'a2fba3ce-1f9c-4077-b636-6c69df8d76f5' -  (Generalization): no bound template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="'a7e073dd-f6a3-4a1f-8566-9f05d1a36f50' -  (Generalization): no bound template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="Diagnostic" Text="'60a2b255-fe3a-4160-b1f1-579347931414' -  (Generalization): no bound template." />
+  <Message Timestamp="2017-01-10T13:19:18" Importance="High" Text="Code generation complete. Errors: 0. Warnings: 0." />
+</Log>
