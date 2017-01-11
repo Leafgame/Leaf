@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-public class WindPad : WindObject
+﻿namespace Assets.Scripts.GeneratedCode
 {
-	public virtual bool ActiveState
+	/// <summary>
+	/// Description:
+	/// Stationary windpad that emits wind in one direction.
+	/// The wind elevates any physics affected object that enters
+	/// the BoxCollider2D trigger.
+	/// </summary>
+	public class WindPad : WindObject
 	{
-		get;
-		set;
-	}
+		public virtual bool ActiveState
+		{
+			get;
+			set;
+		}
 
+	}
 }
 

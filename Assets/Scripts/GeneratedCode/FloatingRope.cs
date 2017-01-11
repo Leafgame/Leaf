@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-public class FloatingRope : FloatObject
+﻿namespace Assets.Scripts.GeneratedCode
 {
-	public virtual float RopeLength
+	public class FloatingRope : FloatObject
 	{
-		get;
-		set;
-	}
+		public virtual float RopeLength
+		{
+			get;
+			set;
+		}
 
+	}
 }
 

@@ -1,50 +1,48 @@
-﻿using System;
-using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class WindObject : MonoBehaviour
+namespace Assets.Scripts.GeneratedCode
 {
-	private float windForce
+	/// <summary>
+	/// Wind objects base class, most wind based objects will derive from this.
+	/// </summary>
+	[RequireComponent(typeof(BoxCollider2D))]
+	public class WindObject : MonoBehaviour
 	{
-		get;
-		set;
+		public float WindForce;
+		public float WindSpeed;
+		public Vector3 WindDirection;
+		public BoxCollider2D WindTrigger;
+
+		public virtual void ApplyWindPhysics(Collider2D col)
+		{
+			// No Rigidbody2D on object: return
+			if (!RigidbodyCheck(col)) return;
+
+			var rigidbody2d = col.GetComponent<Rigidbody2D>();
+			rigidbody2d.AddForce(WindDirection*WindForce);
+
+		}
+
+		public void Start()
+		{
+			WindTrigger = GetComponent<BoxCollider2D>();
+			WindTrigger.isTrigger = true;
+		}
+
+		public void OnTriggerEnter2D(Collider2D col)
+		{
+			print(col.transform.tag);
+		}
+
+		public void OnTriggerStay2D(Collider2D col)
+		{
+			ApplyWindPhysics(col);
+		}
+
+		public bool RigidbodyCheck(Collider2D col)
+		{
+			return col.GetComponent<Rigidbody2D>() != null;
+		}
 	}
-
-	private float windSpeed
-	{
-		get;
-		set;
-	}
-
-	private Vector3 windDirection
-	{
-		get;
-		set;
-	}
-
-    private BoxCollider2D windTrigger
-    {
-        get;
-        set;
-    }
-
-
-	public virtual void ApplyWindPhysics()
-	{
-		throw new System.NotImplementedException();
-	}
-
-    public void Start()
-    {
-        windTrigger = GetComponent<BoxCollider2D>();
-    }
-
-    public void OnTriggerEnter2D(Collider2D col)
-    {
-        print(col.transform.tag);
-    }
 }
 

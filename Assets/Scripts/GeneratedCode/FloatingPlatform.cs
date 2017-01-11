@@ -1,16 +1,15 @@
-﻿using System;
-using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using UnityEngine;
 
-public class FloatingPlatform : FloatObject
+namespace Assets.Scripts.GeneratedCode
 {
-	public virtual BoxCollider2D platform
+	public class FloatingPlatform : FloatObject
 	{
-		get;
-		set;
-	}
+		public virtual BoxCollider2D platform
+		{
+			get;
+			set;
+		}
 
+	}
 }
 

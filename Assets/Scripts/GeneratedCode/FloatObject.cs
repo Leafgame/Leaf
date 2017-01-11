@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-public class FloatObject
+﻿namespace Assets.Scripts.GeneratedCode
 {
-	public virtual void Float()
+	public class FloatObject
 	{
-		throw new System.NotImplementedException();
-	}
+		public virtual void Float()
+		{
+			throw new System.NotImplementedException();
+		}
 
+	}
 }
 
