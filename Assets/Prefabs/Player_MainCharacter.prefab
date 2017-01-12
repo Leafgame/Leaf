@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 61000012793335794}
   - component: {fileID: 114000012229373584}
   m_Layer: 0
-  m_Name: CharacterRobotBoy
+  m_Name: Player_MainCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,15 +181,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08f91df3bd212f429df17f53ce2f364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxSpeed: 10
-  m_JumpForce: 800
-  m_CrouchSpeed: 0.25
-  m_AirControl: 1
-  m_WhatIsGround:
+  MaxSpeed: 10
+  JumpForce: 400
+  CrouchSpeed: 0.36
+  AirControl: 1
+  WhatIsGround:
     serializedVersion: 2
-    m_Bits: 1
-  JumpHoldTime: 0.35
-  HoldForceMultiplier: 30
+    m_Bits: 4294967295
+  JumpHoldTime: 0.2
+  HoldForceMultiplier: 50
 --- !u!114 &114000012229373584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,9 +202,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCameraView: {fileID: 0}
-  _rigidbody: {fileID: 50000010808902228}
+  Rigidbody: {fileID: 0}
   LerpSpeed: 5
   CameraPanSpeed: 0.3
+  CameraSize: 15
 --- !u!114 &114000012344497388
 MonoBehaviour:
   m_ObjectHideFlags: 1

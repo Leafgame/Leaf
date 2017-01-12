@@ -1,134 +1,132 @@
-using System;
 using UnityEngine;
 
-namespace UnityStandardAssets._2D
+namespace Assets.Standard_Assets._2D.Scripts
 {
     public class PlatformerCharacter2D : MonoBehaviour
     {
-        [SerializeField] public float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
-        [SerializeField] public float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
-        [Range(0, 1)] [SerializeField] public float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
-        [SerializeField] public bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
-        [SerializeField] public LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+        [SerializeField] public float MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
+        [SerializeField] public float JumpForce = 400f;                  // Amount of force added when the player jumps.
+        [Range(0, 1)] [SerializeField] public float CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
+        [SerializeField] public bool AirControl = false;                 // Whether or not a player can steer while jumping;
+        [SerializeField] public LayerMask WhatIsGround;                  // A mask determining what is ground to the character
 
 		public float JumpHoldTime = 0.5f;
 		public float HoldForceMultiplier = 10f;
-		private float _currentJumpTime = 0;
+		private float _currentJumpTime;
 
-        private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
-        const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-        private bool m_Grounded;            // Whether or not the player is grounded.
-        private Transform m_CeilingCheck;   // A position marking where to check for ceilings
-        const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
-        private Animator m_Anim;            // Reference to the player's animator component.
-        private Rigidbody2D m_Rigidbody2D;
-        private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+        private Transform _groundCheck;    // A position marking where to check if the player is grounded.
+	    private const float GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+        private bool _grounded;            // Whether or not the player is grounded.
+        private Transform _ceilingCheck;   // A position marking where to check for ceilings
+	    private const float CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
+        private Animator _animator;            // Reference to the player's animator component.
+        private Rigidbody2D _rigidbody2D;
+        private bool _facingRight = true;  // For determining which way the player is currently facing.
 
 
         private void Awake()
         {
             // Setting up references.
-            m_GroundCheck = transform.Find("GroundCheck");
-            m_CeilingCheck = transform.Find("CeilingCheck");
-            m_Anim = GetComponent<Animator>();
-            m_Rigidbody2D = GetComponent<Rigidbody2D>();
+            _groundCheck = transform.Find("GroundCheck");
+            _ceilingCheck = transform.Find("CeilingCheck");
+            _animator = GetComponent<Animator>();
+            _rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
 
         private void FixedUpdate()
         {
-            m_Grounded = false;
+            _grounded = false;
 
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
             // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-            for (int i = 0; i < colliders.Length; i++)
+            var colliders = Physics2D.OverlapCircleAll(_groundCheck.position, GroundedRadius, WhatIsGround);
+            foreach (var t in colliders)
             {
-                if (colliders[i].gameObject != gameObject)
-                    m_Grounded = true;
+	            if (t.gameObject != gameObject)
+		            _grounded = true;
             }
-            m_Anim.SetBool("Ground", m_Grounded);
+            _animator.SetBool("Ground", _grounded);
 
             // Set the vertical animation
-            m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
+            _animator.SetFloat("vSpeed", _rigidbody2D.velocity.y);
 
-			// Reset the JumpHold on grounded
-			if (Input.GetButtonUp( "Fire1" ))
-			{
-				_currentJumpTime = 0;
-			}
-
-			if (m_Grounded)
-			{
-				_currentJumpTime = JumpHoldTime;
-			}
-			if (_currentJumpTime > 0 && Input.GetButton("Fire1") && !m_Grounded)
-			{
-				m_Rigidbody2D.AddForce( new Vector3( 0.0f, HoldForceMultiplier ) );
-				_currentJumpTime -= Time.deltaTime;
-			}
 		}
 
 
         public void Move(float move, bool crouch, bool jump)
         {
             // If crouching, check to see if the character can stand up
-            if (!crouch && m_Anim.GetBool("Crouch"))
+            if (!crouch && _animator.GetBool("Crouch"))
             {
                 // If the character has a ceiling preventing them from standing up, keep them crouching
-                if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
+                if (Physics2D.OverlapCircle(_ceilingCheck.position, CeilingRadius, WhatIsGround))
                 {
                     crouch = true;
                 }
             }
 
             // Set whether or not the character is crouching in the animator
-            m_Anim.SetBool("Crouch", crouch);
+            _animator.SetBool("Crouch", crouch);
 
             //only control the player if grounded or airControl is turned on
-            if (m_Grounded || m_AirControl)
+            if (_grounded || AirControl)
             {
                 // Reduce the speed if crouching by the crouchSpeed multiplier
-                move = (crouch ? move*m_CrouchSpeed : move);
+                move = (crouch ? move*CrouchSpeed : move);
 
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
-                m_Anim.SetFloat("Speed", Mathf.Abs(move));
+                _animator.SetFloat("Speed", Mathf.Abs(move));
 
                 // Move the character
-                m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, m_Rigidbody2D.velocity.y);
+                _rigidbody2D.velocity = new Vector2(move*MaxSpeed, _rigidbody2D.velocity.y);
 
                 // If the input is moving the player right and the player is facing left...
-                if (move > 0 && !m_FacingRight)
+                if (move > 0 && !_facingRight)
                 {
                     // ... flip the player.
                     Flip();
                 }
                     // Otherwise if the input is moving the player left and the player is facing right...
-                else if (move < 0 && m_FacingRight)
+                else if (move < 0 && _facingRight)
                 {
                     // ... flip the player.
                     Flip();
                 }
             }
             // If the player should jump...
-            if (m_Grounded && jump && m_Anim.GetBool("Ground"))
+            if (_grounded && jump && _animator.GetBool("Ground"))
             {
                 // Add a vertical force to the player.
-                m_Grounded = false;
-                m_Anim.SetBool("Ground", false);
-                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-				
+                _grounded = false;
+                _animator.SetBool("Ground", false);
+                _rigidbody2D.AddForce(new Vector2(0f, JumpForce));
 			}
-        }
+			// Reset the JumpHold on grounded
+			if (Input.GetButtonUp("Fire1") || (!_grounded && Input.GetButtonDown("Fire1")))
+			{
+				_currentJumpTime = 0;
+			}
+
+			if (_grounded)
+			{
+				_currentJumpTime = JumpHoldTime;
+			}
+			if (_currentJumpTime > 0 && Input.GetButton("Fire1") && !_grounded)
+			{
+				_rigidbody2D.AddForce(new Vector3(0.0f, HoldForceMultiplier));
+				_currentJumpTime -= Time.deltaTime;
+			}
+		}
 
 
         private void Flip()
         {
             // Switch the way the player is labelled as facing.
-            m_FacingRight = !m_FacingRight;
+            _facingRight = !_facingRight;
 
             // Multiply the player's x local scale by -1.
-            Vector3 theScale = transform.localScale;
+            var theScale = transform.localScale;
             theScale.x *= -1;
 			transform.localScale = theScale;
         }

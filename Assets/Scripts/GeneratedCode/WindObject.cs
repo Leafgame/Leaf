@@ -32,6 +32,10 @@ namespace Assets.Scripts.GeneratedCode
 		public void OnTriggerEnter2D(Collider2D col)
 		{
 			print(col.transform.tag);
+			if (col.tag == "Player")
+			{
+				col.GetComponent<Animator>().SetBool("Ground", false);
+			}
 		}
 
 		public void OnTriggerStay2D(Collider2D col)

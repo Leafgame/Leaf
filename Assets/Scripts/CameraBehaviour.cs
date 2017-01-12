@@ -10,6 +10,7 @@ namespace Assets.Scripts
 		public Rigidbody2D Rigidbody;
 		public float LerpSpeed = 100.0f;
 		public float CameraPanSpeed = 1.0f;
+		public float CameraSize = 15f;
 
 		private Vector3 _referenceVec;
 		private bool _cameraFollow;
@@ -18,6 +19,9 @@ namespace Assets.Scripts
 		{
 			Rigidbody = GetComponent<Rigidbody2D>();
 			MainCameraView = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+			MainCameraView.orthographic = true;
+			MainCameraView.orthographicSize = CameraSize;
+			MainCameraView.transform.position = new Vector3(0,0,-20);
 		}
 
 		public void Update( )

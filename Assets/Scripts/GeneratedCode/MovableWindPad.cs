@@ -8,7 +8,7 @@ namespace Assets.Scripts.GeneratedCode
 		public CircleCollider2D GrabCircle;
 		public float GrabRadius = 3f;
 
-		private Vector3 _previousPosition = new Vector3();
+		private Vector3 _previousPosition;
 		private GameObject _playerReference;
 
 		public new void Start()
@@ -17,7 +17,8 @@ namespace Assets.Scripts.GeneratedCode
 			GrabCircle = GetComponent<CircleCollider2D>();
 			GrabCircle.radius = GrabRadius;
 			GrabCircle.isTrigger = true;
-			
+			WindTrigger.isTrigger = false;
+
 		}
 
 		public void Update()
@@ -26,23 +27,26 @@ namespace Assets.Scripts.GeneratedCode
 			{
 				_playerReference = GameObject.FindGameObjectWithTag("Player");
 			}
-			var distance = (transform.position - _previousPosition).magnitude;
-			if (Input.GetButton("Fire2") && distance < GrabRadius)
+			var diffVec = (transform.position - _previousPosition);
+			var distance = diffVec.magnitude;
+			if (Input.GetButton("Fire2") && distance < GrabRadius && diffVec.x < 0.0f)
 			{
-				Move();
+				Move(distance, -1);
+			}
+			else if(Input.GetButton("Fire2") && distance < GrabRadius && diffVec.x > 0.0f)
+			{
+				Move(distance, 1);
 			}
 			_previousPosition = _playerReference.transform.position;
 		}
 
-		public virtual void Move()
+		public virtual void Move(float distance, int offset)
 		{
-			transform.position = new Vector3(_previousPosition.x+1, transform.position.y, 0);
+			transform.position = new Vector3(_previousPosition.x + offset, transform.position.y, 0);
 		}
 			
 		public new void OnTriggerStay2D(Collider2D col)
 		{
-			base.OnTriggerStay2D(col);
-
 
 		}
 
