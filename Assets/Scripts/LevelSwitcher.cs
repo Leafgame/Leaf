@@ -11,7 +11,10 @@ namespace Assets.Scripts
 		[Header("Next Scene Name")]
 		public string NextSceneName;
 
-		[Header("Loading Screen")]
+	    [Header("Loading Screen")]
+        public bool UseBackgoundImage;
+	    public bool UseProgressBar;
+	    public bool UseLoadText;
 		public Image BackgroundImage;
 		public float LoadProgress;
 		public Scrollbar ProgressBar;
@@ -27,9 +30,12 @@ namespace Assets.Scripts
 
 		public void LoadScene(string sceneName)
 		{
-			_loadingText.text = "Loading...";
-			BackgroundImage.enabled = true;
-			ProgressBar.gameObject.SetActive(true);
+            if(UseLoadText)
+			    _loadingText.text = "Loading...";
+            if(UseBackgoundImage)
+			    BackgroundImage.enabled = true;
+            if(UseProgressBar)
+			    ProgressBar.gameObject.SetActive(true);
 			StartCoroutine("LoadingScreen", sceneName);
 		}
 

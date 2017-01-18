@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Standard_Assets._2D.Scripts;
+using UnityEngine;
 
 namespace Assets.Scripts.GeneratedCode
 {
@@ -31,17 +32,25 @@ namespace Assets.Scripts.GeneratedCode
 
 		public void OnTriggerEnter2D(Collider2D col)
 		{
-			print(col.transform.tag);
 			if (col.tag == "Player")
 			{
 				col.GetComponent<Animator>().SetBool("Ground", false);
-			}
-		}
+                col.GetComponent<PlatformerCharacter2D>().InWindZone = true;
+            }
+        }
 
 		public void OnTriggerStay2D(Collider2D col)
 		{
 			ApplyWindPhysics(col);
 		}
+
+	    public void OnTriggerExit2D(Collider2D col)
+	    {
+	        if (col.tag == "Player")
+	        {
+	            col.GetComponent<PlatformerCharacter2D>().InWindZone = false;
+	        }
+	    }
 
 		public bool RigidbodyCheck(Collider2D col)
 		{

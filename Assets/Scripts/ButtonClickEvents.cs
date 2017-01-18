@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
@@ -33,7 +34,17 @@ namespace Assets.Scripts
 		 */
 		public void ExitButtonClicked()
 		{
-			print("TODO exit the game");
+			Application.Quit();
 		}
-	}
+
+	    public void ResetLevelButtonClicked()
+	    {
+	        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	    }
+
+	    public void SettingsButtonClicked()
+	    {
+            print("TODO options screen");
+        }
+    }
 }

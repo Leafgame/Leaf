@@ -9,19 +9,20 @@ namespace Assets.Standard_Assets._2D.Scripts
         [Range(0, 1)] [SerializeField] public float CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
         [SerializeField] public bool AirControl = false;                 // Whether or not a player can steer while jumping;
         [SerializeField] public LayerMask WhatIsGround;                  // A mask determining what is ground to the character
+        [SerializeField] public bool InWindZone;
 
 		public float JumpHoldTime = 0.5f;
 		public float HoldForceMultiplier = 10f;
 		private float _currentJumpTime;
 
-        private Transform _groundCheck;    // A position marking where to check if the player is grounded.
-	    private const float GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-        private bool _grounded;            // Whether or not the player is grounded.
-        private Transform _ceilingCheck;   // A position marking where to check for ceilings
-	    private const float CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
-        private Animator _animator;            // Reference to the player's animator component.
+        private Transform _groundCheck;             // A position marking where to check if the player is grounded.
+	    private const float GroundedRadius = .2f;   // Radius of the overlap circle to determine if grounded
+        private bool _grounded;                     // Whether or not the player is grounded.
+        private Transform _ceilingCheck;            // A position marking where to check for ceilings
+	    private const float CeilingRadius = .01f;   // Radius of the overlap circle to determine if the player can stand up
+        private Animator _animator;                 // Reference to the player's animator component.
         private Rigidbody2D _rigidbody2D;
-        private bool _facingRight = true;  // For determining which way the player is currently facing.
+        private bool _facingRight = true;           // For determining which way the player is currently facing.
 
 
         private void Awake()
@@ -37,7 +38,6 @@ namespace Assets.Standard_Assets._2D.Scripts
         private void FixedUpdate()
         {
             _grounded = false;
-
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
             // This can be done using layers instead but Sample Assets will not overwrite your project settings.
             var colliders = Physics2D.OverlapCircleAll(_groundCheck.position, GroundedRadius, WhatIsGround);
@@ -51,7 +51,7 @@ namespace Assets.Standard_Assets._2D.Scripts
             // Set the vertical animation
             _animator.SetFloat("vSpeed", _rigidbody2D.velocity.y);
 
-		}
+        }
 
 
         public void Move(float move, bool crouch, bool jump)
@@ -95,7 +95,7 @@ namespace Assets.Standard_Assets._2D.Scripts
                 }
             }
             // If the player should jump...
-            if (_grounded && jump && _animator.GetBool("Ground"))
+            if (_grounded && jump && _animator.GetBool("Ground") && !InWindZone)
             {
                 // Add a vertical force to the player.
                 _grounded = false;
@@ -112,7 +112,7 @@ namespace Assets.Standard_Assets._2D.Scripts
 			{
 				_currentJumpTime = JumpHoldTime;
 			}
-			if (_currentJumpTime > 0 && Input.GetButton("Fire1") && !_grounded)
+			if (_currentJumpTime > 0 && Input.GetButton("Fire1") && !_grounded )
 			{
 				_rigidbody2D.AddForce(new Vector3(0.0f, HoldForceMultiplier));
 				_currentJumpTime -= Time.deltaTime;

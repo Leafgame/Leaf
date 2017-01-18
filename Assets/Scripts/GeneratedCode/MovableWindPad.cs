@@ -50,6 +50,16 @@ namespace Assets.Scripts.GeneratedCode
 
 		}
 
-	}
+	    public new void OnTriggerEnter2D(Collider2D col)
+	    {
+	        
+	    }
+
+        public new void OnTriggerExit2D(Collider2D col)
+        {
+
+        }
+
+    }
 }
 

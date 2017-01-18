@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4000011976257994}
   - component: {fileID: 198000012274731784}
   - component: {fileID: 199000012208825284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4000013167756252}
   - component: {fileID: 61000012626780042}
   - component: {fileID: 114000010313689420}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: AirElivator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
