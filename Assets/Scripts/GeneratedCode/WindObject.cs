@@ -1,5 +1,6 @@
-﻿using Assets.Standard_Assets._2D.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
+using Assets.Scripts.PlayerScripts;
 
 namespace Assets.Scripts.GeneratedCode
 {
@@ -10,18 +11,23 @@ namespace Assets.Scripts.GeneratedCode
 	public class WindObject : MonoBehaviour
 	{
 		public float WindForce;
-		public float WindSpeed;
 		public Vector3 WindDirection;
 		public BoxCollider2D WindTrigger;
 
+        private readonly List<Collider2D> _objectsInWindZone = new List<Collider2D>();
+
 		public virtual void ApplyWindPhysics(Collider2D col)
 		{
-			// No Rigidbody2D on object: return
-			if (!RigidbodyCheck(col)) return;
+			var rigidBody2D = col.GetComponent<Rigidbody2D>();
+			rigidBody2D.AddForce(WindDirection*WindForce);
+		}
 
-			var rigidbody2d = col.GetComponent<Rigidbody2D>();
-			rigidbody2d.AddForce(WindDirection*WindForce);
-
+		private void FixedUpdate()
+		{
+			foreach (var rigidbodyObject in _objectsInWindZone)
+			{
+				ApplyWindPhysics(rigidbodyObject);
+			}
 		}
 
 		public void Start()
@@ -37,12 +43,11 @@ namespace Assets.Scripts.GeneratedCode
 				col.GetComponent<Animator>().SetBool("Ground", false);
                 col.GetComponent<PlatformerCharacter2D>().InWindZone = true;
             }
-        }
 
-		public void OnTriggerStay2D(Collider2D col)
-		{
-			ApplyWindPhysics(col);
-		}
+			// No Rigidbody2D on object: return
+			if (!RigidbodyCheck(col)) return;
+			_objectsInWindZone.Add(col.GetComponent<Collider2D>());
+        }
 
 	    public void OnTriggerExit2D(Collider2D col)
 	    {
@@ -50,7 +55,12 @@ namespace Assets.Scripts.GeneratedCode
 	        {
 	            col.GetComponent<PlatformerCharacter2D>().InWindZone = false;
 	        }
-	    }
+
+			// No Rigidbody2D on object: return
+			if (!RigidbodyCheck(col)) return;
+			_objectsInWindZone.Remove(col.GetComponent<Collider2D>());
+
+		}
 
 		public bool RigidbodyCheck(Collider2D col)
 		{

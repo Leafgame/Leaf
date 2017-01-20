@@ -29,6 +29,7 @@ namespace Assets.Scripts.GeneratedCode
 			}
 			var diffVec = (transform.position - _previousPosition);
 			var distance = diffVec.magnitude;
+			/* MOVE THE PAD WITH E ?
 			if (Input.GetButton("Fire2") && distance < GrabRadius && diffVec.x < 0.0f)
 			{
 				Move(distance, -1);
@@ -37,6 +38,7 @@ namespace Assets.Scripts.GeneratedCode
 			{
 				Move(distance, 1);
 			}
+			*/
 			_previousPosition = _playerReference.transform.position;
 		}
 

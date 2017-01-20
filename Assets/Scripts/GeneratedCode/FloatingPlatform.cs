@@ -10,6 +10,17 @@ namespace Assets.Scripts.GeneratedCode
 			set;
 		}
 
+	    public override void Float()
+	    {
+	        var cosThetha = Mathf.Cos(Time.time) * FloatIntensity;
+            GetComponent<Rigidbody2D>().velocity = (new Vector2(0, cosThetha));
+	    }
+
+	    public void FixedUpdate()
+	    {
+	        Float();
+	    }
+
 	}
 }
 

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - WindZone
+  - Glider
+  - FloatingPlatform
   layers:
   - Default
   - TransparentFX
