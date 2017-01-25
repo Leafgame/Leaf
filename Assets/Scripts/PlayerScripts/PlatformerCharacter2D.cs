@@ -59,17 +59,20 @@ namespace Assets.Scripts.PlayerScripts
             _animator.SetFloat("vSpeed", _rigidbody2D.velocity.y);
 
 			// GLIDING
-	        if (!_grounded && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped && _rigidbody2D.velocity.y < 0)
+	        if (!_grounded && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped && _rigidbody2D.velocity.y < 0 && !InWindZone)
 	        {
 		        transform.GetChild(2).gameObject.SetActive(true);
-				_rigidbody2D.velocity  = new Vector2(_rigidbody2D.velocity.x + (GlideBoost * transform.localScale.x), -GlideFallVelocity);
-				//TODO fix this wierd interaction of glider and windzones.
+				_rigidbody2D.velocity  = new Vector2(0, -GlideFallVelocity);
+				_rigidbody2D.AddForce(new Vector2(GlideBoost*transform.localScale.x, 0));
 	        }
-	        else
+			else if (InWindZone && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped)
+	        {
+				transform.GetChild(2).gameObject.SetActive(true);
+			}
+			else
 	        {
 				transform.GetChild(2).gameObject.SetActive(false);
 			}
-
 		}
 
 

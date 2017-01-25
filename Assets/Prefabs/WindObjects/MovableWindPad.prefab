@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114938445336215288}
   m_Layer: 8
   m_Name: WindPad
-  m_TagString: Untagged
+  m_TagString: WindZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376279947097788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.77, y: 0.6, z: -0.22000001}
+  m_LocalPosition: {x: 113.2, y: 14.9, z: 0}
   m_LocalScale: {x: 0.6409901, y: 0.6409901, z: 0.6409901}
   m_Children:
   - {fileID: 4403866824945942}
@@ -120,9 +120,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.02682827, y: -0.06652911}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.0117948, y: 1.6652572}
 --- !u!61 &61688138257376918
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -134,9 +134,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0.4261011}
+  m_Offset: {x: -0.000011902515, y: 15.017431}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.8522024}
+  m_Size: {x: 1.4487944, y: 30.242025}
 --- !u!114 &114325058761534234
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3395a6a19d2534f92fa89ab775668d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WindForce: 50
-  WindDirection: {x: 0, y: 5, z: 0}
+  WindForce: 21
+  WindDirection: {x: 0, y: 1, z: 0}
   WindTrigger: {fileID: 0}
   GrabCircle: {fileID: 0}
   GrabRadius: 2
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f86e51c77bde4e4290cbe37b2b42ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WindForce: 30
+  WindForce: 21
   WindDirection: {x: 0, y: 1, z: 0}
   WindTrigger: {fileID: 0}
 --- !u!212 &212066565832471250

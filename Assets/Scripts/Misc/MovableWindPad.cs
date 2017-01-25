@@ -47,7 +47,7 @@ namespace Assets.Scripts.GeneratedCode
 			transform.position = new Vector3(_previousPosition.x + offset, transform.position.y, 0);
 		}
 			
-		public new void OnTriggerStay2D(Collider2D col)
+		public void OnTriggerStay2D(Collider2D col)
 		{
 
 		}
