@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.GeneratedCode;
 using UnityEngine;
 
-namespace Assets.Scripts.GeneratedCode
+namespace Assets.Scripts.Misc
 {
     [RequireComponent(typeof(Collider2D))]
 	public class LeverPad : MonoBehaviour
@@ -67,18 +68,18 @@ namespace Assets.Scripts.GeneratedCode
 		{
 		    foreach (var windObject in LeverConnectedWindObjects)
 		    {
-                windObject.SetActive(true);
-            }
-            print("Windpads is activated");
+				windObject.GetComponentInChildren<WindObject>().IsActive = true;
+			}
+			print("Windpads is activated");
 		}
 
         public virtual void DeactivateWindPads()
 	    {
             foreach (var windObject in LeverConnectedWindObjects)
             {
-                windObject.SetActive(false);
-            }
-            print("Windpads is deactivated");
+				windObject.GetComponentInChildren<WindObject>().IsActive = false;
+			}
+			print("Windpads is deactivated");
 	    }
 
 

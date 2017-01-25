@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts.GeneratedCode
+﻿using Assets.Scripts.Misc;
+
+namespace Assets.Scripts.GeneratedCode
 {
 	/// <summary>
 	/// Description:

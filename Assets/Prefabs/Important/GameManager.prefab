@@ -130,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1179973094996752
 GameObject:
   m_ObjectHideFlags: 1
@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5d68e5e199d3e40aae3436930783af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartLocation: {x: 0, y: 2, z: 0}
+  StartLocation: {x: 0, y: 3, z: 0}
   Prefab: {fileID: 1000014229097902, guid: 9d71a1f2c19315a4faa11b573265fcd5, type: 2}
 --- !u!222 &222021421594086120
 CanvasRenderer:

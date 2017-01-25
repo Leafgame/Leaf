@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114279467267397348}
   - component: {fileID: 212223509608785200}
   - component: {fileID: 50746366413383632}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MovableWindPlatformPad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 114539006955995186}
   m_Layer: 8
   m_Name: WindPad
-  m_TagString: Untagged
+  m_TagString: WindZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +154,7 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1375859572388952}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -227,9 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3395a6a19d2534f92fa89ab775668d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WindForce: 50
-  WindDirection: {x: 0, y: 5, z: 0}
-  WindTrigger: {fileID: 0}
   GrabCircle: {fileID: 0}
   GrabRadius: 2
 --- !u!114 &114539006955995186
@@ -246,6 +243,7 @@ MonoBehaviour:
   WindForce: 30
   WindDirection: {x: 0, y: 1, z: 0}
   WindTrigger: {fileID: 0}
+  IsActive: 1
 --- !u!212 &212223509608785200
 SpriteRenderer:
   m_ObjectHideFlags: 1

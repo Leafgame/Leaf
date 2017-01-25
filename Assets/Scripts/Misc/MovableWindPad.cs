@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.GeneratedCode;
+using UnityEngine;
 
-namespace Assets.Scripts.GeneratedCode
+namespace Assets.Scripts.Misc
 {
 	[RequireComponent(typeof(CircleCollider2D))]
-	public class MovableWindPad : WindPad
+	public class MovableWindPad : MonoBehaviour
 	{
 		public CircleCollider2D GrabCircle;
 		public float GrabRadius = 3f;
@@ -11,14 +12,11 @@ namespace Assets.Scripts.GeneratedCode
 		private Vector3 _previousPosition;
 		private GameObject _playerReference;
 
-		public new void Start()
+		public void Start()
 		{
-			base.Start();
 			GrabCircle = GetComponent<CircleCollider2D>();
 			GrabCircle.radius = GrabRadius;
 			GrabCircle.isTrigger = true;
-			WindTrigger.isTrigger = false;
-
 		}
 
 		public void Update()
@@ -52,12 +50,12 @@ namespace Assets.Scripts.GeneratedCode
 
 		}
 
-	    public new void OnTriggerEnter2D(Collider2D col)
+	    public void OnTriggerEnter2D(Collider2D col)
 	    {
 	        
 	    }
 
-        public new void OnTriggerExit2D(Collider2D col)
+        public void OnTriggerExit2D(Collider2D col)
         {
 
         }

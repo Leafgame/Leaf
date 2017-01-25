@@ -14,8 +14,11 @@ namespace Assets.Scripts.PlayerScripts
 	    public float GlideBoost = 50;
 	    public float GlideFallVelocity = 2.0f;
 		public float JumpHoldTime = 0.5f;
+	    public float LateJumpTime = 0.2f;
 		public float HoldForceMultiplier = 10f;
 		private float _currentJumpTime;
+	    private float _currentAirTime;
+	    private bool _canDoubleJump;
 
 		private Transform _groundCheck;             // A position marking where to check if the player is grounded.
 	    private const float GroundedRadius = .2f;   // Radius of the overlap circle to determine if grounded
@@ -44,15 +47,19 @@ namespace Assets.Scripts.PlayerScripts
 
         private void FixedUpdate()
         {
-            _grounded = false;
+	        _grounded = false;
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
             // This can be done using layers instead but Sample Assets will not overwrite your project settings.
             var colliders = Physics2D.OverlapCircleAll(_groundCheck.position, GroundedRadius, WhatIsGround);
             foreach (var t in colliders)
             {
 	            if (t.gameObject != gameObject)
+	            {
 		            _grounded = true;
-            }
+		            _currentAirTime = 0f;
+	            }
+			}
+
             _animator.SetBool("Ground", _grounded);
 
             // Set the vertical animation
@@ -117,31 +124,46 @@ namespace Assets.Scripts.PlayerScripts
                     Flip();
                 }
             }
-            // If the player should jump...
-            if (_grounded && jump && _animator.GetBool("Ground") && !InWindZone)
+
+			// If the player should jump...
+			if ((_grounded || _currentAirTime < LateJumpTime) && jump && !InWindZone)
             {
                 // Add a vertical force to the player.
                 _grounded = false;
                 _animator.SetBool("Ground", false);
-                _rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+				_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
+				_rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+	            _canDoubleJump = true;
+            }
+			else if (_canDoubleJump && jump && !InWindZone)
+			{
+				_canDoubleJump = false;
+				_animator.SetBool("Ground", false);
+				_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
+				_rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+				_currentJumpTime = JumpHoldTime;
 			}
-			// Reset the JumpHold on grounded
-			if (Input.GetButtonUp("Fire1") || (!_grounded && Input.GetButtonDown("Fire1")))
+
+			if (Input.GetButtonUp("Fire1"))
 			{
 				_currentJumpTime = 0;
 			}
 
+			// Reset the JumpHold on grounded
 			if (_grounded)
-			{
-				_currentJumpTime = JumpHoldTime;
-			}
+	        {
+		        _currentJumpTime = JumpHoldTime;
+	        }
+	        else
+	        {
+		        _currentAirTime += Time.deltaTime;
+	        }
 			if (_currentJumpTime > 0 && Input.GetButton("Fire1") && !_grounded )
 			{
 				_rigidbody2D.AddForce(new Vector3(0.0f, HoldForceMultiplier));
 				_currentJumpTime -= Time.deltaTime;
 			}
 		}
-
 
         private void Flip()
         {

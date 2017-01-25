@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Assets.Scripts.PlayerScripts;
+using UnityEngine;
 
-namespace Assets.Scripts.GeneratedCode
+namespace Assets.Scripts.Misc
 {
 	/// <summary>
 	/// Wind objects base class, most wind based objects will derive from this.
@@ -13,6 +13,7 @@ namespace Assets.Scripts.GeneratedCode
 		public float WindForce;
 		public Vector3 WindDirection;
 		public BoxCollider2D WindTrigger;
+		public bool IsActive = true;
 
         private readonly List<Collider2D> _objectsInWindZone = new List<Collider2D>();
 
@@ -24,10 +25,17 @@ namespace Assets.Scripts.GeneratedCode
 
 		private void FixedUpdate()
 		{
+			if(!IsActive) return;
+
 			foreach (var rigidbodyObject in _objectsInWindZone)
 			{
 				ApplyWindPhysics(rigidbodyObject);
 			}
+		}
+
+		public void Update()
+		{
+			WindTrigger.enabled = IsActive;
 		}
 
 		public void Start()
@@ -38,6 +46,7 @@ namespace Assets.Scripts.GeneratedCode
 
 		public void OnTriggerEnter2D(Collider2D col)
 		{
+			if(!IsActive) return;
 			if (col.tag == "Player")
 			{
 				col.GetComponent<Animator>().SetBool("Ground", false);
@@ -51,6 +60,7 @@ namespace Assets.Scripts.GeneratedCode
 
 	    public void OnTriggerExit2D(Collider2D col)
 	    {
+			if(!IsActive) return;
 	        if (col.tag == "Player")
 	        {
 	            col.GetComponent<PlatformerCharacter2D>().InWindZone = false;
