@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014229097902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.64, z: 0}
+  m_LocalPosition: {x: 197.47032, y: 47.866024, z: 0}
   m_LocalScale: {x: 1.7715329, y: 1.7715304, z: 1}
   m_Children:
   - {fileID: 4000011726139796}
@@ -181,9 +181,9 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: 18128a28973302c4fbc140f2ddb5dd0c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0014642654, y: -0.07158544}
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.68}
+  m_Size: {x: 0.18940012, y: 1.0991908}
 --- !u!95 &95000012637196154
 Animator:
   serializedVersion: 3
@@ -239,8 +239,8 @@ MonoBehaviour:
   MainCameraView: {fileID: 0}
   LerpTime: 0.7
   CameraPanSpeed: 0.8
-  CameraSize: 11
-  MaxRadius: 15
+  CameraSize: 8
+  MaxRadius: 5
   InterpolateCamAmount: 1.2
 --- !u!114 &114000012344497388
 MonoBehaviour:

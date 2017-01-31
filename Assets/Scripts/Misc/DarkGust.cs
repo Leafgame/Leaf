@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Assets.Scripts.GeneratedCode
+namespace Assets.Scripts.Misc
 {
     public class DarkGust : Character
     {

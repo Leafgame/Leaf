@@ -11,21 +11,26 @@ namespace Assets.Scripts.Misc
 	public class WindObject : MonoBehaviour
 	{
 		public float WindForce;
+		public float MaxHeight;
 		public Vector3 WindDirection;
 		public BoxCollider2D WindTrigger;
 		public bool IsActive = true;
 
-        private readonly List<Collider2D> _objectsInWindZone = new List<Collider2D>();
+		private readonly List<Collider2D> _objectsInWindZone = new List<Collider2D>();
 
 		public virtual void ApplyWindPhysics(Collider2D col)
 		{
 			var rigidBody2D = col.GetComponent<Rigidbody2D>();
-			rigidBody2D.AddForce(WindDirection*WindForce);
+			var windSource = rigidBody2D.transform.position - transform.position;
+			var distanceToWindSource = windSource.magnitude;
+
+			rigidBody2D.AddForce(WindDirection * WindForce);
+			rigidBody2D.AddForce(WindDirection * WindForce / distanceToWindSource);
 		}
 
-		private void FixedUpdate()
+		public void FixedUpdate()
 		{
-			if(!IsActive) return;
+			if (!IsActive) return;
 
 			foreach (var rigidbodyObject in _objectsInWindZone)
 			{
@@ -46,25 +51,25 @@ namespace Assets.Scripts.Misc
 
 		public void OnTriggerEnter2D(Collider2D col)
 		{
-			if(!IsActive) return;
+			if (!IsActive) return;
 			if (col.tag == "Player")
 			{
 				col.GetComponent<Animator>().SetBool("Ground", false);
-                col.GetComponent<PlatformerCharacter2D>().InWindZone = true;
-            }
+				col.GetComponent<PlatformerCharacter2D>().InWindZone = true;
+			}
 
 			// No Rigidbody2D on object: return
 			if (!RigidbodyCheck(col)) return;
 			_objectsInWindZone.Add(col.GetComponent<Collider2D>());
-        }
+		}
 
-	    public void OnTriggerExit2D(Collider2D col)
-	    {
-			if(!IsActive) return;
-	        if (col.tag == "Player")
-	        {
-	            col.GetComponent<PlatformerCharacter2D>().InWindZone = false;
-	        }
+		public void OnTriggerExit2D(Collider2D col)
+		{
+			if (!IsActive) return;
+			if (col.tag == "Player")
+			{
+				col.GetComponent<PlatformerCharacter2D>().InWindZone = false;
+			}
 
 			// No Rigidbody2D on object: return
 			if (!RigidbodyCheck(col)) return;

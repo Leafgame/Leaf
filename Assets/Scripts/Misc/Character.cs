@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.GeneratedCode
+namespace Assets.Scripts.Misc
 {
     public class Character : MonoBehaviour
     {

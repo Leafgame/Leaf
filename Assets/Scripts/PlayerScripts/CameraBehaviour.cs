@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.PlayerScripts
 {
     public class CameraBehaviour : MonoBehaviour
     {
@@ -14,7 +14,7 @@ namespace Assets.Scripts
 	    public float InterpolateCamAmount = 10.0f;
 
         private Vector3 _referenceVec;
-        private bool _cameraFollow;
+        private bool _freeMovingCamera;
 		private Rigidbody2D _rigidbody2D;
 
 
@@ -35,42 +35,37 @@ namespace Assets.Scripts
                 new Vector2(transform.position.x, transform.position.y));
             var distance = diff.magnitude;
 
-	        if ((Math.Abs(_rigidbody2D.velocity.x) > 0.1 || Math.Abs(_rigidbody2D.velocity.y) > 0.1)
-	            && (Math.Abs(Input.GetAxis("VerticalCamera")) < 0.1 || Math.Abs(Input.GetAxis("HorizontalCamera")) < 0.1))
+	        if ((Math.Abs(_rigidbody2D.velocity.x) < 0.1 && Math.Abs(_rigidbody2D.velocity.y) < 0.1)
+	            && (Math.Abs(Input.GetAxis("VerticalCamera")) > 0.1 || Math.Abs(Input.GetAxis("HorizontalCamera")) > 0.1))
 	        {
-		        _cameraFollow = true;
+		        _freeMovingCamera = true;
 	        }
-	        else if (distance < MaxRadius)
+	        else if((Math.Abs(_rigidbody2D.velocity.x) > 0.1 || Math.Abs(_rigidbody2D.velocity.y) > 0.1))
 	        {
-		        MainCameraView.transform.Translate(horizontalCamera, verticalCamera, 0);
-		        _cameraFollow = false;
+		        _freeMovingCamera = false;
 	        }
-	        else if (distance > MaxRadius)
-	        {
-		        var clampedPos = Vector2.ClampMagnitude(diff, MaxRadius - 0.2f);
-		        MainCameraView.transform.position = transform.position + new Vector3(clampedPos.x, clampedPos.y, -20);
-				_cameraFollow = false;
-			}
-
-
+	        
 
 			// Camera follow calculations
-			if (_cameraFollow)
+			if (!_freeMovingCamera)
             {
                 _referenceVec = new Vector3(transform.position.x, transform.position.y, MainCameraView.transform.position.z);
 
-	            var interpolatedVec = (_rigidbody2D.velocity * InterpolateCamAmount) + new Vector2(_referenceVec.x, _referenceVec.y);
+	            var interpolatedVec = _rigidbody2D.velocity * InterpolateCamAmount + new Vector2(_referenceVec.x, _referenceVec.y);
 
 				MoveObject(MainCameraView.transform, MainCameraView.transform.position, interpolatedVec, LerpTime);
+			}
 
-                // Back at root position of player
-                if (Math.Abs(MainCameraView.transform.localPosition.x - transform.position.x) < 0.5f &&
-                    Math.Abs(MainCameraView.transform.localPosition.y - transform.position.y) < 0.5f)
-                {
-                    _cameraFollow = false;
-                }
-            }
-        }
+			if (distance < MaxRadius && _freeMovingCamera)
+			{
+				MainCameraView.transform.Translate(horizontalCamera, verticalCamera, 0);
+			}
+			if (distance > MaxRadius && _freeMovingCamera)
+			{
+				var clampedPos = Vector2.ClampMagnitude(diff, MaxRadius);
+				MainCameraView.transform.position = transform.position + new Vector3(clampedPos.x, clampedPos.y, -20);
+			}
+		}
 
 		public void MoveObject(Transform movingObject, Vector2 startpos, Vector2 endpos, float time)
 		{
