@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 21294698}
   - component: {fileID: 5065660}
   - component: {fileID: 6171348}
+  - component: {fileID: 114445573175575430}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -25,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.31499958, y: 2.205, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 20.77, y: 6.36, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -135,3 +136,18 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 149236}
   m_IsPrefabParent: 1
+--- !u!114 &114445573175575430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e62cd90b46faf8c4ca1e8356983b0de9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoorOpenLayer: {fileID: 0}
+  DoorsToUnlock:
+  - {fileID: 0}
+  - {fileID: 0}

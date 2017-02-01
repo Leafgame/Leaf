@@ -51,10 +51,9 @@ namespace Assets.Scripts
 			yield return null;
 		}
 
-		public void OnTriggerEnter2D(Collider2D col)
+		public void OnTriggerStay2D(Collider2D col)
 		{
-			print("Loading");
-			if (col.tag == "Player" && !_loading)
+			if (!_loading && Input.GetButtonDown("Vertical") && col.tag == "Player")
 			{
 				LoadScene(NextSceneName);
 				_loading = true;

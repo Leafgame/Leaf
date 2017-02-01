@@ -11,6 +11,7 @@ namespace Assets.Scripts.Misc
 	public class WindObject : MonoBehaviour
 	{
 		public float WindForce;
+		public float WindForceClose;
 		public float MaxHeight;
 		public Vector3 WindDirection;
 		public BoxCollider2D WindTrigger;
@@ -25,7 +26,7 @@ namespace Assets.Scripts.Misc
 			var distanceToWindSource = windSource.magnitude;
 
 			rigidBody2D.AddForce(WindDirection * WindForce);
-			rigidBody2D.AddForce(WindDirection * WindForce / distanceToWindSource);
+			rigidBody2D.AddForce(WindDirection * WindForceClose / distanceToWindSource);
 		}
 
 		public void FixedUpdate()

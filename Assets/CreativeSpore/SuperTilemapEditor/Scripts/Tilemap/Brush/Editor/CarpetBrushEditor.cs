@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CreativeSpore.SuperTilemapEditor.Scripts.Tilemap.Brush;
 using UnityEditor;
 
 namespace CreativeSpore.SuperTilemapEditor

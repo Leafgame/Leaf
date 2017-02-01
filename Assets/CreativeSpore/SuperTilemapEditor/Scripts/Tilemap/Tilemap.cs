@@ -380,7 +380,7 @@ namespace CreativeSpore.SuperTilemapEditor
 #endif
         }
 
-        void OnValidate()
+	    public void OnValidate()
         {
             BuildTilechunkDictionary();
             m_parentTilemapGroup = GetComponentInParent<TilemapGroup>();

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
+using CreativeSpore.SuperTilemapEditor;
 
-namespace CreativeSpore.SuperTilemapEditor
+namespace Assets.CreativeSpore.SuperTilemapEditor.Scripts.Tilemap.Brush
 {
     public class CarpetBrush : RoadBrush
     {
@@ -28,7 +29,7 @@ namespace CreativeSpore.SuperTilemapEditor
         static bool[] s_showDiagonal = new bool[4];
         static bool s_needsSubTiles;
 
-        private void CalculateNeighbourData(Tilemap tilemap, int gridX, int gridY, uint tileData)
+        private void CalculateNeighbourData(global::CreativeSpore.SuperTilemapEditor.Tilemap tilemap, int gridX, int gridY, uint tileData)
         {
             s_needsSubTiles = false;
             s_brushId = (int)((tileData & Tileset.k_TileDataMask_BrushId) >> 16);
@@ -75,7 +76,7 @@ namespace CreativeSpore.SuperTilemapEditor
             }
         }
 
-        public override uint Refresh(Tilemap tilemap, int gridX, int gridY, uint tileData)
+        public override uint Refresh(global::CreativeSpore.SuperTilemapEditor.Tilemap tilemap, int gridX, int gridY, uint tileData)
         {
             CalculateNeighbourData(tilemap, gridX, gridY, tileData);
 
@@ -94,7 +95,7 @@ namespace CreativeSpore.SuperTilemapEditor
         // '┬', '╔', '╦', '╗', | 4, 6, 14, 12,
         // '║', '╠', '╬', '╣', | 5, 7, 15, 13,
         // '┴', '╚', '╩', '╝', | 1, 3, 11, 9,
-        public override uint[] GetSubtiles(Tilemap tilemap, int gridX, int gridY, uint tileData)
+        public override uint[] GetSubtiles(global::CreativeSpore.SuperTilemapEditor.Tilemap tilemap, int gridX, int gridY, uint tileData)
         {
             CalculateNeighbourData(tilemap, gridX, gridY, tileData);
             // tiles that need subtile division
