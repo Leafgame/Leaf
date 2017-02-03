@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.UI
 {
 	public class ButtonClickEvents : MonoBehaviour
 	{
+		public GameObject OptionsPanel;
 		/*
 		 * Called when the user clicks GUI button Start
 		 */
 		public void GameStartButtonClicked()
 		{
-			print("TODO Game Starts");
+			SceneManager.LoadScene(1);
 		}
 
 		/*
@@ -26,7 +28,7 @@ namespace Assets.Scripts
 		 */
 		public void OptionsButtonClicked()
 		{
-			print("TODO options screen");
+			OptionsPanel.SetActive(!OptionsPanel.activeSelf);
 		}
 
 		/*
@@ -46,5 +48,11 @@ namespace Assets.Scripts
 	    {
             print("TODO options screen");
         }
+
+		public static void ContinueButtonClicked()
+		{
+			SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentProgress"));
+		} 
+
     }
 }

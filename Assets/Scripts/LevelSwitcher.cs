@@ -24,6 +24,11 @@ namespace Assets.Scripts
 
 		private bool _loading;
 
+		public void Start()
+		{
+			PlayerPrefs.SetInt("CurrentProgress", SceneManager.GetActiveScene().buildIndex);
+		}
+
 		public void Update()
 		{
 		}

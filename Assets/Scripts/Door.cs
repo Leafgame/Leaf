@@ -10,7 +10,6 @@ namespace Assets.Scripts
 		public Transform RoomEntranceLocation;
 		private SpriteRenderer _fadeSpriteRenderer;
 		private float _alphaFadeValue;
-		private bool _fadeOut;
 		private bool _fadeIn;
 		private float _fadeTime = 5f;
 
@@ -36,7 +35,6 @@ namespace Assets.Scripts
 		public IEnumerable FadeIn()
 		{
 			yield return new WaitForSeconds(_fadeTime);
-			_fadeOut = false;
 			_fadeIn = true;
 		}
 
