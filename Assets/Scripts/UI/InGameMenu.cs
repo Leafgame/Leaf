@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.UI
 {
 	public class InGameMenu : MonoBehaviour
 	{
@@ -36,6 +36,8 @@ namespace Assets.Scripts
 		public void Unpause()
 		{
 			Time.timeScale = 1;
+			GetComponentInChildren<SettingsManager>().SaveChanges();
+			GetComponent<ButtonClickEvents>().OptionsPanel.SetActive(false);
 		}
 	}
 }

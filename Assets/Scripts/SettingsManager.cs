@@ -30,7 +30,7 @@ namespace Assets.Scripts
 			OverallQuality.onValueChanged.AddListener(delegate { OnOverallQualityChanged(); });
 			MusicVolumeSlider.onValueChanged.AddListener(delegate { OnMusicVolumeChanged(); });
 			SoundEffectSlider.onValueChanged.AddListener(delegate { OnSoundEffectsVolumeChanged(); });
-			ApplyButton.onClick.AddListener(OnApplyButtonClicked);
+			ApplyButton.onClick.AddListener(SaveChanges);
 
 			Resolutions = Screen.resolutions;
 
@@ -50,7 +50,7 @@ namespace Assets.Scripts
 		public void OnResolutionChanged()
 		{
 			Screen.SetResolution(Resolutions[Resolutions.Length-ResolutionDropdown.value-1].width, Resolutions[Resolutions.Length-ResolutionDropdown.value-1].height, Screen.fullScreen);
-			GameSettings.ResolutionIndex = Resolutions.Length - ResolutionDropdown.value - 1;
+			GameSettings.ResolutionIndex = ResolutionDropdown.value;
 		}
 
 		public void OnTextureQualityChanged()
@@ -79,7 +79,7 @@ namespace Assets.Scripts
 			GameSettings.SoundEffectsVolume = SoundEffectsAudioSource.volume = SoundEffectSlider.value;
 		}
 
-		public void OnApplyButtonClicked()
+		public void SaveChanges()
 		{
 			var jsonData = JsonUtility.ToJson(GameSettings, true);
 			File.WriteAllText(Application.persistentDataPath + "/gamesettings.json", jsonData);
