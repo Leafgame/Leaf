@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.PlayerScripts
 {
     public class PlatformerCharacter2D : MonoBehaviour
     {
-        [SerializeField] public float MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
+        [SerializeField] public float MaxSpeed = 10f;					 // The fastest the player can travel in the x axis.
+	    [SerializeField] public float MaxRigidBodySpeed = 100f;			 // The max speed of the rigidbody
         [SerializeField] public float JumpForce = 400f;                  // Amount of force added when the player jumps.
         [Range(0, 1)] [SerializeField] public float CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
         [SerializeField] public bool AirControl = false;                 // Whether or not a player can steer while jumping;
@@ -29,6 +31,7 @@ namespace Assets.Scripts.PlayerScripts
         private Rigidbody2D _rigidbody2D;
         private bool _facingRight = true;           // For determining which way the player is currently facing.
 	    private PlayerItems _playerItems;
+	    private float _slopeFriction = 10.5f;
 
         private void Awake()
         {
@@ -45,47 +48,66 @@ namespace Assets.Scripts.PlayerScripts
 	    }
 
 
-        private void FixedUpdate()
-        {
-	        _grounded = false;
-            // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-            // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-            var colliders = Physics2D.OverlapCircleAll(_groundCheck.position, GroundedRadius, WhatIsGround);
-            foreach (var t in colliders)
-            {
-	            if (t.gameObject != gameObject)
-	            {
-		            _grounded = true;
-		            _currentAirTime = 0f;
-	            }
-			}
+	    private void FixedUpdate()
+	    {
+		    if (_rigidbody2D.velocity.magnitude > MaxRigidBodySpeed)
+		    {
+			    _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * MaxRigidBodySpeed;
+		    }
+		    _grounded = false;
+		    // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+		    // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+		    var colliders = Physics2D.OverlapCircleAll(_groundCheck.position, GroundedRadius, WhatIsGround);
+		    foreach (var t in colliders)
+		    {
+			    if (t.gameObject != gameObject)
+			    {
+				    _grounded = true;
+				    _currentAirTime = 0f;
+			    }
+		    }
 
-            _animator.SetBool("Ground", _grounded);
+		    _animator.SetBool("Ground", _grounded);
 
-            // Set the vertical animation
-            _animator.SetFloat("vSpeed", _rigidbody2D.velocity.y);
+		    // Set the vertical animation
+		    _animator.SetFloat("vSpeed", _rigidbody2D.velocity.y);
 
-			// GLIDING
-	        if (!_grounded && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped && _rigidbody2D.velocity.y < 0 && !InWindZone)
-	        {
-		        transform.GetChild(2).gameObject.SetActive(true);
-				_rigidbody2D.velocity  = new Vector2(0, -GlideFallVelocity);
-				_rigidbody2D.AddForce(new Vector2(GlideBoost*transform.localScale.x, 0));
-	        }
-			else if (InWindZone && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped)
-	        {
-				transform.GetChild(2).gameObject.SetActive(true);
-			}
-			else
-	        {
-				transform.GetChild(2).gameObject.SetActive(false);
-			}
-		}
+		    // GLIDING
+		    if (!_grounded && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped && _rigidbody2D.velocity.y < 0 &&
+		        !InWindZone)
+		    {
+			    transform.GetChild(2).gameObject.SetActive(true);
+			    _rigidbody2D.velocity = new Vector2(0, -GlideFallVelocity);
+			    _rigidbody2D.AddForce(new Vector2(GlideBoost * transform.localScale.x, 0));
+		    }
+		    else if (InWindZone && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped)
+		    {
+			    transform.GetChild(2).gameObject.SetActive(true);
+		    }
+		    else
+		    {
+			    transform.GetChild(2).gameObject.SetActive(false);
+		    }
+	    }
 
 	    public void Move(float move, bool crouch, bool jump)
-        {
-            // If crouching, check to see if the character can stand up
-            if (!crouch && _animator.GetBool("Crouch"))
+	    {
+		    var friction = GetComponent<CircleCollider2D>();
+			if (Math.Abs(move) < 0.1 && _grounded)
+			{
+				friction.sharedMaterial.friction = 1f;
+				friction.enabled = false;
+				friction.enabled = true;
+			}
+			else
+			{
+				friction.sharedMaterial.friction = 0;
+				friction.enabled = false;
+				friction.enabled = true;
+			}
+
+			// If crouching, check to see if the character can stand up
+			if (!crouch && _animator.GetBool("Crouch"))
             {
                 // If the character has a ceiling preventing them from standing up, keep them crouching
                 if (Physics2D.OverlapCircle(_ceilingCheck.position, CeilingRadius, WhatIsGround))
@@ -161,6 +183,8 @@ namespace Assets.Scripts.PlayerScripts
 				_rigidbody2D.AddForce(new Vector3(0.0f, HoldForceMultiplier));
 				_currentJumpTime -= Time.deltaTime;
 			}
+
+			print(_grounded);
 		}
 
         private void Flip()
@@ -173,5 +197,5 @@ namespace Assets.Scripts.PlayerScripts
             theScale.x *= -1;
 			transform.localScale = theScale;
         }
-    }
+	}
 }

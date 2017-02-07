@@ -10,6 +10,7 @@ TagManager:
   - FloatingPlatform
   - CheckpointManager
   - Fade
+  - SteerTarget
   layers:
   - Default
   - TransparentFX

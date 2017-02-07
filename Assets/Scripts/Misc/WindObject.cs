@@ -17,25 +17,29 @@ namespace Assets.Scripts.Misc
 		public BoxCollider2D WindTrigger;
 		public bool IsActive = true;
 
-		private readonly List<Collider2D> _objectsInWindZone = new List<Collider2D>();
+		public readonly List<GameObject> ObjectsInWindZone = new List<GameObject>();
 
-		public virtual void ApplyWindPhysics(Collider2D col)
+		public virtual void ApplyWindPhysics(GameObject gO)
 		{
-			var rigidBody2D = col.GetComponent<Rigidbody2D>();
+			var rigidBody2D = gO.GetComponent<Rigidbody2D>();
 			var windSource = rigidBody2D.transform.position - transform.position;
 			var distanceToWindSource = windSource.magnitude;
 
-			rigidBody2D.AddForce(WindDirection * WindForce);
-			rigidBody2D.AddForce(WindDirection * WindForceClose / distanceToWindSource);
+			rigidBody2D.AddForce(WindDirection * WindForce
+				+ WindDirection * WindForceClose / Mathf.Log(distanceToWindSource)
+				);
+
+			//print("Distance: " + distanceToWindSource + " Force: " + WindDirection * WindForce
+			//	+ WindDirection * WindForceClose / Mathf.Log(distanceToWindSource));
 		}
 
 		public void FixedUpdate()
 		{
 			if (!IsActive) return;
 
-			foreach (var rigidbodyObject in _objectsInWindZone)
+			foreach (var rigidbodyObject in ObjectsInWindZone)
 			{
-				ApplyWindPhysics(rigidbodyObject);
+				ApplyWindPhysics(rigidbodyObject.gameObject);
 			}
 		}
 
@@ -61,7 +65,8 @@ namespace Assets.Scripts.Misc
 
 			// No Rigidbody2D on object: return
 			if (!RigidbodyCheck(col)) return;
-			_objectsInWindZone.Add(col.GetComponent<Collider2D>());
+			if(!ObjectsInWindZone.Contains(col.gameObject))
+				ObjectsInWindZone.Add(col.gameObject);
 		}
 
 		public void OnTriggerExit2D(Collider2D col)
@@ -74,11 +79,11 @@ namespace Assets.Scripts.Misc
 
 			// No Rigidbody2D on object: return
 			if (!RigidbodyCheck(col)) return;
-			_objectsInWindZone.Remove(col.GetComponent<Collider2D>());
-
+			if(ObjectsInWindZone.Contains(col.gameObject))
+				ObjectsInWindZone.Remove(col.gameObject);
 		}
 
-		public bool RigidbodyCheck(Collider2D col)
+		public static bool RigidbodyCheck(Collider2D col)
 		{
 			return col.GetComponent<Rigidbody2D>() != null;
 		}
