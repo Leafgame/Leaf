@@ -12,7 +12,6 @@ namespace Assets.Scripts.Misc
 	{
 		public float WindForce;
 		public float WindForceClose;
-		public float MaxHeight;
 		public Vector3 WindDirection;
 		public BoxCollider2D WindTrigger;
 		public bool IsActive = true;

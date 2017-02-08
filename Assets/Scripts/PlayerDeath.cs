@@ -16,7 +16,8 @@ namespace Assets.Scripts
 		{	
 			if (col.tag == "Player")
 			{
-				col.transform.position = _checkpointManager.CurrentCheckpoit.position;
+				col.transform.position = _checkpointManager.CurrentCheckpoitPos;
+				col.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 			}
 		}
 	}

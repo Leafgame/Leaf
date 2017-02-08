@@ -1,21 +1,27 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.PlayerScripts;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
 	public class CheckpointManager : MonoBehaviour
 	{
-		public Transform CurrentCheckpoit;
+		public Vector3 CurrentCheckpoitPos;
+
+		private GameObject _playerReference;
 
 		public Transform[] Checkpoints;
-		// Use this for initialization
+
 		protected virtual void Start ()
 		{
 			Checkpoints = GetComponentsInChildren<Transform>();
+			_playerReference = GameObject.FindGameObjectWithTag("Player");
 		}
 	
-		// Update is called once per frame
 		protected virtual void Update () {
-		
+			if (_playerReference.GetComponent<PlatformerCharacter2D>().Grounded && Input.GetButtonDown("Fire1"))
+			{
+				CurrentCheckpoitPos = _playerReference.transform.position;
+			}
 		}
 	}
 }

@@ -12,6 +12,8 @@ namespace Assets.Scripts.PlayerScripts
         public float CameraSize = 15f;
         public float MaxRadius = 2.0f;
 	    public float InterpolateCamAmount = 10.0f;
+	    public float YOffset = 5f;
+	    public bool LockY = true;
 
         private Vector3 _referenceVec;
         private bool _freeMovingCamera;
@@ -25,6 +27,7 @@ namespace Assets.Scripts.PlayerScripts
             MainCameraView.orthographic = true;
             MainCameraView.orthographicSize = CameraSize;
             MainCameraView.transform.position = new Vector3(0, 0, -20);
+	        YOffset = 5f;
         }
 
         public void Update()
@@ -51,8 +54,7 @@ namespace Assets.Scripts.PlayerScripts
             {
                 _referenceVec = new Vector3(transform.position.x, transform.position.y, MainCameraView.transform.position.z);
 
-	            var interpolatedVec = _rigidbody2D.velocity * InterpolateCamAmount + new Vector2(_referenceVec.x, _referenceVec.y);
-
+	            var interpolatedVec = new Vector3(_rigidbody2D.velocity.x * InterpolateCamAmount + _referenceVec.x, Mathf.Clamp(_rigidbody2D.velocity.y, -2, 2) * InterpolateCamAmount + _referenceVec.y + YOffset, -20);
 				MoveObject(MainCameraView.transform, MainCameraView.transform.position, interpolatedVec, LerpTime);
 			}
 
@@ -65,9 +67,11 @@ namespace Assets.Scripts.PlayerScripts
 				var clampedPos = Vector2.ClampMagnitude(diff, MaxRadius);
 				MainCameraView.transform.position = transform.position + new Vector3(clampedPos.x, clampedPos.y, -20);
 			}
+			if(LockY)
+				MainCameraView.transform.position = new Vector3(MainCameraView.transform.position.x, transform.position.y + YOffset, -20);
 		}
 
-		public void MoveObject(Transform movingObject, Vector2 startpos, Vector2 endpos, float time)
+		public void MoveObject(Transform movingObject, Vector3 startpos, Vector3 endpos, float time)
 		{
 			var rate = 1.0f / time;
 			var i = 0.0f;
@@ -75,7 +79,7 @@ namespace Assets.Scripts.PlayerScripts
 			if (i < 1.0f)
 			{
 				i += Time.deltaTime * rate;
-				movingObject.position = Vector3.Lerp(startpos, endpos, i) + new Vector3(0,0,-20);
+				movingObject.position = Vector3.Lerp(startpos, endpos, i);
 			}
 		}
 	}

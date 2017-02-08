@@ -9,7 +9,7 @@ namespace Assets.Scripts
 		protected void OnTriggerEnter2D(Collider2D col)
 		{
 			var checkpointManager = GetComponentInParent<CheckpointManager>();
-			checkpointManager.CurrentCheckpoit = transform;
+			checkpointManager.CurrentCheckpoitPos = transform.position;
 		}
 	}
 }

@@ -6,14 +6,15 @@ namespace Assets.Scripts.PlayerScripts
     public class PlatformerCharacter2D : MonoBehaviour
     {
         [SerializeField] public float MaxSpeed = 10f;					 // The fastest the player can travel in the x axis.
-	    [SerializeField] public float MaxRigidBodySpeed = 100f;			 // The max speed of the rigidbody
+	    [SerializeField] public float MaxRigidBodySpeed = 50f;			 // The max speed of the rigidbody
         [SerializeField] public float JumpForce = 400f;                  // Amount of force added when the player jumps.
         [Range(0, 1)] [SerializeField] public float CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
         [SerializeField] public bool AirControl = false;                 // Whether or not a player can steer while jumping;
         [SerializeField] public LayerMask WhatIsGround;                  // A mask determining what is ground to the character
-        [SerializeField] public bool InWindZone;
+        [SerializeField] public bool InWindZone;						 // Whether or not the player is in a wind zone
+		[SerializeField] public bool Grounded;							 // Whether or not the player is grounded.
 
-	    public float GlideBoost = 50;
+		public float GlideBoost = 50;
 	    public float GlideFallVelocity = 2.0f;
 		public float JumpHoldTime = 0.5f;
 	    public float LateJumpTime = 0.2f;
@@ -24,14 +25,14 @@ namespace Assets.Scripts.PlayerScripts
 
 		private Transform _groundCheck;             // A position marking where to check if the player is grounded.
 	    private const float GroundedRadius = .2f;   // Radius of the overlap circle to determine if grounded
-        private bool _grounded;                     // Whether or not the player is grounded.
         private Transform _ceilingCheck;            // A position marking where to check for ceilings
 	    private const float CeilingRadius = .01f;   // Radius of the overlap circle to determine if the player can stand up
         private Animator _animator;                 // Reference to the player's animator component.
         private Rigidbody2D _rigidbody2D;
         private bool _facingRight = true;           // For determining which way the player is currently facing.
 	    private PlayerItems _playerItems;
-	    private float _slopeFriction = 10.5f;
+	    private float _speed;
+	    private float _acceleration = 10f;
 
         private void Awake()
         {
@@ -50,30 +51,26 @@ namespace Assets.Scripts.PlayerScripts
 
 	    private void FixedUpdate()
 	    {
-		    if (_rigidbody2D.velocity.magnitude > MaxRigidBodySpeed)
-		    {
-			    _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * MaxRigidBodySpeed;
-		    }
-		    _grounded = false;
+		    Grounded = false;
 		    // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		    // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		    var colliders = Physics2D.OverlapCircleAll(_groundCheck.position, GroundedRadius, WhatIsGround);
+		    var colliders = Physics2D.RaycastAll(_groundCheck.position, Vector2.down, GroundedRadius, WhatIsGround);
 		    foreach (var t in colliders)
 		    {
-			    if (t.gameObject != gameObject)
+			    if (t.transform.gameObject != gameObject)
 			    {
-				    _grounded = true;
+				    Grounded = true;
 				    _currentAirTime = 0f;
 			    }
 		    }
 
-		    _animator.SetBool("Ground", _grounded);
+		    _animator.SetBool("Ground", Grounded);
 
 		    // Set the vertical animation
 		    _animator.SetFloat("vSpeed", _rigidbody2D.velocity.y);
 
 		    // GLIDING
-		    if (!_grounded && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped && _rigidbody2D.velocity.y < 0 &&
+		    if (!Grounded && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped && _rigidbody2D.velocity.y < 0 &&
 		        !InWindZone)
 		    {
 			    transform.GetChild(2).gameObject.SetActive(true);
@@ -88,12 +85,16 @@ namespace Assets.Scripts.PlayerScripts
 		    {
 			    transform.GetChild(2).gameObject.SetActive(false);
 		    }
-	    }
+			if (_rigidbody2D.velocity.magnitude > MaxRigidBodySpeed)
+			{
+				_rigidbody2D.velocity = _rigidbody2D.velocity.normalized * MaxRigidBodySpeed;
+			}
+		}
 
 	    public void Move(float move, bool crouch, bool jump)
 	    {
 		    var friction = GetComponent<CircleCollider2D>();
-			if (Math.Abs(move) < 0.1 && _grounded)
+			if (Math.Abs(move) < 0.1 && Grounded)
 			{
 				friction.sharedMaterial.friction = 1f;
 				friction.enabled = false;
@@ -120,7 +121,7 @@ namespace Assets.Scripts.PlayerScripts
             _animator.SetBool("Crouch", crouch);
 
             //only control the player if grounded or airControl is turned on
-            if (_grounded || AirControl)
+            if (Grounded || AirControl)
             {
                 // Reduce the speed if crouching by the crouchSpeed multiplier
                 move = (crouch ? move*CrouchSpeed : move);
@@ -129,7 +130,13 @@ namespace Assets.Scripts.PlayerScripts
                 _animator.SetFloat("Speed", Mathf.Abs(move));
 
                 // Move the character
-                _rigidbody2D.velocity = new Vector2(move*MaxSpeed, _rigidbody2D.velocity.y);
+	            if (_speed < MaxSpeed && Math.Abs(move) > 0) {
+		            _speed = _speed + _acceleration * Time.deltaTime;
+	            }
+	            else if(Math.Abs(move) < 0.01) {
+		            _speed = 0;
+	            }
+	            _rigidbody2D.velocity = new Vector2(move*_speed, _rigidbody2D.velocity.y);
 
                 // If the input is moving the player right and the player is facing left...
                 if (move > 0 && !_facingRight)
@@ -146,10 +153,10 @@ namespace Assets.Scripts.PlayerScripts
             }
 
 			// If the player should jump...
-			if ((_grounded || _currentAirTime < LateJumpTime) && jump && !InWindZone)
+			if ((Grounded || _currentAirTime < LateJumpTime) && jump && !InWindZone)
             {
                 // Add a vertical force to the player.
-                _grounded = false;
+                Grounded = false;
                 _animator.SetBool("Ground", false);
 				_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
 				_rigidbody2D.AddForce(new Vector2(0f, JumpForce));
@@ -170,7 +177,7 @@ namespace Assets.Scripts.PlayerScripts
 			}
 
 			// Reset the JumpHold on grounded
-			if (_grounded)
+			if (Grounded)
 	        {
 		        _currentJumpTime = JumpHoldTime;
 	        }
@@ -178,13 +185,11 @@ namespace Assets.Scripts.PlayerScripts
 	        {
 		        _currentAirTime += Time.deltaTime;
 	        }
-			if (_currentJumpTime > 0 && Input.GetButton("Fire1") && !_grounded )
+			if (_currentJumpTime > 0 && Input.GetButton("Fire1") && !Grounded )
 			{
 				_rigidbody2D.AddForce(new Vector3(0.0f, HoldForceMultiplier));
 				_currentJumpTime -= Time.deltaTime;
 			}
-
-			print(_grounded);
 		}
 
         private void Flip()
