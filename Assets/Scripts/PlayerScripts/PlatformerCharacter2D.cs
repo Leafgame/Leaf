@@ -12,6 +12,7 @@ namespace Assets.Scripts.PlayerScripts
         [SerializeField] public bool AirControl = false;                 // Whether or not a player can steer while jumping;
         [SerializeField] public LayerMask WhatIsGround;                  // A mask determining what is ground to the character
         [SerializeField] public bool InWindZone;						 // Whether or not the player is in a wind zone
+	    [SerializeField] public bool InVerticalWindZone;
 		[SerializeField] public bool Grounded;							 // Whether or not the player is grounded.
 
 		public float GlideBoost = 50;
@@ -121,7 +122,7 @@ namespace Assets.Scripts.PlayerScripts
             _animator.SetBool("Crouch", crouch);
 
             //only control the player if grounded or airControl is turned on
-            if (Grounded || AirControl)
+            if ((Grounded || AirControl) && !InVerticalWindZone)
             {
                 // Reduce the speed if crouching by the crouchSpeed multiplier
                 move = (crouch ? move*CrouchSpeed : move);

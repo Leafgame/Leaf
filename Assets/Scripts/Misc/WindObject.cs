@@ -25,7 +25,7 @@ namespace Assets.Scripts.Misc
 			var distanceToWindSource = windSource.magnitude;
 
 			rigidBody2D.AddForce(WindDirection * WindForce
-				+ WindDirection * WindForceClose / Mathf.Log(distanceToWindSource)
+				+ WindDirection * WindForceClose / Mathf.Clamp(distanceToWindSource, 0.01f, 1f)
 				);
 
 			//print("Distance: " + distanceToWindSource + " Force: " + WindDirection * WindForce
