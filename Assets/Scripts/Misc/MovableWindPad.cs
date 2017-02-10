@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.GeneratedCode;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Misc
 {

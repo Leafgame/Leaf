@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
-using Assets.Scripts.GeneratedCode;
-using Assets.Scripts.Misc;
 
-public class WindTurn : WindObject
+namespace Assets.Scripts.Misc
 {
-	public virtual CircleCollider2D windTurnCircle
+	public class WindTurn : WindObject
 	{
-		get;
-		set;
-	}
+		public virtual CircleCollider2D WindTurnCircle
+		{
+			get;
+			set;
+		}
 
+	}
 }
 

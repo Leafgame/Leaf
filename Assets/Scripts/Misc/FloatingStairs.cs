@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.GeneratedCode
+﻿namespace Assets.Scripts.Misc
 {
 	public class FloatingStairs : FloatObject
 	{
