@@ -8,7 +8,7 @@ namespace Assets.Scripts
 
 		public GameObject Prefab;
 
-		public void Start ()
+		public void Awake ()
 		{
 			Instantiate( Prefab, StartLocation, Quaternion.identity );
 		}

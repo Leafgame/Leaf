@@ -244,7 +244,7 @@ MonoBehaviour:
   CameraPanSpeed: 0.8
   CameraSize: 8
   MaxRadius: 5
-  InterpolateCamAmount: 1
+  InterpolateCamAmount: 1.1
   YMax: -5
   YMin: 5
   YOffset: 5
