@@ -10,12 +10,6 @@ namespace Assets.Scripts.Misc
 			get;
 			set;
 		}
-
-
-	    public override void Float()
-	    {
-	        var cosThetha = Mathf.Cos(Time.time) * FloatIntensity;
-	    }
 	}
 }
 

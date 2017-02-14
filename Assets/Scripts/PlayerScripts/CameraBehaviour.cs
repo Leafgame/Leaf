@@ -47,7 +47,14 @@ namespace Assets.Scripts.PlayerScripts
 	        {
 		        _freeMovingCamera = false;
 	        }
-	        
+
+	        if (Mathf.Abs(_rigidbody2D.velocity.y) < 0.1f)
+	        {
+				_referenceVec = new Vector3( transform.position.x, transform.position.y, MainCameraView.transform.position.z );
+
+				var interpolatedVec = new Vector3( MainCameraView.transform.position.x, transform.position.y + YOffset, -20 );
+				MoveObject(MainCameraView.transform, MainCameraView.transform.position, interpolatedVec, LerpTime);
+			}
 
 			// Camera follow calculations
 			if (!_freeMovingCamera)

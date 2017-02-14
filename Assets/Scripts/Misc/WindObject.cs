@@ -63,9 +63,14 @@ namespace Assets.Scripts.Misc
 			}
 
 			// No Rigidbody2D on object: return
-			if (!RigidbodyCheck(col)) return;
+			if (!RigidbodyCheck(col) || HeavyObjectCheck(col)) return;
 			if(!ObjectsInWindZone.Contains(col.gameObject))
 				ObjectsInWindZone.Add(col.gameObject);
+		}
+
+		private static bool HeavyObjectCheck(Collider2D col)
+		{
+			return col.tag == "HeavyObject";
 		}
 
 		public void OnTriggerExit2D(Collider2D col)
@@ -80,6 +85,18 @@ namespace Assets.Scripts.Misc
 			if (!RigidbodyCheck(col)) return;
 			if(ObjectsInWindZone.Contains(col.gameObject))
 				ObjectsInWindZone.Remove(col.gameObject);
+		}
+
+		public void OnTriggerStay2D(Collider2D col)
+		{
+			// HeavyObject Enters
+			if (HeavyObjectCheck( col ))
+			{
+				var box = GetComponent<BoxCollider2D>();
+				box.size = new Vector2( (col.transform.position - transform.position).magnitude, box.size.y );
+				var neg = transform.localPosition.x < 0 ? -1 : 1;
+				box.offset = new Vector2(5-box.size.x*neg, 0);
+			}
 		}
 
 		public static bool RigidbodyCheck(Collider2D col)

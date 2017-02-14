@@ -25,16 +25,16 @@ namespace Assets.Scripts.Misc
 
 	    protected virtual void FixedUpdate()
 	    {
-	        Float();
-		    if (!IsWindActive)
+			if (!IsWindActive)
 		    {
 			    LowerPlatform();
 		    }
 		    else
 		    {
 			    RaisePlatform();
-		    }
-	    }
+				Float();
+			}
+		}
 
 		public virtual void LowerPlatform()
 		{

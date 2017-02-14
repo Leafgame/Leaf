@@ -12,6 +12,7 @@ TagManager:
   - Fade
   - SteerTarget
   - VerticalWindZone
+  - HeavyObject
   layers:
   - Default
   - TransparentFX
