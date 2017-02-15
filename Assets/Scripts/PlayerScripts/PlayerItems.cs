@@ -10,6 +10,7 @@ namespace Assets.Scripts.PlayerScripts
          *  deactive items = false
          */
 	    public bool HasGliderEquipped = false;
+	    public bool HasAirDashEquipped = false;
 	    public bool HasUmbrellaEquipped = false;
 	    public bool HasBalloonEquipped = false;
     }

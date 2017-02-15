@@ -88,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012323079764}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 9.1, z: 0}
+  m_LocalPosition: {x: 0.7, y: 11.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4000011599999328}
@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014229097902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.002, z: 0}
+  m_LocalPosition: {x: 30.724852, y: 7.4723663, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 4000011726139796}
@@ -117,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014158575574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -9.38, z: 0}
+  m_LocalPosition: {x: 0, y: -10.4, z: 0}
   m_LocalScale: {x: 0.56448287, y: 0.5644837, z: 1}
   m_Children: []
   m_Father: {fileID: 4000011599999328}
@@ -151,7 +151,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 4
-  m_Material: {fileID: 6200000, guid: 3626fe8e008014f6bbd19bb72937b311, type: 2}
+  m_Material: {fileID: 6200000, guid: 18128a28973302c4fbc140f2ddb5dd0c, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -178,12 +178,12 @@ BoxCollider2D:
   m_GameObject: {fileID: 1000014229097902}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 18128a28973302c4fbc140f2ddb5dd0c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.78374386, y: 0.29390812}
   serializedVersion: 2
-  m_Size: {x: 3, y: 17}
+  m_Size: {x: 5.3512526, y: 17.587816}
 --- !u!95 &95000012637196154
 Animator:
   serializedVersion: 3
@@ -228,6 +228,9 @@ MonoBehaviour:
   JumpHoldTime: 0.2
   LateJumpTime: 0.2
   HoldForceMultiplier: 50
+  MaxDashTime: 1
+  DashSpeed: 2000
+  DashStoppingSpeed: 0.1
 --- !u!114 &114000012229373584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -271,6 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HasGliderEquipped: 0
+  HasAirDashEquipped: 0
   HasUmbrellaEquipped: 0
   HasBalloonEquipped: 0
 --- !u!212 &212000012142476434
