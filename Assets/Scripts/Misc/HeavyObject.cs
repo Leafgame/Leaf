@@ -30,8 +30,7 @@ public class HeavyObject : MonoBehaviour
 	protected virtual void OnCollisionEnter2D( Collision2D col )
 	{
 		if (col.transform.tag == "Player")
-		{
-			
+		{	
 			print( col.relativeVelocity.x );
 		}
 	}

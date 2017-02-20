@@ -10,6 +10,7 @@ namespace Assets.Scripts.Misc
 	[RequireComponent(typeof(BoxCollider2D))]
 	public class WindObject : MonoBehaviour
 	{
+		private const int ModelOffset = 5;
 		public float WindForce;
 		public float WindForceClose;
 		public Vector3 WindDirection;
@@ -17,6 +18,8 @@ namespace Assets.Scripts.Misc
 		public bool IsActive = true;
 
 		public readonly List<GameObject> ObjectsInWindZone = new List<GameObject>();
+
+		private float _maxBoxSize;
 
 		public virtual void ApplyWindPhysics(GameObject gO)
 		{
@@ -62,6 +65,11 @@ namespace Assets.Scripts.Misc
 				col.GetComponent<PlatformerCharacter2D>().InWindZone = true;
 			}
 
+			if (HeavyObjectCheck(col))
+			{
+				_maxBoxSize = GetComponent<BoxCollider2D>().size.x + 2f;
+			}
+
 			// No Rigidbody2D on object: return
 			if (!RigidbodyCheck(col) || HeavyObjectCheck(col)) return;
 			if(!ObjectsInWindZone.Contains(col.gameObject))
@@ -81,6 +89,12 @@ namespace Assets.Scripts.Misc
 				col.GetComponent<PlatformerCharacter2D>().InWindZone = false;
 			}
 
+			if (HeavyObjectCheck(col))
+			{
+				var box = GetComponent<BoxCollider2D>();
+				FixWindZoneArea( col , new Vector2( box.size.x - 2f, box.size.y ));
+			}
+
 			// No Rigidbody2D on object: return
 			if (!RigidbodyCheck(col)) return;
 			if(ObjectsInWindZone.Contains(col.gameObject))
@@ -93,15 +107,26 @@ namespace Assets.Scripts.Misc
 			if (HeavyObjectCheck( col ))
 			{
 				var box = GetComponent<BoxCollider2D>();
-				box.size = new Vector2( (col.transform.position - transform.position).magnitude, box.size.y );
-				var neg = transform.localPosition.x < 0 ? -1 : 1;
-				box.offset = new Vector2(5-box.size.x*neg, 0);
+				if (box.size.x <= _maxBoxSize)
+				{
+					var vec = col.transform.position - box.transform.position;
+					FixWindZoneArea( col, new Vector2( Mathf.Abs( vec.x ) - ModelOffset, 3 ));
+				}
 			}
-		}
+		}	
 
 		public static bool RigidbodyCheck(Collider2D col)
 		{
 			return col.GetComponent<Rigidbody2D>() != null;
+		}
+
+		public void FixWindZoneArea(Collider2D col, Vector2 size)
+		{
+			var box = GetComponent<BoxCollider2D>();
+			var vec = col.transform.position - box.transform.position;
+			var dir = vec.x < 0 ? -1 : 1;
+			box.size = size;
+			box.offset = new Vector2( dir * box.size.x / 2 - ModelOffset * -dir, 0 );
 		}
 	}
 }

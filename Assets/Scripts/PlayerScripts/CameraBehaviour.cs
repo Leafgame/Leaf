@@ -12,8 +12,8 @@ namespace Assets.Scripts.PlayerScripts
         public float CameraSize = 15f;
         public float MaxRadius = 2.0f;
 	    public float InterpolateCamAmount = 10.0f;
-	    public float YMax = -5f;
-	    public float YMin = 5f;
+	    private float _yMax = -5f;
+	    private float _yMin = 5f;
 	    public float YOffset = 5f;
 
         private Vector3 _referenceVec;
@@ -28,6 +28,8 @@ namespace Assets.Scripts.PlayerScripts
             MainCameraView.orthographic = true;
             MainCameraView.orthographicSize = CameraSize;
             MainCameraView.transform.position = new Vector3(0, 0, -20);
+			_yMax = -YOffset;
+			_yMin = YOffset;
         }
 
         public void Update()
@@ -77,11 +79,11 @@ namespace Assets.Scripts.PlayerScripts
 	        var distToCam = new Vector2(MainCameraView.transform.position.x, 
 										MainCameraView.transform.position.y) -
 	                        new Vector2(transform.position.x, transform.position.y);
-	        if (distToCam.y < YMax)
+	        if (distToCam.y < _yMax)
 			{
 				MainCameraView.transform.position = new Vector3(MainCameraView.transform.position.x, transform.position.y - YOffset, -20);
 			}
-			else if (distToCam.y > YMin)
+			else if (distToCam.y > _yMin)
 	        {
 				MainCameraView.transform.position = new Vector3(MainCameraView.transform.position.x, transform.position.y + YOffset, -20);
 			}			
