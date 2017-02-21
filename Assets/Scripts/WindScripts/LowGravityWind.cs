@@ -1,9 +1,7 @@
-﻿using Assets.Scripts.Misc;
-using Assets.Scripts.PlayerScripts;
+﻿using Assets.Scripts.PlayerScripts;
 using UnityEngine;
 
-
-namespace Assets.Scripts
+namespace Assets.Scripts.WindScripts
 {
 	/// <summary>
 	/// Purpose of this class is to lower the acceleration of gravity in a windzone so that 

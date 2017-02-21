@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Misc
+﻿namespace Assets.Scripts.WindScripts
 {
 	/// <summary>
 	/// Description:

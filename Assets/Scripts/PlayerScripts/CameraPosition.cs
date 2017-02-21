@@ -60,8 +60,6 @@ namespace Assets.Scripts.PlayerScripts
 			if (col.tag == "Player" && col is BoxCollider2D )
 			{
 				MoveCamera = true;
-				print( "YO" );
-
 			}
 		}
 

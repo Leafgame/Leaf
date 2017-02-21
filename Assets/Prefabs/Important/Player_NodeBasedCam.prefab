@@ -230,6 +230,9 @@ MonoBehaviour:
   MaxDashTime: 1
   DashSpeed: 2000
   DashStoppingSpeed: 0.1
+  MaxWindNegationTime: 5
+  WindNegationCooldown: 20
+  WindNegationActive: 0
 --- !u!114 &114000012344497388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -256,6 +259,7 @@ MonoBehaviour:
   HasAirDashEquipped: 0
   HasUmbrellaEquipped: 0
   HasDoubleJumpEquipped: 0
+  HasWindNegationEquipped: 0
 --- !u!212 &212000012142476434
 SpriteRenderer:
   m_ObjectHideFlags: 1

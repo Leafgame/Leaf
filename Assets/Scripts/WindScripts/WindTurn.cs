@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Misc
+namespace Assets.Scripts.WindScripts
 {
 	public class WindTurn : WindObject
 	{

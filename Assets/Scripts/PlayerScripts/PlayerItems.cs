@@ -19,5 +19,7 @@ namespace Assets.Scripts.PlayerScripts
 	    public bool HasAirDashEquipped = false;
 	    public bool HasUmbrellaEquipped = false;
 	    public bool HasDoubleJumpEquipped = false;
+	    public bool HasWindNegationEquipped = false;
+
     }
 }

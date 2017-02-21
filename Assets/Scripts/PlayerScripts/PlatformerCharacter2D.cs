@@ -24,9 +24,14 @@ namespace Assets.Scripts.PlayerScripts
 	    public float MaxDashTime;
 	    public float DashSpeed;
 	    public float DashStoppingSpeed;
+	    public float MaxWindNegationTime;
+	    public float WindNegationCooldown;
+		public bool WindNegationActive;
 
 		private float _currentJumpTime;
 	    private float _currentAirTime;
+	    private float _currentWindNegationTime;
+	    private float _currentWindNegCooldown;
 	    private bool _canDoubleJump;
 	    private bool _dashLeft;
 	    private bool _dashRight;
@@ -61,15 +66,39 @@ namespace Assets.Scripts.PlayerScripts
 	    {
 			if (!Grounded && _playerItems.HasAirDashEquipped && !_dashLeft && !_dashRight)
 			{
+				var facing = transform.localScale.x < 0 ? -1 : 1;
 				if (Input.GetButtonDown( "DashRight" ))
 				{
 					_dashRight = true;
+					if(facing == -1) Flip();
 				}
 				else if (Input.GetButtonDown( "DashLeft" ))
 				{
 					_dashLeft = true;
+					if(facing == 1) Flip();
 				}
 			}
+
+			// wind negation
+		    if (Input.GetButtonDown("WindNegation") && !WindNegationActive && _currentWindNegCooldown < 0.0 && _playerItems.HasWindNegationEquipped)
+		    {
+			    WindNegationActive = true;
+			    _currentWindNegationTime = 0.0f;
+			    _currentWindNegCooldown = WindNegationCooldown;
+		    }
+
+		    if (WindNegationActive)
+		    {
+			    _currentWindNegationTime += Time.deltaTime;
+		    }
+		    else
+		    {
+				_currentWindNegCooldown -= Time.deltaTime;
+			}
+			if (_currentWindNegationTime > MaxWindNegationTime)
+		    {
+			    WindNegationActive = false;
+		    }
 		}
 
 	    protected virtual void OnDrawGizmos()
@@ -230,8 +259,6 @@ namespace Assets.Scripts.PlayerScripts
 				_rigidbody2D.AddForce(new Vector3(0.0f, HoldForceMultiplier));
 				_currentJumpTime -= Time.deltaTime;
 			}
-
-
 		}
 
         private void Flip()

@@ -2,7 +2,7 @@
 using Assets.Scripts.PlayerScripts;
 using UnityEngine;
 
-namespace Assets.Scripts.Misc
+namespace Assets.Scripts.WindScripts
 {
 	/// <summary>
 	/// Wind objects base class, most wind based objects will derive from this.
@@ -30,9 +30,6 @@ namespace Assets.Scripts.Misc
 			rigidBody2D.AddForce(WindDirection * WindForce
 				+ WindDirection * WindForceClose / Mathf.Clamp(distanceToWindSource, 0.01f, 1f)
 				);
-
-			//print("Distance: " + distanceToWindSource + " Force: " + WindDirection * WindForce
-			//	+ WindDirection * WindForceClose / Mathf.Log(distanceToWindSource));
 		}
 
 		public void FixedUpdate()
@@ -41,7 +38,20 @@ namespace Assets.Scripts.Misc
 
 			foreach (var rigidbodyObject in ObjectsInWindZone)
 			{
-				ApplyWindPhysics(rigidbodyObject.gameObject);
+				if (rigidbodyObject.tag == "Player")
+				{
+					var character = rigidbodyObject.GetComponent<PlatformerCharacter2D>();
+
+					if (!character.WindNegationActive)
+					{
+						// Apply force to player
+						ApplyWindPhysics(rigidbodyObject.gameObject);
+					}
+				}
+				else // Apply force to all other objects
+				{
+					ApplyWindPhysics( rigidbodyObject.gameObject );
+				}
 			}
 		}
 
@@ -62,7 +72,11 @@ namespace Assets.Scripts.Misc
 			if (col.tag == "Player")
 			{
 				col.GetComponent<Animator>().SetBool("Ground", false);
-				col.GetComponent<PlatformerCharacter2D>().InWindZone = true;
+				var player = col.GetComponent<PlatformerCharacter2D>();
+				if (!player.WindNegationActive)
+				{
+					player.InWindZone = true;
+				}
 			}
 
 			if (HeavyObjectCheck(col))
