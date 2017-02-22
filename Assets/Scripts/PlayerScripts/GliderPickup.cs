@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.PlayerScripts;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.PlayerScripts
 {
 	public class GliderPickup : ItemPickup
 	{

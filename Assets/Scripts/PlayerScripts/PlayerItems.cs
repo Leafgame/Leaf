@@ -9,8 +9,17 @@ namespace Assets.Scripts.PlayerScripts
          *  Player items active items = true 
          *  deactive items = false
          */
+
+	    protected void Awake()
+	    {
+		    DontDestroyOnLoad(gameObject);
+	    }
+
 	    public bool HasGliderEquipped = false;
+	    public bool HasAirDashEquipped = false;
 	    public bool HasUmbrellaEquipped = false;
-	    public bool HasBalloonEquipped = false;
+	    public bool HasDoubleJumpEquipped = false;
+	    public bool HasWindNegationEquipped = false;
+
     }
 }

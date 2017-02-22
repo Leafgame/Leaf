@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 namespace Assets.Scripts.PlayerScripts
@@ -12,6 +13,7 @@ namespace Assets.Scripts.PlayerScripts
         [SerializeField] public bool AirControl = false;                 // Whether or not a player can steer while jumping;
         [SerializeField] public LayerMask WhatIsGround;                  // A mask determining what is ground to the character
         [SerializeField] public bool InWindZone;						 // Whether or not the player is in a wind zone
+	    [SerializeField] public bool InVerticalWindZone;
 		[SerializeField] public bool Grounded;							 // Whether or not the player is grounded.
 
 		public float GlideBoost = 50;
@@ -19,12 +21,23 @@ namespace Assets.Scripts.PlayerScripts
 		public float JumpHoldTime = 0.5f;
 	    public float LateJumpTime = 0.2f;
 		public float HoldForceMultiplier = 10f;
+	    public float MaxDashTime;
+	    public float DashSpeed;
+	    public float DashStoppingSpeed;
+	    public float MaxWindNegationTime;
+	    public float WindNegationCooldown;
+		public bool WindNegationActive;
+
 		private float _currentJumpTime;
 	    private float _currentAirTime;
+	    private float _currentWindNegationTime;
+	    private float _currentWindNegCooldown;
 	    private bool _canDoubleJump;
+	    private bool _dashLeft;
+	    private bool _dashRight;
 
 		private Transform _groundCheck;             // A position marking where to check if the player is grounded.
-	    private const float GroundedRadius = .2f;   // Radius of the overlap circle to determine if grounded
+	    private const float GroundedRadius = 0.5f;   // Radius of the overlap circle to determine if grounded
         private Transform _ceilingCheck;            // A position marking where to check for ceilings
 	    private const float CeilingRadius = .01f;   // Radius of the overlap circle to determine if the player can stand up
         private Animator _animator;                 // Reference to the player's animator component.
@@ -32,9 +45,10 @@ namespace Assets.Scripts.PlayerScripts
         private bool _facingRight = true;           // For determining which way the player is currently facing.
 	    private PlayerItems _playerItems;
 	    private float _speed;
-	    private float _acceleration = 10f;
+	    private const float Acceleration = 10f;
+	    private float _currentDashTime;
 
-        private void Awake()
+	    protected void Awake()
         {
             // Setting up references.
             _groundCheck = transform.Find("GroundCheck");
@@ -48,8 +62,60 @@ namespace Assets.Scripts.PlayerScripts
 	    {
 	    }
 
+	    protected void Update()
+	    {
+			if (!Grounded && _playerItems.HasAirDashEquipped && !_dashLeft && !_dashRight)
+			{
+				var facing = transform.localScale.x < 0 ? -1 : 1;
+				if (Input.GetButtonDown( "DashRight" ))
+				{
+					_dashRight = true;
+					if(facing == -1) Flip();
+				}
+				else if (Input.GetButtonDown( "DashLeft" ))
+				{
+					_dashLeft = true;
+					if(facing == 1) Flip();
+				}
+			}
 
-	    private void FixedUpdate()
+			// wind negation
+		    if (Input.GetButtonDown("WindNegation") && !WindNegationActive && _currentWindNegCooldown < 0.0 && _playerItems.HasWindNegationEquipped)
+		    {
+			    WindNegationActive = true;
+			    _currentWindNegationTime = 0.0f;
+			    _currentWindNegCooldown = WindNegationCooldown;
+		    }
+
+		    if (WindNegationActive)
+		    {
+			    _currentWindNegationTime += Time.deltaTime;
+		    }
+		    else
+		    {
+				_currentWindNegCooldown -= Time.deltaTime;
+			}
+			if (_currentWindNegationTime > MaxWindNegationTime)
+		    {
+			    WindNegationActive = false;
+		    }
+		}
+
+	    protected virtual void OnDrawGizmos()
+	    {
+			Gizmos.DrawRay(_groundCheck.position, Vector3.down*0.5f);
+			var hit = Physics2D.Raycast( _groundCheck.position, Vector2.down, 0.5f, LayerMask.GetMask("Default"));
+			Gizmos.color = new Color(0, 255, 0);
+		    if (hit)
+		    {
+				Gizmos.DrawRay(transform.position, hit.normal);
+				Gizmos.color = new Color(255, 0, 0);
+				var facing = hit.normal.x < 0 ? 1 : -1;
+				Gizmos.DrawRay(transform.position, new Vector3( facing*hit.normal.y, -facing * hit.normal.x ) );
+			}
+		}
+
+	    protected void FixedUpdate()
 	    {
 		    Grounded = false;
 		    // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
@@ -59,8 +125,10 @@ namespace Assets.Scripts.PlayerScripts
 		    {
 			    if (t.transform.gameObject != gameObject)
 			    {
+					// ON GROUND reset variables
 				    Grounded = true;
 				    _currentAirTime = 0f;
+				    _currentDashTime = 0f;
 			    }
 		    }
 
@@ -74,8 +142,9 @@ namespace Assets.Scripts.PlayerScripts
 		        !InWindZone)
 		    {
 			    transform.GetChild(2).gameObject.SetActive(true);
-			    _rigidbody2D.velocity = new Vector2(0, -GlideFallVelocity);
-			    _rigidbody2D.AddForce(new Vector2(GlideBoost * transform.localScale.x, 0));
+			    _rigidbody2D.velocity = new Vector2(GlideBoost*transform.localScale.x, -GlideFallVelocity);
+			    //_rigidbody2D.AddForce(new Vector2(GlideBoost * transform.localScale.x, 0));
+				print(_rigidbody2D.velocity);
 		    }
 		    else if (InWindZone && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped)
 		    {
@@ -89,23 +158,22 @@ namespace Assets.Scripts.PlayerScripts
 			{
 				_rigidbody2D.velocity = _rigidbody2D.velocity.normalized * MaxRigidBodySpeed;
 			}
+
+			// The input checking is done in update
+			Dash();
 		}
 
-	    public void Move(float move, bool crouch, bool jump)
+		public void Move(float move, bool crouch, bool jump)
 	    {
-		    var friction = GetComponent<CircleCollider2D>();
-			if (Math.Abs(move) < 0.1 && Grounded)
+			var hit = Physics2D.Raycast( _groundCheck.position, Vector2.down, 1f, LayerMask.GetMask( "Default" ) );
+			if (hit)
 			{
-				friction.sharedMaterial.friction = 1f;
-				friction.enabled = false;
-				friction.enabled = true;
+				var facing = hit.normal.x < 0 ? 1 : -1;
+				var dir = new Vector2( facing * hit.normal.y, -facing * hit.normal.x);
+				if (dir.y > .3f)
+					_rigidbody2D.AddForce(dir*27.8f);
 			}
-			else
-			{
-				friction.sharedMaterial.friction = 0;
-				friction.enabled = false;
-				friction.enabled = true;
-			}
+			
 
 			// If crouching, check to see if the character can stand up
 			if (!crouch && _animator.GetBool("Crouch"))
@@ -120,8 +188,8 @@ namespace Assets.Scripts.PlayerScripts
             // Set whether or not the character is crouching in the animator
             _animator.SetBool("Crouch", crouch);
 
-            //only control the player if grounded or airControl is turned on
-            if (Grounded || AirControl)
+            //only control the player if grounded or airControl is turned on and not dashing
+            if ((Grounded || AirControl) && !InVerticalWindZone && !_dashRight && !_dashLeft)
             {
                 // Reduce the speed if crouching by the crouchSpeed multiplier
                 move = (crouch ? move*CrouchSpeed : move);
@@ -131,7 +199,7 @@ namespace Assets.Scripts.PlayerScripts
 
                 // Move the character
 	            if (_speed < MaxSpeed && Math.Abs(move) > 0) {
-		            _speed = _speed + _acceleration * Time.deltaTime;
+		            _speed = _speed + Acceleration * Time.deltaTime;
 	            }
 	            else if(Math.Abs(move) < 0.01) {
 		            _speed = 0;
@@ -162,13 +230,14 @@ namespace Assets.Scripts.PlayerScripts
 				_rigidbody2D.AddForce(new Vector2(0f, JumpForce));
 	            _canDoubleJump = true;
             }
-			else if (_canDoubleJump && jump && !InWindZone)
+			else if (_canDoubleJump && jump && !InWindZone && _playerItems.HasDoubleJumpEquipped)
 			{
 				_canDoubleJump = false;
 				_animator.SetBool("Ground", false);
 				_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
 				_rigidbody2D.AddForce(new Vector2(0f, JumpForce));
 				_currentJumpTime = JumpHoldTime;
+				_currentDashTime = 0.0f;					// Reset the dash on double jump
 			}
 
 			if (Input.GetButtonUp("Fire1"))
@@ -202,5 +271,33 @@ namespace Assets.Scripts.PlayerScripts
             theScale.x *= -1;
 			transform.localScale = theScale;
         }
+
+	    protected void OnCollisionEnter2D(Collision2D col)
+	    {
+			// set dash to false when colliding with walls
+		    _dashLeft = false;
+		    _dashRight = false;
+	    }
+
+	    public void Dash()
+	    {
+			if (!Grounded && _currentDashTime < MaxDashTime && (_dashLeft || _dashRight))
+			{
+				if (_dashLeft)
+				{
+					_rigidbody2D.velocity = Vector2.Lerp( new Vector2( 0, 0 ), new Vector2( -1 * DashSpeed, 0 ), Time.deltaTime );
+				}
+				else if (_dashRight)
+				{
+					_rigidbody2D.velocity = Vector2.Lerp( new Vector2( 0, 0 ), new Vector2( DashSpeed, 0 ), Time.deltaTime );
+				}
+				_currentDashTime += DashStoppingSpeed;
+			}
+			if (_currentDashTime > MaxDashTime)
+			{
+				_dashLeft = false;
+				_dashRight = false;
+			}
+		}
 	}
 }

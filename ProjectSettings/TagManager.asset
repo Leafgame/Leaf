@@ -11,6 +11,8 @@ TagManager:
   - CheckpointManager
   - Fade
   - SteerTarget
+  - VerticalWindZone
+  - HeavyObject
   layers:
   - Default
   - TransparentFX

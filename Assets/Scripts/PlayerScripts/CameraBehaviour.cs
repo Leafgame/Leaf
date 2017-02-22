@@ -12,8 +12,9 @@ namespace Assets.Scripts.PlayerScripts
         public float CameraSize = 15f;
         public float MaxRadius = 2.0f;
 	    public float InterpolateCamAmount = 10.0f;
+	    private float _yMax = -5f;
+	    private float _yMin = 5f;
 	    public float YOffset = 5f;
-	    public bool LockY = true;
 
         private Vector3 _referenceVec;
         private bool _freeMovingCamera;
@@ -27,7 +28,8 @@ namespace Assets.Scripts.PlayerScripts
             MainCameraView.orthographic = true;
             MainCameraView.orthographicSize = CameraSize;
             MainCameraView.transform.position = new Vector3(0, 0, -20);
-	        YOffset = 5f;
+			_yMax = -YOffset;
+			_yMin = YOffset;
         }
 
         public void Update()
@@ -47,14 +49,21 @@ namespace Assets.Scripts.PlayerScripts
 	        {
 		        _freeMovingCamera = false;
 	        }
-	        
+
+	        if (Mathf.Abs(_rigidbody2D.velocity.y) < 0.1f)
+	        {
+				_referenceVec = new Vector3( transform.position.x, transform.position.y, MainCameraView.transform.position.z );
+
+				var interpolatedVec = new Vector3( MainCameraView.transform.position.x, transform.position.y + YOffset, -20 );
+				MoveObject(MainCameraView.transform, MainCameraView.transform.position, interpolatedVec, LerpTime);
+			}
 
 			// Camera follow calculations
 			if (!_freeMovingCamera)
             {
                 _referenceVec = new Vector3(transform.position.x, transform.position.y, MainCameraView.transform.position.z);
 
-	            var interpolatedVec = new Vector3(_rigidbody2D.velocity.x * InterpolateCamAmount + _referenceVec.x, Mathf.Clamp(_rigidbody2D.velocity.y, -2, 2) * InterpolateCamAmount + _referenceVec.y + YOffset, -20);
+	            var interpolatedVec = new Vector3(_rigidbody2D.velocity.x * InterpolateCamAmount + _referenceVec.x, MainCameraView.transform.position.y, -20);
 				MoveObject(MainCameraView.transform, MainCameraView.transform.position, interpolatedVec, LerpTime);
 			}
 
@@ -67,8 +76,17 @@ namespace Assets.Scripts.PlayerScripts
 				var clampedPos = Vector2.ClampMagnitude(diff, MaxRadius);
 				MainCameraView.transform.position = transform.position + new Vector3(clampedPos.x, clampedPos.y, -20);
 			}
-			if(LockY)
+	        var distToCam = new Vector2(MainCameraView.transform.position.x, 
+										MainCameraView.transform.position.y) -
+	                        new Vector2(transform.position.x, transform.position.y);
+	        if (distToCam.y < _yMax)
+			{
+				MainCameraView.transform.position = new Vector3(MainCameraView.transform.position.x, transform.position.y - YOffset, -20);
+			}
+			else if (distToCam.y > _yMin)
+	        {
 				MainCameraView.transform.position = new Vector3(MainCameraView.transform.position.x, transform.position.y + YOffset, -20);
+			}			
 		}
 
 		public void MoveObject(Transform movingObject, Vector3 startpos, Vector3 endpos, float time)

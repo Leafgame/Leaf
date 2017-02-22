@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.GeneratedCode;
+using Assets.Scripts.WindScripts;
 using UnityEngine;
 
 namespace Assets.Scripts.Misc
@@ -16,16 +16,13 @@ namespace Assets.Scripts.Misc
 
         public enum LeverState
         { 
-            Idle,
+			Off,
             On,
-            Off
-        }
-
-	    private LeverState _leverState;
+            Idle
+		}
 
 	    private void Start()
 	    {
-	        _leverState = LeverState.Off;
 	        _animator = GetComponent<Animator>();
 	        _leverReady = true;
 	    }
@@ -34,65 +31,50 @@ namespace Assets.Scripts.Misc
 	    {
 	        if ( Input.GetButtonDown("Fire2") && _playerInRangeOfLever )
 	        {
-                print(_animator.GetBool("LeverState"));
 	            if (_animator.GetBool("LeverState") && _leverReady)
 	            {
 	                _leverReady = false;
                     _animator.SetBool("LeverState", false);
-	            }
-                else if(!_animator.GetBool("LeverState") && _leverReady)
+					FlipActiveState();
+
+				}
+				else if(!_animator.GetBool("LeverState") && _leverReady)
                 {
                     _leverReady = false;
                     _animator.SetBool("LeverState", true);
-                }
-            }
+					FlipActiveState();
+				}
+			}
 	        if (_animator.GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
 	        {
 	            _leverReady = true;
 	        }
-
-	        if (_leverState == LeverState.Idle) return;
-
-            if(_leverState == LeverState.On)
-            {
-                ActivateWindPads();
-            }
-            else if (_leverState == LeverState.Off)
-            {
-                DeactivateWindPads();
-            }
-            _leverState = LeverState.Idle;
         }
 
-		public virtual void ActivateWindPads()
+		public virtual void FlipActiveState()
 		{
-		    foreach (var windObject in LeverConnectedWindObjects)
-		    {
-				windObject.GetComponentInChildren<WindObject>().IsActive = true;
+			foreach (var windObject in LeverConnectedWindObjects)
+			{
+				var windObj = windObject.GetComponentInChildren<WindObject>();
+				windObj.IsActive = !windObj.IsActive;
+
+				var floatingObj = windObject.GetComponentInChildren<FloatObject>();
+				if (floatingObj != null)
+				{
+					floatingObj.IsWindActive = !floatingObj.IsWindActive;
+				}
 			}
-			print("Windpads is activated");
 		}
 
-        public virtual void DeactivateWindPads()
-	    {
-            foreach (var windObject in LeverConnectedWindObjects)
-            {
-				windObject.GetComponentInChildren<WindObject>().IsActive = false;
-			}
-			print("Windpads is deactivated");
-	    }
 
-
-	    public void LeverStateOn()
+		public void LeverStateOn()
 	    {
 	        _leverReady = true;
-            _leverState = LeverState.On;
 	    }
 
         public void LeverStateOff()
         {
             _leverReady = true;
-            _leverState = LeverState.Off;
         }
 
         private void OnTriggerEnter2D(Collider2D col)
