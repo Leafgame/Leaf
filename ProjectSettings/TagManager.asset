@@ -13,6 +13,7 @@ TagManager:
   - SteerTarget
   - VerticalWindZone
   - HeavyObject
+  - CameraPos
   layers:
   - Default
   - TransparentFX

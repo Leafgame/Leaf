@@ -2,8 +2,7 @@
 
 namespace Assets.Scripts.PlayerScripts
 {
-	[ExecuteInEditMode]
-	[RequireComponent( typeof( BoxCollider2D ) )]
+	[RequireComponent(typeof(BoxCollider2D))]
 	public class CameraPosition : MonoBehaviour
 	{
 		/// <summary>
@@ -13,61 +12,87 @@ namespace Assets.Scripts.PlayerScripts
 
 		public float CameraMoveSpeed = 1f;
 
+		public float SwapOffsetLeft = 4f;
+		public float SwapOffsetRight = 5f;
+
 		public float Width { get; private set; }
 		public float Height { get; private set; }
 
-		private Vector3 _position;
+		public Vector3 Position;
 		private Camera _mainCamera;
 		private BoxCollider2D _cameraBox;
-		public bool MoveCamera;
+		private Transform _playerLocation;
 
-		public void Start( )
+		public void Start()
 		{
 			_cameraBox = GetComponent<BoxCollider2D>();
-			_position = new Vector3( transform.position.x, transform.position.y, -20 );
+			Position = new Vector3(transform.position.x, transform.position.y, -20);
 			_mainCamera = Camera.main;
 			Height = Size * 2f;
 			Width = Height * Screen.width / Screen.height;
-			_cameraBox.size = new Vector2( Width, Height );
+			_cameraBox.size = new Vector2(Width, Height);
 			_cameraBox.isTrigger = true;
+			_playerLocation = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 		}
 
-
-		protected void Update( )
+		protected void OnDrawGizmos()
 		{
-			if (MoveCamera)
+			Gizmos.color = new Color(255, 255, 0, 0.1f);
+			Gizmos.DrawCube(Position + new Vector3(0,0,10), new Vector3(Width, Height, 0));
+			Gizmos.color = new Color(0, 0, 255);
+			Gizmos.DrawLine(transform.position + new Vector3(-Width/2 - SwapOffsetLeft, 0, 0),
+				transform.position + new Vector3(-Width / 2 - SwapOffsetLeft, -10, 0));
+			Gizmos.DrawLine(transform.position + new Vector3(Width / 2 + SwapOffsetRight, 0, 0),
+				transform.position + new Vector3(Width / 2 + SwapOffsetRight, -10, 0));
+		}
+
+		protected void Update()
+		{
+			//print("Player x: " + _playerLocation.position.x + " y: " + _playerLocation.position.y);
+			if (Position.x - Width/2 - SwapOffsetLeft < _playerLocation.position.x && 
+				_playerLocation.position.x < Position.x + Width/2 + SwapOffsetRight)
 			{
-				_mainCamera.transform.position = Vector3.Lerp( _mainCamera.transform.position, _position, Time.deltaTime * CameraMoveSpeed );
-				_mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, Size, Time.deltaTime * CameraMoveSpeed );
+				var cameras = _mainCamera.GetComponent<NodeCamera>();
+				var thiscam = GetComponent<CameraPosition>();
+				for (var i = 0; i < cameras.CameraPositions.Length; i++)
+				{
+					if (thiscam == cameras.CameraPositions[i])
+					{
+						
+						cameras.CurrentCameraIndex = i;
+					}
+				}	
 			}
 		}
 
-
-		public void MoveCameraToThisPosition( )
+		protected void OnTriggerStay2D(Collider2D col)
 		{
-			_mainCamera.transform.position = _position;
-			_mainCamera.orthographicSize = Size;
+			if(col.tag == "CameraPos")
+				print(col.tag);
 		}
 
-		protected void OnDrawGizmos( )
+		protected void OnTriggerEnter2D(Collider2D col)
 		{
-			Gizmos.color = new Color( 255, 255, 0, 0.1f );
-			Gizmos.DrawCube( _position, new Vector3( Width, Height, 0 ) );
+			
 		}
 
-		protected void OnTriggerEnter2D( Collider2D col )
+		protected void OnTriggerExit2D(Collider2D col)
 		{
-			if (col.tag == "Player" && col is BoxCollider2D )
+		}
+
+		protected void SwapCamera(Collider2D col)
+		{
+			if (col.tag == "Player" && col is BoxCollider2D)
 			{
-				MoveCamera = true;
-			}
-		}
-
-		protected void OnTriggerExit2D( Collider2D col )
-		{
-			if (col.tag == "Player")
-			{
-				MoveCamera = false;
+				var cameras = _mainCamera.GetComponent<NodeCamera>();
+				var thiscam = GetComponent<CameraPosition>();
+				for (var i = 0; i < cameras.CameraPositions.Length; i++)
+				{
+					if (thiscam == cameras.CameraPositions[i])
+					{
+						cameras.CurrentCameraIndex = i;
+					}
+				}
 			}
 		}
 	}

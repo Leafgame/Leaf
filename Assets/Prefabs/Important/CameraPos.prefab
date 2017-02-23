@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61668784943354244}
   m_Layer: 5
   m_Name: CameraPos
-  m_TagString: Untagged
+  m_TagString: CameraPos
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,4 +68,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Size: 8
   CameraMoveSpeed: 5
-  MoveCamera: 0
+  Position: {x: 0, y: 0, z: 0}
