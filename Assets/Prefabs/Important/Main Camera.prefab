@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 92973765792596564}
   - component: {fileID: 124295501220632410}
   - component: {fileID: 81202309290256766}
+  - component: {fileID: 114370048073927282}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -708,7 +709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3628cfd52964f2cad7ff422f7b7bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.4
+  scrollSpeed: 0.7
   isHorizontalScroll: 1
   isVerticalScroll: 1
   theCharacter: {fileID: 0}
@@ -725,7 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3628cfd52964f2cad7ff422f7b7bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.8
+  scrollSpeed: 1.6
   isHorizontalScroll: 1
   isVerticalScroll: 1
   theCharacter: {fileID: 0}
@@ -742,12 +743,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3628cfd52964f2cad7ff422f7b7bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.3
+  scrollSpeed: 0.5
   isHorizontalScroll: 1
   isVerticalScroll: 1
   theCharacter: {fileID: 0}
   theCam: {fileID: 0}
   smoothing: 1
+--- !u!114 &114370048073927282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448817985172228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c244b2d44d062b429bc12fbcf4f580e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraPositions:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114424600055947448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -759,7 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3628cfd52964f2cad7ff422f7b7bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.5
+  scrollSpeed: 0.9
   isHorizontalScroll: 1
   isVerticalScroll: 1
   theCharacter: {fileID: 0}
@@ -776,7 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3628cfd52964f2cad7ff422f7b7bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.7
+  scrollSpeed: 1.3
   isHorizontalScroll: 1
   isVerticalScroll: 1
   theCharacter: {fileID: 0}
@@ -793,7 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3628cfd52964f2cad7ff422f7b7bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.8
+  scrollSpeed: 1.8
   isHorizontalScroll: 1
   isVerticalScroll: 1
   theCharacter: {fileID: 0}
@@ -810,7 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3628cfd52964f2cad7ff422f7b7bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.6
+  scrollSpeed: 1.1
   isHorizontalScroll: 1
   isVerticalScroll: 1
   theCharacter: {fileID: 0}

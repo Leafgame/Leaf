@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.PlayerScripts;
+﻿using System.Collections;
+using Assets.Scripts.PlayerScripts;
 using UnityEngine;
 
 namespace Assets.Scripts.WindScripts
@@ -43,7 +44,7 @@ namespace Assets.Scripts.WindScripts
 			if (col.tag == "Player")
 			{
 				col.GetComponent<PlatformerCharacter2D>().InVerticalWindZone = true;
-
+				col.GetComponent<PlatformerCharacter2D>().AirControl = false;
 			}
 		}
 
@@ -53,7 +54,15 @@ namespace Assets.Scripts.WindScripts
 			if (col.tag == "Player")
 			{
 				col.GetComponent<PlatformerCharacter2D>().InVerticalWindZone = false;
+				col.GetComponent<PlatformerCharacter2D>().AirControl = true;
+				StartCoroutine("EnableAirControll", col);
 			}
+		}
+
+		public IEnumerator EnableAirControll(Collider2D col)
+		{
+			yield return new WaitForSeconds(1.5f);
+			col.GetComponent<PlatformerCharacter2D>().AirControl = true;
 		}
 	}
 }

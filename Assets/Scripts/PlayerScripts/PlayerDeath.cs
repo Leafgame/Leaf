@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.PositionRelated;
+using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.PlayerScripts
 {
 	public class PlayerDeath : MonoBehaviour
 	{

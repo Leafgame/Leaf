@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.PositionRelated
 {
 	[RequireComponent(typeof(Collider2D))]
 	public class Checkpoint : MonoBehaviour

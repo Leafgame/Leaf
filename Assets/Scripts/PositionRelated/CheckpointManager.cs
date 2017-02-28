@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.PlayerScripts;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.PositionRelated
 {
 	public class CheckpointManager : MonoBehaviour
 	{
@@ -15,6 +15,7 @@ namespace Assets.Scripts
 		{
 			Checkpoints = GetComponentsInChildren<Transform>();
 			_playerReference = GameObject.FindGameObjectWithTag("Player");
+			CurrentCheckpoitPos = _playerReference.transform.position;
 		}
 
 		protected virtual void Update()

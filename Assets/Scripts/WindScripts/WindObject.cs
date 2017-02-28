@@ -26,10 +26,16 @@ namespace Assets.Scripts.WindScripts
 			var rigidBody2D = gO.GetComponent<Rigidbody2D>();
 			var windSource = rigidBody2D.transform.position - transform.position;
 			var distanceToWindSource = windSource.magnitude;
-
+	
 			rigidBody2D.AddForce(WindDirection * WindForce
 				+ WindDirection * WindForceClose / Mathf.Clamp(distanceToWindSource, 0.01f, 1f)
 				);
+
+			if (rigidBody2D.tag == "Player")
+			{
+				rigidBody2D.velocity = WindDirection;
+			}
+
 		}
 
 		public void FixedUpdate()
@@ -46,11 +52,13 @@ namespace Assets.Scripts.WindScripts
 					{
 						// Apply force to player
 						ApplyWindPhysics(rigidbodyObject.gameObject);
+						print("applying physics to char");
 					}
 				}
 				else // Apply force to all other objects
 				{
 					ApplyWindPhysics( rigidbodyObject.gameObject );
+					print("Applying physics to other object");
 				}
 			}
 		}

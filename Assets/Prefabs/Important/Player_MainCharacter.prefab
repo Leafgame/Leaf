@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014229097902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.724852, y: 7.4723663, z: 0}
+  m_LocalPosition: {x: 30.724852, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 4000011726139796}
@@ -117,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014158575574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.53, y: -10.22, z: 0}
+  m_LocalPosition: {x: 0.53, y: -9.4, z: 0}
   m_LocalScale: {x: 0.56448287, y: 0.5644837, z: 1}
   m_Children: []
   m_Father: {fileID: 4000011599999328}
@@ -232,6 +232,7 @@ MonoBehaviour:
   DashSpeed: 2000
   DashStoppingSpeed: 0.1
   MaxWindNegationTime: 5
+  WindNegationCooldown: 0
   WindNegationActive: 0
 --- !u!114 &114000012229373584
 MonoBehaviour:
