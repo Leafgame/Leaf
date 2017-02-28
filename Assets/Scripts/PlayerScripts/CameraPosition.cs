@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.PlayerScripts
 {
+	[ExecuteInEditMode]
 	[RequireComponent(typeof(BoxCollider2D))]
 	public class CameraPosition : MonoBehaviour
 	{
@@ -32,7 +34,16 @@ namespace Assets.Scripts.PlayerScripts
 			Width = Height * Screen.width / Screen.height;
 			_cameraBox.size = new Vector2(Width, Height);
 			_cameraBox.isTrigger = true;
-			_playerLocation = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+			try
+			{
+				_playerLocation = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				_playerLocation = transform;
+				print("Failed to find player");
+			}
 		}
 
 		protected void OnDrawGizmos()

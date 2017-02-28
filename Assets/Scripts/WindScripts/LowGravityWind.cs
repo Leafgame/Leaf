@@ -27,14 +27,10 @@ namespace Assets.Scripts.WindScripts
 						_windDirection = transfrm.position;
 					}
 				}
-				var direction = _windDirection - col.transform.position;
-				if (direction.magnitude > 2f)
-				{
-					rigidbdy.velocity = new Vector2(rigidbdy.velocity.x, rigidbdy.velocity.y * .1f);
-					rigidbdy.AddForce(direction.normalized * WindForce
-						+ _windDirection * WindForceClose / direction.magnitude * Time.deltaTime
-						);
-				}
+				var direction = _windDirection - rigidbdy.transform.position;
+				
+				rigidbdy.transform.position += direction.normalized * WindForce * Time.deltaTime;
+				
 			}
 		}
 

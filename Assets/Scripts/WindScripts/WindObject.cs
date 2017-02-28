@@ -10,7 +10,7 @@ namespace Assets.Scripts.WindScripts
 	[RequireComponent(typeof(BoxCollider2D))]
 	public class WindObject : MonoBehaviour
 	{
-		private const int ModelOffset = 5;
+		public int ModelOffset = 5;
 		public float WindForce;
 		public float WindForceClose;
 		public Vector3 WindDirection;
@@ -33,7 +33,13 @@ namespace Assets.Scripts.WindScripts
 
 			if (rigidBody2D.tag == "Player")
 			{
+				rigidBody2D.sharedMaterial.friction = 0f;
+				rigidBody2D.isKinematic = true;
+				rigidBody2D.isKinematic = false;
 				rigidBody2D.velocity = WindDirection;
+				rigidBody2D.AddForce(WindDirection * WindForce
+		+ WindDirection * WindForceClose / Mathf.Clamp(distanceToWindSource, 0.01f, 1f)
+		);
 			}
 
 		}
@@ -132,7 +138,7 @@ namespace Assets.Scripts.WindScripts
 				if (box.size.x <= _maxBoxSize)
 				{
 					var vec = col.transform.position - box.transform.position;
-					FixWindZoneArea( col, new Vector2( Mathf.Abs( vec.x ) - ModelOffset, 3 ));
+					FixWindZoneArea( col, new Vector2( Mathf.Abs( vec.x ) - ModelOffset, box.size.y ));
 				}
 			}
 		}	

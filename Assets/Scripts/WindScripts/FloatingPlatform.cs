@@ -15,7 +15,7 @@ namespace Assets.Scripts.WindScripts
 		protected new virtual void Start()
 		{
 			base.Start();
-			InitalPosition = transform.position;
+			InitalPosition = transform.position - transform.parent.position;
 		}
 
 		public virtual void LowerPlatform()
