@@ -55,13 +55,16 @@ namespace Assets.Scripts.PlayerScripts
 				transform.position + new Vector3(-Width / 2 - SwapOffsetLeft, -10, 0));
 			Gizmos.DrawLine(transform.position + new Vector3(Width / 2 + SwapOffsetRight, 0, 0),
 				transform.position + new Vector3(Width / 2 + SwapOffsetRight, -10, 0));
+
 		}
 
 		protected void Update()
 		{
 			//print("Player x: " + _playerLocation.position.x + " y: " + _playerLocation.position.y);
 			if (Position.x - Width/2 - SwapOffsetLeft < _playerLocation.position.x && 
-				_playerLocation.position.x < Position.x + Width/2 + SwapOffsetRight)
+				_playerLocation.position.x < Position.x + Width/2 + SwapOffsetRight &&
+				Position.y - Height/2f < _playerLocation.position.y && 
+				Position.y + Height/2f > _playerLocation.position.y )
 			{
 				var cameras = _mainCamera.GetComponent<NodeCamera>();
 				var thiscam = GetComponent<CameraPosition>();
@@ -69,7 +72,6 @@ namespace Assets.Scripts.PlayerScripts
 				{
 					if (thiscam == cameras.CameraPositions[i])
 					{
-						
 						cameras.CurrentCameraIndex = i;
 					}
 				}	

@@ -5,19 +5,23 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/FloatingPlatforms.unity
+  - enabled: 1
+    path: Assets/Scenes/Tutorial1.unity
   - enabled: 1
     path: Assets/Scenes/Menu/MainMenuScene.unity
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SuperTilemapScene.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ItemPickups.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/scene01.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/scene02.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test_Puzzle.unity
+  - enabled: 1
+    path: Assets/Scenes/Puzzle_1.unity

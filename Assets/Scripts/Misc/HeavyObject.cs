@@ -9,11 +9,13 @@ using UnityEngine;
 public class HeavyObject : MonoBehaviour
 {
 	private Rigidbody2D _rigidbody2D;
+	public Vector3 InitialPosition;
 	public float PushForce = 100f;
 
 	public void Start( )
 	{
 		_rigidbody2D = GetComponent<Rigidbody2D>();
+		InitialPosition = transform.position;
 	}
 
 	public virtual BoxCollider2D windBlockZone
