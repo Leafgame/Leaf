@@ -58,13 +58,11 @@ namespace Assets.Scripts.WindScripts
 					{
 						// Apply force to player
 						ApplyWindPhysics(rigidbodyObject.gameObject);
-						print("applying physics to char");
 					}
 				}
 				else // Apply force to all other objects
 				{
 					ApplyWindPhysics( rigidbodyObject.gameObject );
-					print("Applying physics to other object");
 				}
 			}
 		}

@@ -427,6 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2ebd5bbfbf95c4b9c77a9b982952e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InitialPosition: {x: 0, y: 0, z: 0}
   PushForce: 100
 --- !u!4 &661751109
 Transform:
@@ -706,6 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f86e51c77bde4e4290cbe37b2b42ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ModelOffset: 5
   WindForce: 50
   WindForceClose: 50
   WindDirection: {x: 1, y: 0, z: 0}
@@ -979,6 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f86e51c77bde4e4290cbe37b2b42ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ModelOffset: 5
   WindForce: 50
   WindForceClose: 50
   WindDirection: {x: -1, y: 0, z: 0}

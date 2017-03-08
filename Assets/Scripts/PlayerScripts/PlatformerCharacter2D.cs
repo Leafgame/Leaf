@@ -168,7 +168,7 @@ namespace Assets.Scripts.PlayerScripts
 		public void Move(float move, bool crouch, bool jump)
 	    {
 			var hit = Physics2D.Raycast( _groundCheck.position, Vector2.down, 2f, LayerMask.GetMask( "Default" ), 0.4f );
-
+			Debug.DrawRay(_groundCheck.position, Vector3.down*2f, Color.blue);
 			if (Grounded && move == 0.0f)
 			{
 				_rigidbody2D.sharedMaterial.friction = 1f;
