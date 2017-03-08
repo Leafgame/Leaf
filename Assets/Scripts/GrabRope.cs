@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets
+namespace Assets.Scripts
 {
 	/// <summary>
 	/// TODO implement this
@@ -36,3 +36,4 @@ namespace Assets
 		}
 	}
 }
+

@@ -38,8 +38,8 @@ namespace Assets.Scripts.WindScripts
 				rigidBody2D.isKinematic = false;
 				rigidBody2D.velocity = WindDirection;
 				rigidBody2D.AddForce(WindDirection * WindForce
-		+ WindDirection * WindForceClose / Mathf.Clamp(distanceToWindSource, 0.01f, 1f)
-		);
+					+ WindDirection * WindForceClose / Mathf.Clamp(distanceToWindSource, 0.01f, 1f)
+					);
 			}
 
 		}
