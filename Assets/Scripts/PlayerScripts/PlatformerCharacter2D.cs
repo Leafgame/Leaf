@@ -165,42 +165,11 @@ namespace Assets.Scripts.PlayerScripts
 
 
 
-		public void Move(float move, bool crouch, bool jump)
+		public void Move(float move, bool jump)
 	    {
-			var hit = Physics2D.Raycast( _groundCheck.position, Vector2.down, 2f, LayerMask.GetMask( "Default" ), 0.4f );
-			Debug.DrawRay(_groundCheck.position, Vector3.down*2f, Color.blue);
-			if (Grounded && move == 0.0f)
-			{
-				_rigidbody2D.sharedMaterial.friction = 1f;
-				_rigidbody2D.isKinematic = true;
-				_rigidbody2D.isKinematic = false;
-			}
-			else
-			{
-				_rigidbody2D.sharedMaterial.friction = 0f;
-				_rigidbody2D.isKinematic = true;
-				_rigidbody2D.isKinematic = false;
-			}
-
-			// If crouching, check to see if the character can stand up
-			if (!crouch && _animator.GetBool("Crouch"))
-            {
-                // If the character has a ceiling preventing them from standing up, keep them crouching
-                if (Physics2D.OverlapCircle(_ceilingCheck.position, CeilingRadius, WhatIsGround))
-                {
-                    crouch = true;
-                }
-            }
-
-            // Set whether or not the character is crouching in the animator
-            _animator.SetBool("Crouch", crouch);
-
             //only control the player if grounded or airControl is turned on and not dashing
             if ((Grounded || AirControl) && !InVerticalWindZone && !_dashRight && !_dashLeft)
             {
-                // Reduce the speed if crouching by the crouchSpeed multiplier
-                move = (crouch ? move*CrouchSpeed : move);
-
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
                 _animator.SetFloat("Speed", Mathf.Abs(move));
 

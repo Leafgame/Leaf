@@ -5,8 +5,15 @@ namespace Assets.Scripts
 {
 	public class KeyUnlockDoor : MonoBehaviour
 	{
-
+        /// <summary>
+        /// Door open layer in a tilemap we're not gonna use tilemap so this needs to be 
+        /// recreated for the same effect
+        /// </summary>
 		public Tilemap DoorOpenLayer;
+
+        /// <summary>
+        /// The doors the key will unlock
+        /// </summary>
 		public GameObject[] DoorsToUnlock;
 
 		public void Start()

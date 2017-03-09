@@ -1,16 +1,34 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Assets.Scripts.PlayerScripts;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
-	public class Door : MonoBehaviour
+    public class Door : MonoBehaviour
 	{
+        /// <summary>
+        /// The entrance of the room 
+        /// </summary>
 		public Transform RoomEntranceLocation;
+
+        /// <summary>
+        /// Fade sprite TODO/butchered feature
+        /// </summary>
 		private SpriteRenderer _fadeSpriteRenderer;
+
+        /// <summary>
+        /// Alpha fade value
+        /// </summary>
 		private float _alphaFadeValue;
+
+        /// <summary>
+        /// If fading or not
+        /// </summary>
 		private bool _fadeIn;
+
+        /// <summary>
+        /// The amount of time it takes for the fade to complete
+        /// </summary>
 		private float _fadeTime = 5f;
 
 

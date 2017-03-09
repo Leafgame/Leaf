@@ -6,7 +6,14 @@ namespace Assets.Scripts.PlayerScripts
     [RequireComponent(typeof (PlatformerCharacter2D))]
     public class Platformer2DUserControl : MonoBehaviour
     {
+        /// <summary>
+        /// Reference to the player controller script
+        /// </summary>
         private PlatformerCharacter2D _character;
+
+        /// <summary>
+        /// If the player should jump or not
+        /// </summary>
         private bool _jump;
 
 
@@ -28,11 +35,9 @@ namespace Assets.Scripts.PlayerScripts
 
         private void FixedUpdate()
         {
-            // Read the inputs.
-            var crouch = Input.GetKey(KeyCode.LeftControl);
             var h = CrossPlatformInputManager.GetAxis("Horizontal");
             // Pass all parameters to the character control script.
-            _character.Move(h, crouch, _jump);
+            _character.Move(h, _jump);
             _jump = false;
         }
     }

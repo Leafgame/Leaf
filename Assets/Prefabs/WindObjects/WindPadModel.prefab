@@ -43,7 +43,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1355240596225204
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -144,14 +144,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1590494277708978}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -11.1, y: 10.6, z: -0}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 98.315285, y: 2.7622619, z: -0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
+  - {fileID: 4236888324353166}
   - {fileID: 4595646676051726}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -89.98021, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4147693342311808
 Transform:
   m_ObjectHideFlags: 1
@@ -184,12 +185,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1355240596225204}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.012599995, z: 0}
-  m_LocalScale: {x: 0.0064098993, y: 0.006409896, z: 0.006409896}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0.02050003, y: 0, z: -0.012599992}
+  m_LocalScale: {x: 0.0064098993, y: 0.0064098937, z: 0.0064098937}
   m_Children: []
-  m_Father: {fileID: 4595646676051726}
-  m_RootOrder: 2
+  m_Father: {fileID: 4103187878327696}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4255448901584928
 Transform:
@@ -218,9 +219,8 @@ Transform:
   m_Children:
   - {fileID: 4255448901584928}
   - {fileID: 4008810003611572}
-  - {fileID: 4236888324353166}
   m_Father: {fileID: 4103187878327696}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23836735752627368
 MeshRenderer:
@@ -375,8 +375,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f86e51c77bde4e4290cbe37b2b42ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WindForce: 30
-  WindForceClose: 10
+  ModelOffset: 5
+  WindForce: 72
+  WindForceClose: 0.337
   WindDirection: {x: 0, y: 1, z: 0}
   WindTrigger: {fileID: 0}
   IsActive: 1

@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1680122674522580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.9915237, y: -5.3486648, z: 0}
+  m_LocalPosition: {x: 117.5251, y: 0.57, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4132254192395876}
@@ -111,9 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f86e51c77bde4e4290cbe37b2b42ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WindForce: 26
-  WindForceClose: 50
-  MaxHeight: 0
+  ModelOffset: 5
+  WindForce: 100
+  WindForceClose: 0.558
   WindDirection: {x: 0, y: 1, z: 0}
   WindTrigger: {fileID: 0}
   IsActive: 1
