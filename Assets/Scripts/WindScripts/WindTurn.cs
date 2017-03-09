@@ -1,19 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.WindScripts
 {
 	public class WindTurn : WindObject
 	{
-		[SerializeField] private bool _left;
-		[SerializeField] private bool _right;
-		[SerializeField] private bool _down;
+		public enum Direction
+		{
+			_left,
+			_right,
+			_up,
+			_down
+		}
+
+		private Direction _direction = Direction._up;
 
 		private BoxCollider2D _windZone;
 
 		private float _sizeX;
 		private float _sizeY;
-		private float _xOffset;
-		private float _yOffset;
 
 		protected new virtual void Start()
 		{
@@ -21,47 +26,58 @@ namespace Assets.Scripts.WindScripts
 			_windZone = GetComponent<BoxCollider2D>();
 			_sizeX = _windZone.size.x;
 			_sizeY = _windZone.size.y;
-			_xOffset = _windZone.offset.x;
-			_yOffset = _windZone.offset.y;
-
-			if (_down)
-			{
-				// 
-			}
-
+			SetRight(_windZone);
 		}
 
 		protected new virtual void Update()
 		{
 			base.Update();
-
+			switch (_direction)
+			{
+				case Direction._left:
+					WindDirection = new Vector3(-WindForce,0f,0f);
+					break;
+				case Direction._right:
+					WindDirection = new Vector3(WindForce, 0f,0f);
+					break;
+				case Direction._down:
+					WindDirection = new Vector3(0f,-WindForce, 0f);
+					break;
+				case Direction._up:
+					WindDirection = new Vector3(0f, WindForce, 0f);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
 		}
 
-		public void SetLeft()
+		public void SetLeft(BoxCollider2D windZone)
 		{
-			_windZone.size = new Vector2(_sizeY, _sizeX);
-			transform.localPosition = new Vector3(-_windZone.size.x/2, 0f, 0f);
+			windZone.size = new Vector2(_sizeY, _sizeX);
+			windZone.offset = new Vector2(-windZone.size.x/2f, 0f);
+			_direction = Direction._left;
 		}
 
-		public void SetRight()
+		public void SetRight(BoxCollider2D windZone)
 		{
-			_windZone.size = new Vector2(_sizeY, _sizeX);
-			transform.localPosition = new Vector3(_windZone.size.x/2f, 0f, 0f);
+			windZone.size = new Vector2(_sizeY, _sizeX);
+			windZone.offset = new Vector3(windZone.size.x/2f, 0f);
+			_direction = Direction._right;
 		}
 
-		public void SetUp()
+		public void SetUp(BoxCollider2D windZone)
 		{
-			_windZone.size = new Vector2(_sizeX, _sizeY);
-			transform.localPosition = new Vector3(0f, _windZone.size.y/2f, 0f);
+			windZone.size = new Vector2(_sizeX, _sizeY);
+			windZone.offset = new Vector2(0f, windZone.size.y/2f);
+			_direction = Direction._up;
 		}
 
-		public void SetDown()
+		public void SetDown(BoxCollider2D windZone)
 		{
-			_windZone.size = new Vector2(_sizeX, _sizeY);
-			transform.localPosition = new Vector3(0f, -_windZone.size.y/2f, 0f);
+			windZone.size = new Vector2(_sizeX, _sizeY);
+			windZone.offset = new Vector3(0f, -windZone.size.y/2f);
+			_direction = Direction._down;
 		}
-
-		
 	}
 }
 
