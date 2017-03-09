@@ -23,11 +23,11 @@ TagManager:
   - UI
   - 
   - 
-  - WindZone
-  - GrabRadius
-  - Fade
-  - 
-  - 
+  - Background
+  - Parallax
+  - Ground
+  - Foreground
+  - FX
   - 
   - 
   - 
@@ -50,4 +50,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3848145619
+    locked: 0
+  - name: Parallax
+    uniqueID: 536767395
+    locked: 0
+  - name: Ground
+    uniqueID: 4212561957
+    locked: 0
+  - name: Foreground
+    uniqueID: 1508898453
+    locked: 0
+  - name: FX
+    uniqueID: 201612523
     locked: 0
