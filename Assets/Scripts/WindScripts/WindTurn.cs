@@ -13,9 +13,13 @@ namespace Assets.Scripts.WindScripts
 			_down
 		}
 
-		private Direction _direction = Direction._up;
+		public Direction CurrentDirection = Direction._up;
 
 		private BoxCollider2D _windZone;
+        public bool Up;
+        public bool Down;
+        public bool Left;
+        public bool Right;
 
 		private float _sizeX;
 		private float _sizeY;
@@ -26,13 +30,12 @@ namespace Assets.Scripts.WindScripts
 			_windZone = GetComponent<BoxCollider2D>();
 			_sizeX = _windZone.size.x;
 			_sizeY = _windZone.size.y;
-			SetRight(_windZone);
 		}
 
 		protected new virtual void Update()
 		{
 			base.Update();
-			switch (_direction)
+			switch (CurrentDirection)
 			{
 				case Direction._left:
 					WindDirection = new Vector3(-WindForce,0f,0f);
@@ -51,32 +54,32 @@ namespace Assets.Scripts.WindScripts
 			}
 		}
 
-		public void SetLeft(BoxCollider2D windZone)
+		public void SetLeft()
 		{
-			windZone.size = new Vector2(_sizeY, _sizeX);
-			windZone.offset = new Vector2(-windZone.size.x/2f, 0f);
-			_direction = Direction._left;
+			_windZone.size = new Vector2(_sizeY, _sizeX);
+			_windZone.offset = new Vector2(-_windZone.size.x/2f, 0f);
+			CurrentDirection = Direction._left;
 		}
 
-		public void SetRight(BoxCollider2D windZone)
+		public void SetRight()
 		{
-			windZone.size = new Vector2(_sizeY, _sizeX);
-			windZone.offset = new Vector3(windZone.size.x/2f, 0f);
-			_direction = Direction._right;
+			_windZone.size = new Vector2(_sizeY, _sizeX);
+			_windZone.offset = new Vector3(_windZone.size.x/2f, 0f);
+			CurrentDirection = Direction._right;
 		}
 
-		public void SetUp(BoxCollider2D windZone)
+		public void SetUp()
 		{
-			windZone.size = new Vector2(_sizeX, _sizeY);
-			windZone.offset = new Vector2(0f, windZone.size.y/2f);
-			_direction = Direction._up;
+			_windZone.size = new Vector2(_sizeX, _sizeY);
+			_windZone.offset = new Vector2(0f, _windZone.size.y/2f);
+			CurrentDirection = Direction._up;
 		}
 
-		public void SetDown(BoxCollider2D windZone)
+		public void SetDown()
 		{
-			windZone.size = new Vector2(_sizeX, _sizeY);
-			windZone.offset = new Vector3(0f, -windZone.size.y/2f);
-			_direction = Direction._down;
+			_windZone.size = new Vector2(_sizeX, _sizeY);
+			_windZone.offset = new Vector3(0f, -_windZone.size.y/2f);
+			CurrentDirection = Direction._down;
 		}
 	}
 }

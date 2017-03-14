@@ -54,7 +54,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 28.464088, y: 16}
+  m_Size: {x: 28.466257, y: 16}
 --- !u!114 &114845325071390322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,4 +68,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Size: 8
   CameraMoveSpeed: 5
-  Position: {x: 0, y: 0, z: 0}
+  SwapOffsetLeft: 4
+  SwapOffsetRight: 5
+  Position: {x: 3.2934208, y: -0.2, z: -20}

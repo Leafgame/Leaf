@@ -33,7 +33,7 @@ namespace Assets.Scripts.WindScripts
 			var windSource = rigidBody2D.transform.position - transform.position;
 			var distanceToWindSource = windSource.magnitude;
 
-            _velocity = WindDirection * WindForce * Time.fixedDeltaTime / WindForceClose;
+            _velocity = WindDirection * WindForce * Time.fixedDeltaTime;
 
             if(WindDirection.x < 0 && Input.GetAxis("Horizontal") > 0.0 && gO.tag == "Player")
             {
@@ -44,7 +44,7 @@ namespace Assets.Scripts.WindScripts
                 _velocity = _velocity + new Vector3(10, 0, 0);
 
             }
-
+            
             rigidBody2D.velocity = _velocity;
 
 
@@ -83,6 +83,7 @@ namespace Assets.Scripts.WindScripts
 		{
 			WindTrigger = GetComponent<BoxCollider2D>();
 			WindTrigger.isTrigger = true;
+            gameObject.tag = "WindZone";
 		}
 
 		public void OnTriggerEnter2D(Collider2D col)

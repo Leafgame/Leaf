@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.WindScripts;
 using UnityEngine;
 
@@ -63,11 +64,36 @@ namespace Assets.Scripts.Misc
 				{
 					floatingObj.IsWindActive = !floatingObj.IsWindActive;
 				}
+
+                SwapWindTurnDirection(windObject);
 			}
 		}
 
+        private void SwapWindTurnDirection(GameObject windObject)
+        {
+            var wturn = windObject.GetComponentInChildren<WindTurn>();
+            if(wturn != null)
+            {
+				wturn.IsActive = true;
+                switch (wturn.CurrentDirection)
+                {
+                    case WindTurn.Direction._left:
+                        wturn.SetUp();
+						break;
+					case WindTurn.Direction._up:
+						wturn.SetRight();
+						break;
+					case WindTurn.Direction._right:
+						wturn.SetDown();
+						break;
+					case WindTurn.Direction._down:
+						wturn.SetLeft();
+						break;
+                }
+            }
+        }
 
-		public void LeverStateOn()
+        public void LeverStateOn()
 	    {
 	        _leverReady = true;
 	    }
