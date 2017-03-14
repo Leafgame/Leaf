@@ -84,6 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4103187878327696}
   - component: {fileID: 95535950407974108}
+  - component: {fileID: 50519269326835788}
   m_Layer: 8
   m_Name: WindPadModel
   m_TagString: WindZone
@@ -116,8 +117,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4595646676051726}
-  - component: {fileID: 61924636941768704}
-  - component: {fileID: 50939221080813326}
+  - component: {fileID: 61080002714605506}
   m_Layer: 8
   m_Name: Bone
   m_TagString: WindZone
@@ -299,26 +299,40 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1547208036703448}
   m_Mesh: {fileID: 4300000, guid: 6ee5aa9dbf68efc4b9487a5f27847da6, type: 3}
---- !u!50 &50939221080813326
+--- !u!50 &50519269326835788
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848291636272494}
+  m_GameObject: {fileID: 1590494277708978}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
-  m_Material: {fileID: 6200000, guid: 3626fe8e008014f6bbd19bb72937b311, type: 2}
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &61080002714605506
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848291636272494}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.00022143498, y: 0.0070374203}
+  serializedVersion: 2
+  m_Size: {x: 0.020972166, y: 0.0148088345}
 --- !u!61 &61299945701836552
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -333,20 +347,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 19}
   serializedVersion: 2
   m_Size: {x: 2.5, y: 30}
---- !u!61 &61924636941768704
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1848291636272494}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 306f131538f3aab43852ac03c0ebde83, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0.00009615839, y: 0.0063202283}
-  serializedVersion: 2
-  m_Size: {x: 0.019231949, y: 0.012703347}
 --- !u!95 &95535950407974108
 Animator:
   serializedVersion: 3
