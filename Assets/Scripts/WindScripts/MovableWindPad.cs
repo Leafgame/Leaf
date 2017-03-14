@@ -8,40 +8,42 @@ namespace Assets.Scripts.Misc
 		public CircleCollider2D GrabCircle;
 		public float GrabRadius = 3f;
 
-		private Vector3 _previousPosition;
-		private GameObject _playerReference;
+		private Vector3 _distanceToObject;
+		private Transform _playerReference;
+        private Rigidbody2D _rigidbody2d;
 
 		public void Start()
 		{
 			GrabCircle = GetComponent<CircleCollider2D>();
 			GrabCircle.radius = GrabRadius;
 			GrabCircle.isTrigger = true;
+            _rigidbody2d = GetComponent<Rigidbody2D>();
 		}
 
 		public void Update()
 		{
 			if (_playerReference == null)
 			{
-				_playerReference = GameObject.FindGameObjectWithTag("Player");
+				_playerReference = GameObject.FindGameObjectWithTag("Player").transform;
 			}
-			var diffVec = (transform.position - _previousPosition);
+			var diffVec = ( _playerReference.position - transform.position );
 			var distance = diffVec.magnitude;
-			/* MOVE THE PAD WITH E ?
-			if (Input.GetButton("Fire2") && distance < GrabRadius && diffVec.x < 0.0f)
+            if (Input.GetButtonDown("Fire2") && distance < GrabRadius)
+            {
+                _distanceToObject = _playerReference.position - transform.position;
+            }
+
+            if (Input.GetButton("Fire2") && distance < GrabRadius)
 			{
-				Move(distance, -1);
+                //non physics system transform if that ever comes in handy
+                //transform.Translate(diffVec - _distanceToObject);
+                var rb = _playerReference.GetComponent<Rigidbody2D>();
+               _rigidbody2d.velocity = new Vector2(rb.velocity.x, 0);
 			}
-			else if(Input.GetButton("Fire2") && distance < GrabRadius && diffVec.x > 0.0f)
-			{
-				Move(distance, 1);
-			}
-			*/
-			_previousPosition = _playerReference.transform.position;
 		}
 
-		public virtual void Move(float distance, int offset)
+		public virtual void Move(Vector3 distance)
 		{
-			transform.position = new Vector3(_previousPosition.x + offset, transform.position.y, 0);
 		}
 			
 		public void OnTriggerStay2D(Collider2D col)
@@ -56,7 +58,10 @@ namespace Assets.Scripts.Misc
 
         public void OnTriggerExit2D(Collider2D col)
         {
-
+            if(col.tag == "Player")
+            {
+                _rigidbody2d.velocity = new Vector3(0, 0);
+            }
         }
 
     }

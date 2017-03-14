@@ -214,8 +214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpeed: 10
   MaxRigidBodySpeed: 50
-  JumpForce: 400
-  CrouchSpeed: 0.36
+  JumpForce: 500
+  CrouchSpeed: 0.26
   AirControl: 1
   WhatIsGround:
     serializedVersion: 2
@@ -250,7 +250,7 @@ MonoBehaviour:
   CameraPanSpeed: 0.8
   CameraSize: 5
   MaxRadius: 5
-  InterpolateCamAmount: 1.1
+  ExtrapolationAmout: 10
   YOffset: 2
 --- !u!114 &114000012344497388
 MonoBehaviour:

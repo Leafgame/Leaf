@@ -83,23 +83,21 @@ namespace Assets.Scripts.PlayerScripts
         {
             var verticalCamera = Input.GetAxis("VerticalCamera") * CameraPanSpeed;
             var horizontalCamera = Input.GetAxis("HorizontalCamera") * CameraPanSpeed;
-            var diff = (new Vector2(MainCameraView.transform.position.x + horizontalCamera, MainCameraView.transform.position.y + verticalCamera) -
-                new Vector2(transform.position.x, transform.position.y));
+			var diff = GetVectorFromPlayerToCamera(horizontalCamera, verticalCamera);
             var distance = diff.magnitude;
 
-	        if ((Math.Abs(_rigidbody2D.velocity.x) < 0.1 && Math.Abs(_rigidbody2D.velocity.y) < 0.1)
-	            && (Math.Abs(Input.GetAxis("VerticalCamera")) > 0.1 || Math.Abs(Input.GetAxis("HorizontalCamera")) > 0.1))
+	        if (PlayerIsStandingStill())
 	        {
 		        _freeMovingCamera = true;
 	        }
-	        else if((Math.Abs(_rigidbody2D.velocity.x) > 0.1 || Math.Abs(_rigidbody2D.velocity.y) > 0.1))
+	        else if(PlayerIsMoving())
 	        {
 		        _freeMovingCamera = false;
 	        }
 
-	        if (Mathf.Abs(_rigidbody2D.velocity.y) < 0.1f)
+	        if (PlayerNotFallingOrJumping())
 	        {
-				_referenceVec = new Vector3( transform.position.x, transform.position.y, MainCameraView.transform.position.z );
+				_referenceVec = GetCenterOfPlayerWithCorrectZCamPos();
 
 				var interpolatedVec = new Vector3( MainCameraView.transform.position.x, transform.position.y + YOffset, -20 );
 				MoveObject(MainCameraView.transform, MainCameraView.transform.position, interpolatedVec, LerpTime);
@@ -108,7 +106,7 @@ namespace Assets.Scripts.PlayerScripts
 			// Camera follow calculations
 			if (!_freeMovingCamera)
             {
-                _referenceVec = new Vector3(transform.position.x, transform.position.y, MainCameraView.transform.position.z);
+				_referenceVec = GetCenterOfPlayerWithCorrectZCamPos();
 
 	            var interpolatedVec = new Vector3(_rigidbody2D.velocity.x * ExtrapolationAmout + _referenceVec.x, MainCameraView.transform.position.y, -20);
 				MoveObject(MainCameraView.transform, MainCameraView.transform.position, interpolatedVec, LerpTime);
@@ -123,27 +121,61 @@ namespace Assets.Scripts.PlayerScripts
 				var clampedPos = Vector2.ClampMagnitude(diff, MaxRadius);
 				MainCameraView.transform.position = transform.position + new Vector3(clampedPos.x, clampedPos.y, -20);
 			}
-	        var distToCam = new Vector2(MainCameraView.transform.position.x, 
-										MainCameraView.transform.position.y) -
-	                        new Vector2(transform.position.x, transform.position.y);
+			var distToCam = GetVectorFromPlayerToCamera(0, 0);
+
 	        if (distToCam.y < _yMax)
 			{
-				MainCameraView.transform.position = new Vector3(MainCameraView.transform.position.x, transform.position.y - YOffset, -20);
+				OffsetCamera(-YOffset);
 			}
 			else if (distToCam.y > _yMin)
 	        {
-				MainCameraView.transform.position = new Vector3(MainCameraView.transform.position.x, transform.position.y + YOffset, -20);
+				OffsetCamera(YOffset);
 			}			
 		}
 
 
-        /// <summary>
-        /// Linearly interpolates from startpos to endpos based on time.
-        /// </summary>
-        /// <param name="movingObject"></param>
-        /// <param name="startpos"></param>
-        /// <param name="endpos"></param>
-        /// <param name="time"></param>
+		private void OffsetCamera(float offset)
+		{
+			MainCameraView.transform.position = new Vector3(MainCameraView.transform.position.x, transform.position.y + offset, -20);
+		}
+
+		private Vector3 GetCenterOfPlayerWithCorrectZCamPos()
+		{
+			return new Vector3(transform.position.x, transform.position.y, MainCameraView.transform.position.z);
+		}
+
+		private bool PlayerNotFallingOrJumping()
+		{
+			return Mathf.Abs(_rigidbody2D.velocity.y) < 0.1f;
+		}
+
+		private bool PlayerIsMoving()
+		{
+			return (Math.Abs(_rigidbody2D.velocity.x) > 0.1 || Math.Abs(_rigidbody2D.velocity.y) > 0.1);
+		}
+
+		private bool PlayerIsStandingStill()
+		{
+			return (Math.Abs(_rigidbody2D.velocity.x) < 0.1 && 
+					Math.Abs(_rigidbody2D.velocity.y) < 0.1) && 
+				   (Math.Abs(Input.GetAxis("VerticalCamera")) > 0.1 || 
+				    Math.Abs(Input.GetAxis("HorizontalCamera")) > 0.1);
+		}
+
+		private Vector3 GetVectorFromPlayerToCamera(float h, float v)
+		{
+			return new Vector2(MainCameraView.transform.position.x + h, MainCameraView.transform.position.y + v) -
+					new Vector2(transform.position.x, transform.position.y);
+		}
+
+
+		/// <summary>
+		/// Linearly interpolates from startpos to endpos based on time.
+		/// </summary>
+		/// <param name="movingObject"></param>
+		/// <param name="startpos"></param>
+		/// <param name="endpos"></param>
+		/// <param name="time"></param>
 		public void MoveObject(Transform movingObject, Vector3 startpos, Vector3 endpos, float time)
 		{
 			var rate = 1.0f / time;
