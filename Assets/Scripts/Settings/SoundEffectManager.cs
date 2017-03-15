@@ -1,11 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SoundEffectManager : MonoBehaviour
 {
+    /// <summary>
+    /// Sound effect manager Singleton Instance
+    /// </summary>
 	public static SoundEffectManager Instance;
 
+    /// <summary>
+    /// The audio effects 
+    /// </summary>
 	public AudioClip[] AudioClips;
 
 	protected void Awake()

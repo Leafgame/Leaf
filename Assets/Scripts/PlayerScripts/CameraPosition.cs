@@ -12,17 +12,49 @@ namespace Assets.Scripts.PlayerScripts
 		/// </summary>
 		public float Size;
 
+        /// <summary>
+        /// Movement speed to the camera when transitioning.
+        /// </summary>
 		public float CameraMoveSpeed = 1f;
 
+        /// <summary>
+        /// The offset where the swap will happen sooner to give the player info about what is to come
+        /// </summary>
 		public float SwapOffsetLeft = 4f;
+
+        /// <summary>
+        /// The offset where the swap will happen sooner to give the player info about what is to come
+        /// </summary>
 		public float SwapOffsetRight = 5f;
 
+        /// <summary>
+        /// Width of the camera BBOX
+        /// </summary>
 		public float Width { get; private set; }
+
+        /// <summary>
+        /// Height of the camrea BBOX
+        /// </summary>
 		public float Height { get; private set; }
 
+        /// <summary>
+        /// Position in worldspace 
+        /// </summary>
 		public Vector3 Position;
+
+        /// <summary>
+        /// Reference to the main rendering camera
+        /// </summary>
 		private Camera _mainCamera;
+
+        /// <summary>
+        /// The BBOX trigger for the camera to tell if the player is inside or not
+        /// </summary>
 		private BoxCollider2D _cameraBox;
+
+        /// <summary>
+        /// Reference to players location
+        /// </summary>
 		private Transform _playerLocation;
 
 		public void Start()
@@ -78,21 +110,11 @@ namespace Assets.Scripts.PlayerScripts
 			}
 		}
 
-		protected void OnTriggerStay2D(Collider2D col)
-		{
-			if(col.tag == "CameraPos")
-				print(col.tag);
-		}
 
-		protected void OnTriggerEnter2D(Collider2D col)
-		{
-			
-		}
-
-		protected void OnTriggerExit2D(Collider2D col)
-		{
-		}
-
+        /// <summary>
+        /// Swaps the out the camera position for another one.
+        /// </summary>
+        /// <param name="col"></param>
 		protected void SwapCamera(Collider2D col)
 		{
 			if (col.tag == "Player" && col is BoxCollider2D)

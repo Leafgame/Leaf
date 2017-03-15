@@ -1891,7 +1891,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8eb80fa98d85ce34fae7affcdfb64c6c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.495
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2330,7 +2330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentCheckpoitPos: {x: 0, y: 0, z: 0}
-  Checkpoints: []
 --- !u!114 &114082679203749712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5496,7 +5495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartLocation: {x: 0, y: 3, z: 0}
-  Prefab: {fileID: 1000014229097902, guid: e7d4477d40a1c64479c92865264fba9a, type: 2}
+  Prefab: {fileID: 1000014229097902, guid: 9d71a1f2c19315a4faa11b573265fcd5, type: 2}
 --- !u!114 &114975420585595578
 MonoBehaviour:
   m_ObjectHideFlags: 1

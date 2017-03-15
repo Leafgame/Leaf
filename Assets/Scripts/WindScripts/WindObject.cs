@@ -12,6 +12,7 @@ namespace Assets.Scripts.WindScripts
 	{
 		public int ModelOffset = 5;
 		public float WindForce;
+        [Range(0.1f,1f)]
 		public float WindForceClose;
 		public Vector3 WindDirection;
 		public BoxCollider2D WindTrigger;
@@ -21,32 +22,38 @@ namespace Assets.Scripts.WindScripts
 
 		private float _maxBoxSize;
 
+        private Vector3 _velocity;
+        private float _gravityPull;
+        private float _initalMomentum;
+
+
 		public virtual void ApplyWindPhysics(GameObject gO)
 		{
 			var rigidBody2D = gO.GetComponent<Rigidbody2D>();
 			var windSource = rigidBody2D.transform.position - transform.position;
 			var distanceToWindSource = windSource.magnitude;
-	
-			rigidBody2D.AddForce(WindDirection * WindForce
-				+ WindDirection * WindForceClose / Mathf.Clamp(distanceToWindSource, 0.01f, 1f)
-				);
 
-			if (rigidBody2D.tag == "Player")
-			{
-				rigidBody2D.sharedMaterial.friction = 0f;
-				rigidBody2D.isKinematic = true;
-				rigidBody2D.isKinematic = false;
-				rigidBody2D.velocity = WindDirection;
-				rigidBody2D.AddForce(WindDirection * WindForce
-					+ WindDirection * WindForceClose / Mathf.Clamp(distanceToWindSource, 0.01f, 1f)
-					);
-			}
+            _velocity = WindDirection * WindForce * Time.fixedDeltaTime;
 
-		}
+            if(WindDirection.x < 0 && Input.GetAxis("Horizontal") > 0.0 && gO.tag == "Player")
+            {
+                _velocity = _velocity + new Vector3(-10, 0, 0);
+            }
+            if (WindDirection.x > 0 && Input.GetAxis("Horizontal") < 0.0 && gO.tag == "Player")
+            {
+                _velocity = _velocity + new Vector3(10, 0, 0);
 
-		public void FixedUpdate()
+            }
+            
+            rigidBody2D.velocity = _velocity;
+
+
+        }
+
+        public void FixedUpdate()
 		{
-			if (!IsActive) return;
+
+            if (!IsActive) return;
 
 			foreach (var rigidbodyObject in ObjectsInWindZone)
 			{
@@ -65,17 +72,18 @@ namespace Assets.Scripts.WindScripts
 					ApplyWindPhysics( rigidbodyObject.gameObject );
 				}
 			}
-		}
+        }
 
-		public void Update()
-		{
-			WindTrigger.enabled = IsActive;
-		}
+        protected virtual void Update()
+        {
+            WindTrigger.enabled = IsActive;
+        }
 
-		public void Start()
+        public void Start()
 		{
 			WindTrigger = GetComponent<BoxCollider2D>();
 			WindTrigger.isTrigger = true;
+            gameObject.tag = "WindZone";
 		}
 
 		public void OnTriggerEnter2D(Collider2D col)
@@ -89,6 +97,7 @@ namespace Assets.Scripts.WindScripts
 				{
 					player.InWindZone = true;
 				}
+                print("Player enters");
 			}
 
 			if (HeavyObjectCheck(col))
@@ -97,7 +106,7 @@ namespace Assets.Scripts.WindScripts
 			}
 
 			// No Rigidbody2D on object: return
-			if (!RigidbodyCheck(col) || HeavyObjectCheck(col)) return;
+			if (!RigidbodyCheck(col) || HeavyObjectCheck(col) || NonWindInteractingTags(col)) return;
 			if(!ObjectsInWindZone.Contains(col.gameObject))
 				ObjectsInWindZone.Add(col.gameObject);
 		}
@@ -107,12 +116,18 @@ namespace Assets.Scripts.WindScripts
 			return col.tag == "HeavyObject";
 		}
 
+        private static bool NonWindInteractingTags(Collider2D col)
+        {
+            return col.tag == "FloatingPlatform";
+        }
+
 		public void OnTriggerExit2D(Collider2D col)
 		{
 			if (!IsActive) return;
 			if (col.tag == "Player")
 			{
 				col.GetComponent<PlatformerCharacter2D>().InWindZone = false;
+                print("Player leaves");
 			}
 
 			if (HeavyObjectCheck(col))

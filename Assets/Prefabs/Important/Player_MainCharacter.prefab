@@ -151,7 +151,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 4
-  m_Material: {fileID: 6200000, guid: 18128a28973302c4fbc140f2ddb5dd0c, type: 2}
+  m_Material: {fileID: 6200000, guid: 6d17ed7fb99cc4e4fb7ffa64885cb729, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -164,7 +164,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1000014229097902}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 18128a28973302c4fbc140f2ddb5dd0c, type: 2}
+  m_Material: {fileID: 6200000, guid: 6d17ed7fb99cc4e4fb7ffa64885cb729, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0.79, y: -7}
@@ -178,7 +178,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1000014229097902}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 18128a28973302c4fbc140f2ddb5dd0c, type: 2}
+  m_Material: {fileID: 6200000, guid: 6d17ed7fb99cc4e4fb7ffa64885cb729, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0.7837486, y: 0.39325237}
@@ -214,8 +214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpeed: 10
   MaxRigidBodySpeed: 50
-  JumpForce: 400
-  CrouchSpeed: 0.36
+  JumpForce: 500
+  CrouchSpeed: 0.26
   AirControl: 1
   WhatIsGround:
     serializedVersion: 2
@@ -250,7 +250,7 @@ MonoBehaviour:
   CameraPanSpeed: 0.8
   CameraSize: 5
   MaxRadius: 5
-  InterpolateCamAmount: 1.1
+  ExtrapolationAmout: 10
   YOffset: 2
 --- !u!114 &114000012344497388
 MonoBehaviour:

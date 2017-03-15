@@ -66,15 +66,15 @@ namespace Assets.Scripts.Misc
 	    /// </summary>
 	    public float MaxRotation;
 
-		private float HauntPower
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// The amount of Haunt Power
+        /// </summary>
+        private float HauntPower;
+
 
         public virtual void Haunt()
         {
-            throw new System.NotImplementedException();
+            
         }
 
 	    public SteeringOutput GetSteering(Transform target)

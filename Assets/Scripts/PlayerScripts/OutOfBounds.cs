@@ -5,6 +5,10 @@ namespace Assets.Scripts.PlayerScripts
 {
 	public class OutOfBounds : MonoBehaviour
 	{
+        /// <summary>
+        /// The last checkpoint the player died every time he jumps 
+        /// from default layer a new "checkpoint" is created.
+        /// </summary>
 		private CheckpointManager _checkpointManager;
 
 		protected void Start()
@@ -30,6 +34,10 @@ namespace Assets.Scripts.PlayerScripts
 			}
 		}
 
+        /// <summary>
+        /// Resets the velicty of the rigidbody to 0
+        /// </summary>
+        /// <param name="col"></param>
 		public void ResetVelocity(Collider2D col)
 		{
 			var rb = col.GetComponent<Rigidbody2D>();

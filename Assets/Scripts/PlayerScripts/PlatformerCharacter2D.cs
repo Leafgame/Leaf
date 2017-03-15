@@ -37,7 +37,7 @@ namespace Assets.Scripts.PlayerScripts
 	    private bool _dashRight;
 
 		private Transform _groundCheck;             // A position marking where to check if the player is grounded.
-	    private const float GroundedRadius = 0.5f;   // Radius of the overlap circle to determine if grounded
+		private const float GroundedRadius = 0.25f; // Radius of the overlap circle to determine if grounded
         private Transform _ceilingCheck;            // A position marking where to check for ceilings
 	    private const float CeilingRadius = .01f;   // Radius of the overlap circle to determine if the player can stand up
         private Animator _animator;                 // Reference to the player's animator component.
@@ -103,7 +103,7 @@ namespace Assets.Scripts.PlayerScripts
 
 	    protected virtual void OnDrawGizmos()
 	    {
-			Gizmos.DrawRay(_groundCheck.position, Vector3.down*0.5f);
+			Gizmos.DrawRay(_groundCheck.position, Vector3.down*0.25f);
 			var hit = Physics2D.Raycast( _groundCheck.position, Vector2.down, 0.5f, LayerMask.GetMask("Default"));
 			Gizmos.color = new Color(0, 255, 0);
 		    if (hit)
@@ -113,6 +113,7 @@ namespace Assets.Scripts.PlayerScripts
 				var facing = hit.normal.x < 0 ? 1 : -1;
 				Gizmos.DrawRay(transform.position, new Vector3( facing*hit.normal.y, -facing * hit.normal.x ) );
 			}
+			Gizmos.DrawSphere(_groundCheck.position, GroundedRadius);
 		}
 
 	    protected void FixedUpdate()
@@ -120,7 +121,7 @@ namespace Assets.Scripts.PlayerScripts
 		    Grounded = false;
 		    // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		    // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		    var colliders = Physics2D.RaycastAll(_groundCheck.position, Vector2.down, GroundedRadius, WhatIsGround);
+		    var colliders = Physics2D.CircleCastAll(_groundCheck.position, GroundedRadius, Vector2.down, 0.25f, WhatIsGround);
 		    foreach (var t in colliders)
 		    {
 			    if (t.transform.gameObject != gameObject)
@@ -165,42 +166,11 @@ namespace Assets.Scripts.PlayerScripts
 
 
 
-		public void Move(float move, bool crouch, bool jump)
+		public void Move(float move, bool jump)
 	    {
-			var hit = Physics2D.Raycast( _groundCheck.position, Vector2.down, 2f, LayerMask.GetMask( "Default" ), 0.4f );
-			Debug.DrawRay(_groundCheck.position, Vector3.down*2f, Color.blue);
-			if (Grounded && move == 0.0f)
-			{
-				_rigidbody2D.sharedMaterial.friction = 1f;
-				_rigidbody2D.isKinematic = true;
-				_rigidbody2D.isKinematic = false;
-			}
-			else
-			{
-				_rigidbody2D.sharedMaterial.friction = 0f;
-				_rigidbody2D.isKinematic = true;
-				_rigidbody2D.isKinematic = false;
-			}
-
-			// If crouching, check to see if the character can stand up
-			if (!crouch && _animator.GetBool("Crouch"))
-            {
-                // If the character has a ceiling preventing them from standing up, keep them crouching
-                if (Physics2D.OverlapCircle(_ceilingCheck.position, CeilingRadius, WhatIsGround))
-                {
-                    crouch = true;
-                }
-            }
-
-            // Set whether or not the character is crouching in the animator
-            _animator.SetBool("Crouch", crouch);
-
             //only control the player if grounded or airControl is turned on and not dashing
             if ((Grounded || AirControl) && !InVerticalWindZone && !_dashRight && !_dashLeft)
             {
-                // Reduce the speed if crouching by the crouchSpeed multiplier
-                move = (crouch ? move*CrouchSpeed : move);
-
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
                 _animator.SetFloat("Speed", Mathf.Abs(move));
 
@@ -228,7 +198,7 @@ namespace Assets.Scripts.PlayerScripts
             }
 
 			// If the player should jump...
-			if ((Grounded || _currentAirTime < LateJumpTime) && jump && !InWindZone)
+			if ((Grounded && _currentAirTime < LateJumpTime) && jump && !InWindZone)
             {
                 // Add a vertical force to the player.
                 Grounded = false;
@@ -236,6 +206,7 @@ namespace Assets.Scripts.PlayerScripts
 				_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
 				_rigidbody2D.AddForce(new Vector2(0f, JumpForce));
 	            _canDoubleJump = true;
+				SoundManager.Instance.PlayEffect(1);
             }
 			else if (_canDoubleJump && jump && !InWindZone && _playerItems.HasDoubleJumpEquipped)
 			{

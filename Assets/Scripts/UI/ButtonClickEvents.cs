@@ -6,7 +6,11 @@ namespace Assets.Scripts.UI
 {
 	public class ButtonClickEvents : MonoBehaviour
 	{
+        /// <summary>
+        /// Options panel
+        /// </summary>
 		public GameObject OptionsPanel;
+
 		/*
 		 * Called when the user clicks GUI button Start
 		 */
@@ -42,6 +46,7 @@ namespace Assets.Scripts.UI
 	    public void ResetLevelButtonClicked()
 	    {
 	        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            
 	    }
 
 	    public void SettingsButtonClicked()

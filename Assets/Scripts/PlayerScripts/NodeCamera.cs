@@ -4,8 +4,19 @@ namespace Assets.Scripts.PlayerScripts
 {
 	public class NodeCamera : MonoBehaviour
 	{
+        /// <summary>
+        /// All the cameras currently positioned in the world
+        /// </summary>
 		public CameraPosition[] CameraPositions;
+
+        /// <summary>
+        /// Currently active camera
+        /// </summary>
 		public int CurrentCameraIndex { get; set; }
+
+        /// <summary>
+        /// Main camera reference
+        /// </summary>
 		private Camera _main;
 
 		protected void Start()

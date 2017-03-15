@@ -5,23 +5,31 @@ namespace Assets
 {
 	public class CameraController : MonoBehaviour
 	{
-		[SerializeField] private Camera _mainCamera;
-		[SerializeField] private CameraBehaviour _standardCamera;
-		[SerializeField] private NodeCamera _nodeCamera;
+		private Camera _mainCamera;
+		private CameraBehaviour _standardCamera;
+		private NodeCamera _nodeCamera;
 
+        public bool IsStandardCamera; 
 
 		protected void Start()
 		{
 			_mainCamera = Camera.main;
 			_standardCamera = GameObject.FindGameObjectWithTag("Player").GetComponent<CameraBehaviour>();
 			_nodeCamera = _mainCamera.GetComponent<NodeCamera>();
-			SetToStandardCamera();
-		}
+            if (IsStandardCamera)
+            {
+                SetToStandardCamera();
+            }
+            else
+            {
+                SetToNodeCamera();
+            }
+        }
 
-		/// <summary>
-		/// Reequires there to be camera nodes in the scene
-		/// </summary>
-		public void SetToNodeCamera()
+        /// <summary>
+        /// Reequires there to be camera nodes in the scene
+        /// </summary>
+        public void SetToNodeCamera()
 		{
 			_nodeCamera.enabled = true;
 			_standardCamera.enabled = false;
