@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.PlayerScripts;
 using UnityEngine;
 
@@ -11,10 +12,10 @@ namespace Assets.Scripts.WindScripts
 	public class WindObject : MonoBehaviour
 	{
 		public int ModelOffset = 5;
+		[Range(5f, 50f)]
 		public float WindForce;
-        [Range(0.1f,1f)]
-		public float WindForceClose;
-		public Vector3 WindDirection;
+		public float ExitForce = 20f;
+		public Vector3 WindDirection = Vector3.up;
 		public BoxCollider2D WindTrigger;
 		public bool IsActive = true;
 
@@ -27,7 +28,7 @@ namespace Assets.Scripts.WindScripts
         private float _initalMomentum;
 
 
-		public virtual void ApplyWindPhysics(GameObject gO)
+		public virtual void ApplyWindPhysicsOld(GameObject gO)
 		{
 			var rigidBody2D = gO.GetComponent<Rigidbody2D>();
 			var windSource = rigidBody2D.transform.position - transform.position;
@@ -50,9 +51,23 @@ namespace Assets.Scripts.WindScripts
 
         }
 
-        public void FixedUpdate()
+		public virtual void ApplyWindPhysics(GameObject actor)
 		{
+			Vector3 position = transform.position;
+			Vector3 targetPosition = actor.transform.position;
+			Vector3 direction = targetPosition - position;
+			direction.Normalize();
 
+			Vector3 velocity = WindDirection * WindForce * Time.deltaTime + 
+							direction * Mathf.PerlinNoise(direction.x, direction.y) * Time.deltaTime;
+
+			actor.transform.position += velocity;
+			
+		}
+
+        public void Update()
+		{
+			EnableTrigger();
             if (!IsActive) return;
 
 			foreach (var rigidbodyObject in ObjectsInWindZone)
@@ -74,7 +89,7 @@ namespace Assets.Scripts.WindScripts
 			}
         }
 
-        protected virtual void Update()
+        protected virtual void EnableTrigger()
         {
             WindTrigger.enabled = IsActive;
         }
@@ -84,6 +99,7 @@ namespace Assets.Scripts.WindScripts
 			WindTrigger = GetComponent<BoxCollider2D>();
 			WindTrigger.isTrigger = true;
             gameObject.tag = "WindZone";
+			WindDirection.Normalize();
 		}
 
 		public void OnTriggerEnter2D(Collider2D col)
@@ -96,8 +112,8 @@ namespace Assets.Scripts.WindScripts
 				if (!player.WindNegationActive)
 				{
 					player.InWindZone = true;
+					//var rb = col.GetComponent<Rigidbody2D>().gravityScale = 0;
 				}
-                print("Player enters");
 			}
 
 			if (HeavyObjectCheck(col))
@@ -109,6 +125,22 @@ namespace Assets.Scripts.WindScripts
 			if (!RigidbodyCheck(col) || HeavyObjectCheck(col) || NonWindInteractingTags(col)) return;
 			if(!ObjectsInWindZone.Contains(col.gameObject))
 				ObjectsInWindZone.Add(col.gameObject);
+
+			TemporarlyDisableEnableGravity(col, false);
+		}
+
+		private void TemporarlyDisableEnableGravity(Collider2D col, bool enable)
+		{
+			var rb = col.GetComponent<Rigidbody2D>();
+
+			if (enable)
+			{
+				rb.isKinematic = false;
+			}
+			else
+			{
+				rb.isKinematic = true;
+			}
 		}
 
 		private static bool HeavyObjectCheck(Collider2D col)
@@ -140,6 +172,20 @@ namespace Assets.Scripts.WindScripts
 			if (!RigidbodyCheck(col)) return;
 			if(ObjectsInWindZone.Contains(col.gameObject))
 				ObjectsInWindZone.Remove(col.gameObject);
+
+			TemporarlyDisableEnableGravity(col, true);
+			AddExitForce(col);
+		}
+
+		private void AddExitForce(Collider2D col)
+		{
+			var rb = col.GetComponent<Rigidbody2D>();
+			Vector3 position = transform.position;
+			Vector3 targetPosition = col.transform.position;
+			Vector3 direction = targetPosition - position;
+			direction.Normalize();
+
+			rb.velocity = (direction * ExitForce);
 		}
 
 		public void OnTriggerStay2D(Collider2D col)

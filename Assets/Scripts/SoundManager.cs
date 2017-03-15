@@ -16,6 +16,7 @@ public class SoundManager : Singleton<SoundManager>
 	{
 		MusicSoundSource = gameObject.AddComponent<AudioSource>();
 		SoundEffectSource = gameObject.AddComponent<AudioSource>();
+		Settings = GetComponentInChildren<SettingsManager>();
 		PlaySong(0);
 	}
 

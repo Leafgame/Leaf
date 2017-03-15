@@ -47,6 +47,7 @@ namespace Assets.Scripts.PlayerScripts
 	    private float _speed;
 	    private const float Acceleration = 10f;
 	    private float _currentDashTime;
+		private bool _fire1;
 
 	    protected void Awake()
         {
@@ -64,44 +65,56 @@ namespace Assets.Scripts.PlayerScripts
 
 	    protected void Update()
 	    {
-			if (!Grounded && _playerItems.HasAirDashEquipped && !_dashLeft && !_dashRight)
+			_fire1 = Input.GetButton("Fire1");
+
+			CheckDash();
+
+			CheckWindNegation();
+		}
+
+		private void CheckWindNegation()
+		{
+			// wind negation
+			if (Input.GetButtonDown("WindNegation") && !WindNegationActive && _currentWindNegCooldown < 0.0 && _playerItems.HasWindNegationEquipped)
 			{
-				var facing = transform.localScale.x < 0 ? -1 : 1;
-				if (Input.GetButtonDown( "DashRight" ))
-				{
-					_dashRight = true;
-					if(facing == -1) Flip();
-				}
-				else if (Input.GetButtonDown( "DashLeft" ))
-				{
-					_dashLeft = true;
-					if(facing == 1) Flip();
-				}
+				WindNegationActive = true;
+				_currentWindNegationTime = 0.0f;
+				_currentWindNegCooldown = WindNegationCooldown;
 			}
 
-			// wind negation
-		    if (Input.GetButtonDown("WindNegation") && !WindNegationActive && _currentWindNegCooldown < 0.0 && _playerItems.HasWindNegationEquipped)
-		    {
-			    WindNegationActive = true;
-			    _currentWindNegationTime = 0.0f;
-			    _currentWindNegCooldown = WindNegationCooldown;
-		    }
-
-		    if (WindNegationActive)
-		    {
-			    _currentWindNegationTime += Time.deltaTime;
-		    }
-		    else
-		    {
+			if (WindNegationActive)
+			{
+				_currentWindNegationTime += Time.deltaTime;
+			}
+			else
+			{
 				_currentWindNegCooldown -= Time.deltaTime;
 			}
 			if (_currentWindNegationTime > MaxWindNegationTime)
-		    {
-			    WindNegationActive = false;
-		    }
+			{
+				WindNegationActive = false;
+			}
 		}
 
-	    protected virtual void OnDrawGizmos()
+		private void CheckDash()
+		{
+			if (!Grounded && _playerItems.HasAirDashEquipped && !_dashLeft && !_dashRight)
+			{
+				var facing = transform.localScale.x < 0 ? -1 : 1;
+				if (Input.GetButtonDown("DashRight"))
+				{
+					_dashRight = true;
+					if (facing == -1) Flip();
+				}
+				else if (Input.GetButtonDown("DashLeft"))
+				{
+					_dashLeft = true;
+					if (facing == 1) Flip();
+				}
+			}
+		}
+
+		protected virtual void OnDrawGizmos()
 	    {
 			Gizmos.DrawRay(_groundCheck.position, Vector3.down*0.25f);
 			var hit = Physics2D.Raycast( _groundCheck.position, Vector2.down, 0.5f, LayerMask.GetMask("Default"));
@@ -138,33 +151,35 @@ namespace Assets.Scripts.PlayerScripts
 		    // Set the vertical animation
 		    _animator.SetFloat("vSpeed", _rigidbody2D.velocity.y);
 
-		    // GLIDING
-		    if (!Grounded && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped && _rigidbody2D.velocity.y < 0 &&
-		        !InWindZone)
-		    {
-			    transform.GetChild(2).gameObject.SetActive(true);
-			    _rigidbody2D.velocity = new Vector2(GlideBoost*transform.localScale.x, -GlideFallVelocity);
-			    //_rigidbody2D.AddForce(new Vector2(GlideBoost * transform.localScale.x, 0));
-				print(_rigidbody2D.velocity);
-		    }
-		    else if (InWindZone && Input.GetButton("Fire1") && _playerItems.HasGliderEquipped)
-		    {
-			    transform.GetChild(2).gameObject.SetActive(true);
-		    }
-		    else
-		    {
-			    transform.GetChild(2).gameObject.SetActive(false);
-		    }
-			if (_rigidbody2D.velocity.magnitude > MaxRigidBodySpeed)
-			{
-				_rigidbody2D.velocity = _rigidbody2D.velocity.normalized * MaxRigidBodySpeed;
-			}
+			Glide();
 
 			// The input checking is done in update
 			Dash();
 		}
 
-
+		private void Glide()
+		{
+			// GLIDING
+			if (!Grounded && _fire1 && _playerItems.HasGliderEquipped && _rigidbody2D.velocity.y < 0 &&
+				!InWindZone)
+			{
+				transform.GetChild(2).gameObject.SetActive(true);
+				_rigidbody2D.velocity = new Vector2(GlideBoost * transform.localScale.x, -GlideFallVelocity);
+				print(_rigidbody2D.velocity);
+			}
+			else if (InWindZone && _fire1 && _playerItems.HasGliderEquipped)
+			{
+				transform.GetChild(2).gameObject.SetActive(true);
+			}
+			else
+			{
+				transform.GetChild(2).gameObject.SetActive(false);
+			}
+			if (_rigidbody2D.velocity.magnitude > MaxRigidBodySpeed)
+			{
+				_rigidbody2D.velocity = _rigidbody2D.velocity.normalized * MaxRigidBodySpeed;
+			}
+		}
 
 		public void Move(float move, bool jump)
 	    {
@@ -200,22 +215,16 @@ namespace Assets.Scripts.PlayerScripts
 			// If the player should jump...
 			if ((Grounded && _currentAirTime < LateJumpTime) && jump && !InWindZone)
             {
-                // Add a vertical force to the player.
                 Grounded = false;
-                _animator.SetBool("Ground", false);
-				_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
-				_rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+				Jump();
 	            _canDoubleJump = true;
-				SoundManager.Instance.PlayEffect(1);
             }
 			else if (_canDoubleJump && jump && !InWindZone && _playerItems.HasDoubleJumpEquipped)
 			{
 				_canDoubleJump = false;
-				_animator.SetBool("Ground", false);
-				_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
-				_rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+				Jump();	
 				_currentJumpTime = JumpHoldTime;
-				_currentDashTime = 0.0f;					// Reset the dash on double jump
+				_currentDashTime = 0.0f;                    // Reset the dash on double jump
 			}
 
 			if (Input.GetButtonUp("Fire1"))
@@ -239,7 +248,15 @@ namespace Assets.Scripts.PlayerScripts
 			}
 		}
 
-        private void Flip()
+		private void Jump()
+		{
+			_animator.SetBool("Ground", false);
+			_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
+			_rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+			SoundManager.Instance.PlayEffect(1);
+		}
+
+		private void Flip()
         {
             // Switch the way the player is labelled as facing.
             _facingRight = !_facingRight;

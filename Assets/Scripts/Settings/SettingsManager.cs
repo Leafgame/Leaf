@@ -15,8 +15,6 @@ namespace Assets.Scripts.Settings
 		public Slider SoundEffectSlider;
 		public Button ApplyButton;
 
-		public AudioSource MusicAudioSource;
-		public AudioSource SoundEffectsAudioSource;
 		public Resolution[] Resolutions;
 		public GameSettings GameSettings;
 
@@ -71,12 +69,12 @@ namespace Assets.Scripts.Settings
 
 		public void OnMusicVolumeChanged()
 		{
-			GameSettings.MusicVolume = MusicAudioSource.volume = MusicVolumeSlider.value;
+			GameSettings.MusicVolume = MusicVolumeSlider.value;
 		}
 
 		public void OnSoundEffectsVolumeChanged()
 		{
-			GameSettings.SoundEffectsVolume = SoundEffectsAudioSource.volume = SoundEffectSlider.value;
+			GameSettings.SoundEffectsVolume = SoundEffectSlider.value;
 		}
 
 		public void SaveChanges()

@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -91,23 +91,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &67434657 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1046429035586182, guid: d371f9842939b3841b806128a23d59e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 350206608}
---- !u!114 &67434662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 67434657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05897706a8582c747913f145ed01491b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsStandardCamera: 0
 --- !u!1001 &234896050
 Prefab:
   m_ObjectHideFlags: 0
@@ -416,18 +399,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 114974409246816530, guid: d371f9842939b3841b806128a23d59e7,
-        type: 2}
-      propertyPath: Prefab
-      value: 
-      objectReference: {fileID: 1000014229097902, guid: 9d71a1f2c19315a4faa11b573265fcd5,
-        type: 2}
-    - target: {fileID: 1109448748757398, guid: d371f9842939b3841b806128a23d59e7, type: 2}
-      propertyPath: m_Name
-      value: SoundManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 82501987508425408, guid: d371f9842939b3841b806128a23d59e7, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d371f9842939b3841b806128a23d59e7, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &622811422
@@ -583,32 +555,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 635271403}
   m_Mesh: {fileID: 0}
---- !u!1 &761296923 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1109448748757398, guid: d371f9842939b3841b806128a23d59e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 350206608}
---- !u!114 &761296924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 761296923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c13ed6040af289344914f1d4e9e9f2c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SoundEffectClips:
-  - {fileID: 8300000, guid: 7ed99aff9d8cb9a4781eb9083bcfd4dc, type: 3}
-  - {fileID: 8300000, guid: 72fc6e5cdf994634a91645d0e1ca35a4, type: 3}
-  - {fileID: 8300000, guid: 6badfa4dcb52d1e40862d0551666930c, type: 3}
-  MusicSoundPlaylist:
-  - {fileID: 8300000, guid: 68813283b2126304c8b8af66eb3c2664, type: 3}
-  - {fileID: 8300000, guid: 39178d22943a0554788fbe73a20b3268, type: 3}
-  SoundEffectSource: {fileID: 0}
-  MusicSoundSource: {fileID: 0}
-  Settings: {fileID: 909409569}
 --- !u!1001 &799214189
 Prefab:
   m_ObjectHideFlags: 0
@@ -651,7 +597,7 @@ Prefab:
     - target: {fileID: 61668784943354244, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
       propertyPath: m_Size.x
-      value: 28.477064
+      value: 28.466257
       objectReference: {fileID: 0}
     - target: {fileID: 114845325071390322, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
@@ -690,12 +636,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9d47d8ceb0b124aae93d326417ad58, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &909409569 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114650082732892798, guid: d371f9842939b3841b806128a23d59e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 350206608}
-  m_Script: {fileID: 11500000, guid: ae35097bc98a3134f8764d29aec63cc6, type: 3}
 --- !u!1001 &950144741
 Prefab:
   m_ObjectHideFlags: 0
@@ -1123,7 +1063,7 @@ Prefab:
     - target: {fileID: 61668784943354244, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
       propertyPath: m_Size.x
-      value: 28.477064
+      value: 28.466257
       objectReference: {fileID: 0}
     - target: {fileID: 114845325071390322, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
@@ -1256,7 +1196,7 @@ Prefab:
     - target: {fileID: 61668784943354244, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
       propertyPath: m_Size.x
-      value: 28.477064
+      value: 28.466257
       objectReference: {fileID: 0}
     - target: {fileID: 114845325071390322, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
@@ -1337,7 +1277,7 @@ Prefab:
     - target: {fileID: 61668784943354244, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
       propertyPath: m_Size.x
-      value: 28.477064
+      value: 28.466257
       objectReference: {fileID: 0}
     - target: {fileID: 114845325071390322, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
@@ -1778,7 +1718,7 @@ Prefab:
     - target: {fileID: 61668784943354244, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
       propertyPath: m_Size.x
-      value: 28.477064
+      value: 28.466257
       objectReference: {fileID: 0}
     - target: {fileID: 114845325071390322, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
@@ -2015,7 +1955,7 @@ Prefab:
     - target: {fileID: 61668784943354244, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
       propertyPath: m_Size.x
-      value: 28.477064
+      value: 28.466257
       objectReference: {fileID: 0}
     - target: {fileID: 114845325071390322, guid: 5e9d47d8ceb0b124aae93d326417ad58,
         type: 2}
