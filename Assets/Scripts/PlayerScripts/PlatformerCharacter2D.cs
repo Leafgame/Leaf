@@ -1,10 +1,9 @@
 using System;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 namespace Assets.Scripts.PlayerScripts
 {
-    public class PlatformerCharacter2D : MonoBehaviour
+	public class PlatformerCharacter2D : MonoBehaviour
     {
         [SerializeField] public float MaxSpeed = 10f;					 // The fastest the player can travel in the x axis.
 	    [SerializeField] public float MaxRigidBodySpeed = 50f;			 // The max speed of the rigidbody
@@ -18,10 +17,7 @@ namespace Assets.Scripts.PlayerScripts
 
 		public float GlideBoost = 50;
 	    public float GlideFallVelocity = 2.0f;
-		public float JumpHoldTime = 0.5f;
-	    public float LateJumpTime = 0.2f;
-		public float HoldForceMultiplier = 10f;
-	    public float MaxDashTime;
+		public float MaxDashTime;
 	    public float DashSpeed;
 	    public float DashStoppingSpeed;
 	    public float MaxWindNegationTime;
@@ -41,13 +37,14 @@ namespace Assets.Scripts.PlayerScripts
         private Transform _ceilingCheck;            // A position marking where to check for ceilings
 	    private const float CeilingRadius = .01f;   // Radius of the overlap circle to determine if the player can stand up
         private Animator _animator;                 // Reference to the player's animator component.
-        private Rigidbody2D _rigidbody2D;
         private bool _facingRight = true;           // For determining which way the player is currently facing.
 	    private PlayerItems _playerItems;
 	    private float _speed;
 	    private const float Acceleration = 10f;
 	    private float _currentDashTime;
 		private bool _fire1;
+		private Controller2D _controller;
+		private Player _player;
 
 	    protected void Awake()
         {
@@ -55,20 +52,20 @@ namespace Assets.Scripts.PlayerScripts
             _groundCheck = transform.Find("GroundCheck");
             _ceilingCheck = transform.Find("CeilingCheck");
             _animator = GetComponent<Animator>();
-            _rigidbody2D = GetComponent<Rigidbody2D>();
-	        _playerItems = GetComponent<PlayerItems>();
+	        _playerItems = GetComponentInParent<PlayerItems>();
+			_controller = GetComponentInParent<Controller2D>();
+			_player = GetComponentInParent<Player>();
         }
 
 	    protected void Start()
 	    {
+			Debug.Log(Environment.Version);
 	    }
 
 	    protected void Update()
 	    {
 			_fire1 = Input.GetButton("Fire1");
-
-			CheckDash();
-
+			Move(Input.GetAxis("Horizontal"));
 			CheckWindNegation();
 		}
 
@@ -96,17 +93,17 @@ namespace Assets.Scripts.PlayerScripts
 			}
 		}
 
-		private void CheckDash()
+		public void CheckDash(DashDirection direction)
 		{
 			if (!Grounded && _playerItems.HasAirDashEquipped && !_dashLeft && !_dashRight)
 			{
 				var facing = transform.localScale.x < 0 ? -1 : 1;
-				if (Input.GetButtonDown("DashRight"))
+				if (direction == DashDirection.Right)
 				{
 					_dashRight = true;
 					if (facing == -1) Flip();
 				}
-				else if (Input.GetButtonDown("DashLeft"))
+				else if (direction == DashDirection.Left)
 				{
 					_dashLeft = true;
 					if (facing == 1) Flip();
@@ -114,6 +111,7 @@ namespace Assets.Scripts.PlayerScripts
 			}
 		}
 
+		/*
 		protected virtual void OnDrawGizmos()
 	    {
 			Gizmos.DrawRay(_groundCheck.position, Vector3.down*0.25f);
@@ -128,6 +126,7 @@ namespace Assets.Scripts.PlayerScripts
 			}
 			Gizmos.DrawSphere(_groundCheck.position, GroundedRadius);
 		}
+		*/
 
 	    protected void FixedUpdate()
 	    {
@@ -148,8 +147,8 @@ namespace Assets.Scripts.PlayerScripts
 
 		    _animator.SetBool("Ground", Grounded);
 
-		    // Set the vertical animation
-		    _animator.SetFloat("vSpeed", _rigidbody2D.velocity.y);
+			// TODO this is something thats going to have to be done
+			_animator.SetFloat("vSpeed", 0);
 
 			Glide();
 
@@ -160,12 +159,10 @@ namespace Assets.Scripts.PlayerScripts
 		private void Glide()
 		{
 			// GLIDING
-			if (!Grounded && _fire1 && _playerItems.HasGliderEquipped && _rigidbody2D.velocity.y < 0 &&
-				!InWindZone)
+			if (!Grounded && _fire1 && _playerItems.HasGliderEquipped && _player.velocity.y < 0 && !InWindZone)
 			{
 				transform.GetChild(2).gameObject.SetActive(true);
-				_rigidbody2D.velocity = new Vector2(GlideBoost * transform.localScale.x, -GlideFallVelocity);
-				print(_rigidbody2D.velocity);
+				_player.velocity = new Vector2(GlideBoost * transform.localScale.x, -GlideFallVelocity);
 			}
 			else if (InWindZone && _fire1 && _playerItems.HasGliderEquipped)
 			{
@@ -173,88 +170,27 @@ namespace Assets.Scripts.PlayerScripts
 			}
 			else
 			{
-				transform.GetChild(2).gameObject.SetActive(false);
-			}
-			if (_rigidbody2D.velocity.magnitude > MaxRigidBodySpeed)
-			{
-				_rigidbody2D.velocity = _rigidbody2D.velocity.normalized * MaxRigidBodySpeed;
+				transform.GetChild(2).gameObject.SetActive(false);				
 			}
 		}
 
-		public void Move(float move, bool jump)
+		public void Move(float move)
 	    {
-            //only control the player if grounded or airControl is turned on and not dashing
-            if ((Grounded || AirControl) && !InVerticalWindZone && !_dashRight && !_dashLeft)
+            // If the input is moving the player right and the player is facing left...
+            if (move > 0 && !_facingRight)
             {
-                // The Speed animator parameter is set to the absolute value of the horizontal input.
-                _animator.SetFloat("Speed", Mathf.Abs(move));
-
-                // Move the character
-	            if (_speed < MaxSpeed && Math.Abs(move) > 0) {
-		            _speed = _speed + Acceleration * Time.deltaTime;
-	            }
-	            else if(Math.Abs(move) < 0.01) {
-		            _speed = 0;
-	            }
-	            _rigidbody2D.velocity = new Vector2(move*_speed, _rigidbody2D.velocity.y);
-
-                // If the input is moving the player right and the player is facing left...
-                if (move > 0 && !_facingRight)
-                {
-                    // ... flip the player.
-                    Flip();
-                }
-                    // Otherwise if the input is moving the player left and the player is facing right...
-                else if (move < 0 && _facingRight)
-                {
-                    // ... flip the player.
-                    Flip();
-                }
+                // ... flip the player.
+                Flip();
             }
-
-			// If the player should jump...
-			if ((Grounded && _currentAirTime < LateJumpTime) && jump && !InWindZone)
+                // Otherwise if the input is moving the player left and the player is facing right...
+            else if (move < 0 && _facingRight)
             {
-                Grounded = false;
-				Jump();
-	            _canDoubleJump = true;
+                // ... flip the player.
+                Flip();
             }
-			else if (_canDoubleJump && jump && !InWindZone && _playerItems.HasDoubleJumpEquipped)
-			{
-				_canDoubleJump = false;
-				Jump();	
-				_currentJumpTime = JumpHoldTime;
-				_currentDashTime = 0.0f;                    // Reset the dash on double jump
-			}
-
-			if (Input.GetButtonUp("Fire1"))
-			{
-				_currentJumpTime = 0;
-			}
-
-			// Reset the JumpHold on grounded
-			if (Grounded)
-	        {
-		        _currentJumpTime = JumpHoldTime;
-	        }
-	        else
-	        {
-		        _currentAirTime += Time.deltaTime;
-	        }
-			if (_currentJumpTime > 0 && Input.GetButton("Fire1") && !Grounded )
-			{
-				_rigidbody2D.AddForce(new Vector3(0.0f, HoldForceMultiplier));
-				_currentJumpTime -= Time.deltaTime;
-			}
+           
 		}
 
-		private void Jump()
-		{
-			_animator.SetBool("Ground", false);
-			_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
-			_rigidbody2D.AddForce(new Vector2(0f, JumpForce));
-			SoundManager.Instance.PlayEffect(1);
-		}
 
 		private void Flip()
         {
@@ -280,11 +216,11 @@ namespace Assets.Scripts.PlayerScripts
 			{
 				if (_dashLeft)
 				{
-					_rigidbody2D.velocity = Vector2.Lerp( new Vector2( 0, 0 ), new Vector2( -1 * DashSpeed, 0 ), Time.deltaTime );
+					_player.velocity = (Vector2.Lerp( new Vector2( 0, 0 ), new Vector2( -1 * DashSpeed, 0 ), Time.deltaTime ));
 				}
 				else if (_dashRight)
 				{
-					_rigidbody2D.velocity = Vector2.Lerp( new Vector2( 0, 0 ), new Vector2( DashSpeed, 0 ), Time.deltaTime );
+					_player.velocity = (Vector2.Lerp( new Vector2( 0, 0 ), new Vector2( DashSpeed, 0 ), Time.deltaTime ));
 				}
 				_currentDashTime += DashStoppingSpeed;
 			}

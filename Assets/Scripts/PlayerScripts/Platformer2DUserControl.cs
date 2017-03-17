@@ -1,44 +1,73 @@
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 namespace Assets.Scripts.PlayerScripts
 {
-    [RequireComponent(typeof (PlatformerCharacter2D))]
+	[RequireComponent(typeof (PlatformerCharacter2D))]
     public class Platformer2DUserControl : MonoBehaviour
     {
-        /// <summary>
-        /// Reference to the player controller script
-        /// </summary>
-        private PlatformerCharacter2D _character;
-
         /// <summary>
         /// If the player should jump or not
         /// </summary>
         private bool _jump;
 
+		/// <summary>
+		/// Dash command button
+		/// </summary>
+		private Command DashLeftButton;
 
-        private void Awake()
+		/// <summary>
+		/// Dash command button
+		/// </summary>
+		private Command DashRightButton;
+
+		/// <summary>
+		/// Jump command button
+		/// </summary>
+		private Command JumpButton;
+
+		/// <summary>
+		/// Horizontal Axis command
+		/// </summary>
+		private Command HorizontalAxis;
+
+		/// <summary>
+		/// Vertical axis command
+		/// </summary>
+		private Command VerticalAxis;
+
+		/// <summary>
+		/// Interaction button command
+		/// </summary>
+		private Command InteractButton;
+
+
+		private void Awake()
         {
-            _character = GetComponent<PlatformerCharacter2D>();
+			DashLeftButton = new DashCommand(DashDirection.Left);
+			DashRightButton = new DashCommand(DashDirection.Right);
         }
 
 
         private void Update()
         {
-            if (!_jump)
-            {
-                // Read the jump input in Update so button presses aren't missed.
-                _jump = CrossPlatformInputManager.GetButtonDown("Fire1");
-            }
-        }
+			if (Input.GetButton("Fire2"))
+			{
+				InteractButton.Execute(gameObject);
+			}
+			else if (Input.GetButtonDown("DashLeft"))
+			{
+				DashLeftButton.Execute(gameObject);
+			}
+			else if (Input.GetButtonDown("DashRight"))
+			{
+				DashRightButton.Execute(gameObject);
+			}
+		}
 
 
         private void FixedUpdate()
         {
-            var h = CrossPlatformInputManager.GetAxis("Horizontal");
-            // Pass all parameters to the character control script.
-            _character.Move(h, _jump);
-            _jump = false;
+
         }
     }
 }

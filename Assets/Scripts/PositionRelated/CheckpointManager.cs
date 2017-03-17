@@ -27,7 +27,7 @@ namespace Assets.Scripts.PositionRelated
 			{
 				Start();
 			}
-			if (_playerReference.GetComponent<PlatformerCharacter2D>().Grounded 
+			if ( _playerReference.GetComponent<PlatformerCharacter2D>().Grounded 
 				&& Input.GetButtonDown("Fire1") )
 			{
 				CurrentCheckpoitPos = _playerReference.transform.position;

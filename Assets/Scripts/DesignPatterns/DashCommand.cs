@@ -1,16 +1,32 @@
 ﻿using System;
+using Assets.Scripts.PlayerScripts;
 using UnityEngine;
+
+public enum DashDirection
+{
+	Left,
+	Right
+};
 
 public class DashCommand : Command
 {
-	public override void Execute(GameObject actor)
+	private DashDirection _direction;
+
+	public DashCommand(DashDirection direction)
 	{
-		Dash();
+		_direction = direction;
 	}
 
-
-	private void Dash()
+	public override void Execute(GameObject actor)
 	{
+		Dash(actor);
+	}
+
+	private PlatformerCharacter2D _player;
+	private void Dash(GameObject actor)
+	{
+		if (_player == null) _player = actor.GetComponent<PlatformerCharacter2D>();
+		_player.CheckDash(_direction);
 
 	}
 }

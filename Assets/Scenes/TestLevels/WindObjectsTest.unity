@@ -303,10 +303,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1664304694866568, guid: 2bd0c1d3bc0c6134da504bd1249cfc2d, type: 2}
-      propertyPath: m_Name
-      value: Particle System
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2bd0c1d3bc0c6134da504bd1249cfc2d, type: 2}
   m_IsPrefabParent: 0
@@ -852,7 +848,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4759508125048098, guid: 52cc4dab45017ae4e9c48446431f0e2f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.5102558
+      value: 1.77
       objectReference: {fileID: 0}
     - target: {fileID: 4759508125048098, guid: 52cc4dab45017ae4e9c48446431f0e2f, type: 2}
       propertyPath: m_LocalPosition.z

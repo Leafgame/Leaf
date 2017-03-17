@@ -53,16 +53,18 @@ namespace Assets.Scripts.WindScripts
 
 		public virtual void ApplyWindPhysics(GameObject actor)
 		{
+			var rigidBody2D = actor.GetComponent<Rigidbody2D>();
+
 			Vector3 position = transform.position;
 			Vector3 targetPosition = actor.transform.position;
 			Vector3 direction = targetPosition - position;
 			direction.Normalize();
-
+			WindDirection.Normalize();
 			Vector3 velocity = WindDirection * WindForce * Time.deltaTime + 
 							direction * Mathf.PerlinNoise(direction.x, direction.y) * Time.deltaTime;
 
-			actor.transform.position += velocity;
-			
+			rigidBody2D.velocity = (velocity)*100;
+			print(rigidBody2D.velocity);
 		}
 
         public void Update()
@@ -112,7 +114,6 @@ namespace Assets.Scripts.WindScripts
 				if (!player.WindNegationActive)
 				{
 					player.InWindZone = true;
-					//var rb = col.GetComponent<Rigidbody2D>().gravityScale = 0;
 				}
 			}
 
@@ -131,16 +132,7 @@ namespace Assets.Scripts.WindScripts
 
 		private void TemporarlyDisableEnableGravity(Collider2D col, bool enable)
 		{
-			var rb = col.GetComponent<Rigidbody2D>();
-
-			if (enable)
-			{
-				rb.isKinematic = false;
-			}
-			else
-			{
-				rb.isKinematic = true;
-			}
+			
 		}
 
 		private static bool HeavyObjectCheck(Collider2D col)

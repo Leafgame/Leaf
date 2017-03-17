@@ -14,6 +14,9 @@ namespace Assets.Scripts
         /// </summary>
 		public GameObject Prefab;
 
+		/// <summary>
+		/// Spawn the player only if it does not already exist
+		/// </summary>
 		public void Awake ()
 		{
             var player = GameObject.FindGameObjectWithTag("Player");
