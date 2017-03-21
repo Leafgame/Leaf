@@ -39,7 +39,7 @@ namespace Assets.Scripts.WindScripts
 			Vector3 direction = targetPosition - position;
 			direction.Normalize();
 			WindDirection.Normalize();
-			Vector3 velocity = 
+			Vector2 velocity = 
 				WindDirection * WindForce * Time.deltaTime +
 				direction * Mathf.PerlinNoise(direction.x, direction.y) * Time.deltaTime;
 
@@ -73,7 +73,6 @@ namespace Assets.Scripts.WindScripts
 		private void ApplyPlayerWind(Player player)
 		{
 			var velocity = CalculateVelocity(player.transform);
-			velocity.x = (transform.position.x - player.transform.position.x) * Time.deltaTime;
 			player.velocity = (velocity*100);
 		}
 
