@@ -12,8 +12,9 @@ namespace Assets.Scripts.WindScripts
 	{
 		private Vector3 _windDirection;
 
-		public new void FixedUpdate()
+		public void FixedUpdate()
 		{
+			print("LOW GRAV");
 			var windObjects = GetComponent<WindObject>();
 
 			foreach (var col in windObjects.ObjectsInWindZone)
@@ -39,8 +40,7 @@ namespace Assets.Scripts.WindScripts
 			base.OnTriggerEnter2D(col);
 			if (col.tag == "Player")
 			{
-				col.GetComponent<PlatformerCharacter2D>().InVerticalWindZone = true;
-				col.GetComponent<PlatformerCharacter2D>().AirControl = false;
+				col.GetComponent<PlayerItemsController>().InVerticalWindZone = true;
 			}
 		}
 
@@ -49,16 +49,8 @@ namespace Assets.Scripts.WindScripts
 			base.OnTriggerExit2D(col);
 			if (col.tag == "Player")
 			{
-				col.GetComponent<PlatformerCharacter2D>().InVerticalWindZone = false;
-				col.GetComponent<PlatformerCharacter2D>().AirControl = true;
-				StartCoroutine("EnableAirControll", col);
+				col.GetComponent<PlayerItemsController>().InVerticalWindZone = false;
 			}
-		}
-
-		public IEnumerator EnableAirControll(Collider2D col)
-		{
-			yield return new WaitForSeconds(1.5f);
-			col.GetComponent<PlatformerCharacter2D>().AirControl = true;
 		}
 	}
 }

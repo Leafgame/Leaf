@@ -22,10 +22,10 @@ public class DashCommand : Command
 		Dash(actor);
 	}
 
-	private PlatformerCharacter2D _player;
+	private PlayerItemsController _player;
 	private void Dash(GameObject actor)
 	{
-		if (_player == null) _player = actor.GetComponent<PlatformerCharacter2D>();
+		if (_player == null) _player = actor.GetComponent<PlayerItemsController>();
 		_player.CheckDash(_direction);
 
 	}

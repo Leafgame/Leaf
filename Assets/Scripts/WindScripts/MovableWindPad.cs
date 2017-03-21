@@ -8,7 +8,6 @@ namespace Assets.Scripts.Misc
 		public CircleCollider2D GrabCircle;
 		public float GrabRadius = 3f;
 
-		private Vector3 _distanceToObject;
 		private Transform _playerReference;
         private Rigidbody2D _rigidbody2d;
 
@@ -17,7 +16,7 @@ namespace Assets.Scripts.Misc
 			GrabCircle = GetComponent<CircleCollider2D>();
 			GrabCircle.radius = GrabRadius;
 			GrabCircle.isTrigger = true;
-            _rigidbody2d = GetComponent<Rigidbody2D>();
+            _rigidbody2d = transform.parent.GetComponent<Rigidbody2D>();
 		}
 
 		public void Update()
@@ -28,33 +27,14 @@ namespace Assets.Scripts.Misc
 			}
 			var diffVec = ( _playerReference.position - transform.position );
 			var distance = diffVec.magnitude;
-            if (Input.GetButtonDown("Fire2") && distance < GrabRadius)
-            {
-                _distanceToObject = _playerReference.position - transform.position;
-            }
 
             if (Input.GetButton("Fire2") && distance < GrabRadius)
 			{
-                //non physics system transform if that ever comes in handy
-                //transform.Translate(diffVec - _distanceToObject);
-                var rb = _playerReference.GetComponent<Rigidbody2D>();
-               _rigidbody2d.velocity = new Vector2(rb.velocity.x, 0);
+				var player = _playerReference.GetComponent<Player>();
+               _rigidbody2d.velocity = new Vector2(player.velocity.x, 0);
 			}
 		}
 
-		public virtual void Move(Vector3 distance)
-		{
-		}
-			
-		public void OnTriggerStay2D(Collider2D col)
-		{
-
-		}
-
-	    public void OnTriggerEnter2D(Collider2D col)
-	    {
-	        
-	    }
 
         public void OnTriggerExit2D(Collider2D col)
         {

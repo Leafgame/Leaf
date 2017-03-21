@@ -19,55 +19,34 @@ namespace Assets.Scripts.WindScripts
 		public BoxCollider2D WindTrigger;
 		public bool IsActive = true;
 
-		public readonly List<GameObject> ObjectsInWindZone = new List<GameObject>();
+		public List<GameObject> ObjectsInWindZone = new List<GameObject>();
 
 		private float _maxBoxSize;
-
-        private Vector3 _velocity;
-        private float _gravityPull;
-        private float _initalMomentum;
-
-
-		public virtual void ApplyWindPhysicsOld(GameObject gO)
-		{
-			var rigidBody2D = gO.GetComponent<Rigidbody2D>();
-			var windSource = rigidBody2D.transform.position - transform.position;
-			var distanceToWindSource = windSource.magnitude;
-
-            _velocity = WindDirection * WindForce * Time.fixedDeltaTime;
-
-            if(WindDirection.x < 0 && Input.GetAxis("Horizontal") > 0.0 && gO.tag == "Player")
-            {
-                _velocity = _velocity + new Vector3(-10, 0, 0);
-            }
-            if (WindDirection.x > 0 && Input.GetAxis("Horizontal") < 0.0 && gO.tag == "Player")
-            {
-                _velocity = _velocity + new Vector3(10, 0, 0);
-
-            }
-            
-            rigidBody2D.velocity = _velocity;
-
-
-        }
 
 		public virtual void ApplyWindPhysics(GameObject actor)
 		{
 			var rigidBody2D = actor.GetComponent<Rigidbody2D>();
 
+			var velocity = CalculateVelocity(actor.transform);
+
+			rigidBody2D.velocity = (velocity)*100;
+		}
+
+		private Vector2 CalculateVelocity(Transform target)
+		{
 			Vector3 position = transform.position;
-			Vector3 targetPosition = actor.transform.position;
+			Vector3 targetPosition = target.position;
 			Vector3 direction = targetPosition - position;
 			direction.Normalize();
 			WindDirection.Normalize();
-			Vector3 velocity = WindDirection * WindForce * Time.deltaTime + 
-							direction * Mathf.PerlinNoise(direction.x, direction.y) * Time.deltaTime;
+			Vector3 velocity = 
+				WindDirection * WindForce * Time.deltaTime +
+				direction * Mathf.PerlinNoise(direction.x, direction.y) * Time.deltaTime;
 
-			rigidBody2D.velocity = (velocity)*100;
-			print(rigidBody2D.velocity);
+			return velocity;
 		}
 
-        public void Update()
+		public void Update()
 		{
 			EnableTrigger();
             if (!IsActive) return;
@@ -76,12 +55,12 @@ namespace Assets.Scripts.WindScripts
 			{
 				if (rigidbodyObject.tag == "Player")
 				{
-					var character = rigidbodyObject.GetComponent<PlatformerCharacter2D>();
+					var character = rigidbodyObject.GetComponentInChildren<PlayerItemsController>();
 
 					if (!character.WindNegationActive)
 					{
 						// Apply force to player
-						ApplyWindPhysics(rigidbodyObject.gameObject);
+						ApplyPlayerWind(rigidbodyObject.GetComponent<Player>());
 					}
 				}
 				else // Apply force to all other objects
@@ -91,12 +70,19 @@ namespace Assets.Scripts.WindScripts
 			}
         }
 
-        protected virtual void EnableTrigger()
+		private void ApplyPlayerWind(Player player)
+		{
+			var velocity = CalculateVelocity(player.transform);
+			velocity.x = (transform.position.x - player.transform.position.x) * Time.deltaTime;
+			player.velocity = (velocity*100);
+		}
+
+		protected virtual void EnableTrigger()
         {
             WindTrigger.enabled = IsActive;
         }
 
-        public void Start()
+        public void Awake()
 		{
 			WindTrigger = GetComponent<BoxCollider2D>();
 			WindTrigger.isTrigger = true;
@@ -109,8 +95,7 @@ namespace Assets.Scripts.WindScripts
 			if (!IsActive) return;
 			if (col.tag == "Player")
 			{
-				col.GetComponent<Animator>().SetBool("Ground", false);
-				var player = col.GetComponent<PlatformerCharacter2D>();
+				var player = col.GetComponentInChildren<PlayerItemsController>();
 				if (!player.WindNegationActive)
 				{
 					player.InWindZone = true;
@@ -127,12 +112,6 @@ namespace Assets.Scripts.WindScripts
 			if(!ObjectsInWindZone.Contains(col.gameObject))
 				ObjectsInWindZone.Add(col.gameObject);
 
-			TemporarlyDisableEnableGravity(col, false);
-		}
-
-		private void TemporarlyDisableEnableGravity(Collider2D col, bool enable)
-		{
-			
 		}
 
 		private static bool HeavyObjectCheck(Collider2D col)
@@ -150,8 +129,7 @@ namespace Assets.Scripts.WindScripts
 			if (!IsActive) return;
 			if (col.tag == "Player")
 			{
-				col.GetComponent<PlatformerCharacter2D>().InWindZone = false;
-                print("Player leaves");
+				col.GetComponentInChildren<PlayerItemsController>().InWindZone = false;
 			}
 
 			if (HeavyObjectCheck(col))
@@ -165,19 +143,26 @@ namespace Assets.Scripts.WindScripts
 			if(ObjectsInWindZone.Contains(col.gameObject))
 				ObjectsInWindZone.Remove(col.gameObject);
 
-			TemporarlyDisableEnableGravity(col, true);
 			AddExitForce(col);
 		}
 
 		private void AddExitForce(Collider2D col)
 		{
-			var rb = col.GetComponent<Rigidbody2D>();
 			Vector3 position = transform.position;
 			Vector3 targetPosition = col.transform.position;
 			Vector3 direction = targetPosition - position;
 			direction.Normalize();
 
-			rb.velocity = (direction * ExitForce);
+			if(col.tag == "Player")
+			{
+				var controller = col.GetComponent<Player>();
+				controller.velocity = (direction * ExitForce);
+			}
+			else
+			{
+				var rb = col.GetComponent<Rigidbody2D>();
+				rb.velocity = (direction * ExitForce);
+			}
 		}
 
 		public void OnTriggerStay2D(Collider2D col)
@@ -196,7 +181,7 @@ namespace Assets.Scripts.WindScripts
 
 		public static bool RigidbodyCheck(Collider2D col)
 		{
-			return col.GetComponent<Rigidbody2D>() != null;
+			return col.GetComponent<Rigidbody2D>() != null || col.GetComponentInChildren<Rigidbody2D>() != null;
 		}
 
 		public void FixWindZoneArea(Collider2D col, Vector2 size)

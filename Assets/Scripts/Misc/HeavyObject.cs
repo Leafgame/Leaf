@@ -8,13 +8,10 @@ using UnityEngine;
 
 public class HeavyObject : MonoBehaviour
 {
-	private Rigidbody2D _rigidbody2D;
 	public Vector3 InitialPosition;
-	public float PushForce = 100f;
 
-	public void Start( )
+	public void Start()
 	{
-		_rigidbody2D = GetComponent<Rigidbody2D>();
 		InitialPosition = transform.position;
 	}
 
@@ -24,16 +21,16 @@ public class HeavyObject : MonoBehaviour
 		set;
 	}
 
-	public virtual void MoveObject( )
+	public virtual void MoveObject()
 	{
 		throw new System.NotImplementedException();
 	}
 
-	protected virtual void OnCollisionEnter2D( Collision2D col )
+	protected virtual void OnCollisionEnter2D(Collision2D col)
 	{
 		if (col.transform.tag == "Player")
-		{	
-			print( col.relativeVelocity.x );
+		{
+			print(col.relativeVelocity.x);
 		}
 	}
 

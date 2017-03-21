@@ -5,11 +5,11 @@ public class JumpCommand : Command
 {
 	public override void Execute(GameObject actor) { Jump(actor); }
 
-	private PlatformerCharacter2D _player;
+	private PlayerItemsController _player;
 
 	private void Jump(GameObject actor)
 	{
-		if (_player == null) _player = actor.GetComponent<PlatformerCharacter2D>();
+		if (_player == null) _player = actor.GetComponent<PlayerItemsController>();
 		//_player.Jump(true);
 	}
 }

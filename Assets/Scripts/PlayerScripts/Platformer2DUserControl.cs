@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.PlayerScripts
 {
-	[RequireComponent(typeof (PlatformerCharacter2D))]
+	[RequireComponent(typeof (PlayerItemsController))]
     public class Platformer2DUserControl : MonoBehaviour
     {
         /// <summary>
@@ -45,6 +45,7 @@ namespace Assets.Scripts.PlayerScripts
         {
 			DashLeftButton = new DashCommand(DashDirection.Left);
 			DashRightButton = new DashCommand(DashDirection.Right);
+			InteractButton = new InteractionCommand();
         }
 
 

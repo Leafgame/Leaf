@@ -8,15 +8,12 @@ namespace Assets.Scripts
 	public class GrabRope : MonoBehaviour
 	{
 		private bool _grabRope;
-		private ContactPoint2D _contactPoint2D;
 		private Transform _playerTransform;
 		public void OnCollisionEnter2D(Collision2D col)
 		{
-			print("Hey there");
 			if (col.transform.tag == "Player" && Input.GetButton("Fire2"))
 			{
 				_grabRope = true;
-				_contactPoint2D = col.contacts[0];
 				_playerTransform = col.transform;
 			}
 		}

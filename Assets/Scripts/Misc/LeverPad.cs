@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Assets.Scripts.WindScripts;
 using UnityEngine;
 
 namespace Assets.Scripts.Misc
 {
-    [RequireComponent(typeof(Collider2D))]
+	[RequireComponent(typeof(Collider2D))]
 	public class LeverPad : MonoBehaviour
 	{
 		public List<GameObject> LeverConnectedWindObjects = new List<GameObject>();
@@ -14,6 +13,9 @@ namespace Assets.Scripts.Misc
 
 	    private bool _playerInRangeOfLever;
 	    private bool _leverReady;
+		public float InteractRadius;
+
+		private Transform _playerReference;
 
         public enum LeverState
         { 
@@ -28,9 +30,17 @@ namespace Assets.Scripts.Misc
 	        _leverReady = true;
 	    }
 
-	    private void Update()
+	    public void Update()
 	    {
-	        if ( Input.GetButtonDown("Fire2") && _playerInRangeOfLever )
+
+			if (_playerReference == null)
+			{
+				_playerReference = GameObject.FindGameObjectWithTag("Player").transform;
+			}
+			var diffVec = (_playerReference.position - transform.position);
+			var distance = diffVec.magnitude;
+
+			if ( Input.GetButtonDown("Fire2") && distance < InteractRadius )
 	        {
 	            if (_animator.GetBool("LeverState") && _leverReady)
 	            {
@@ -102,22 +112,6 @@ namespace Assets.Scripts.Misc
         {
             _leverReady = true;
         }
-
-        private void OnTriggerEnter2D(Collider2D col)
-	    {
-	        if (col.tag == "Player")
-	        {
-	            _playerInRangeOfLever = true;
-	        }
-	    }
-
-	    private void OnTriggerExit2D(Collider2D col)
-	    {
-	        if (col.tag == "Player")
-	        {
-	            _playerInRangeOfLever = false;
-	        }
-	    }
 
 	}
 }

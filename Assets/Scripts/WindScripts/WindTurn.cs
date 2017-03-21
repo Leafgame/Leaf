@@ -16,7 +16,7 @@ namespace Assets.Scripts.WindScripts
 		public Direction CurrentDirection = Direction._up;
 
 		private BoxCollider2D _windZone;
-        public bool Up;
+		public bool Up;
         public bool Down;
         public bool Left;
         public bool Right;
@@ -24,27 +24,25 @@ namespace Assets.Scripts.WindScripts
 		private float _sizeX;
 		private float _sizeY;
 
-		protected new virtual void Start()
+		public void Start()
 		{
-			base.Start();
 			_windZone = GetComponent<BoxCollider2D>();
 			_sizeX = _windZone.size.x;
 			_sizeY = _windZone.size.y;
 		}
 
-		protected new virtual void Update()
+		public void LateUpdate()
 		{
-			base.Update();
 			switch (CurrentDirection)
 			{
 				case Direction._left:
-					WindDirection = new Vector3(-WindForce,0f,0f);
+					WindDirection = new Vector3(-WindForce, 0f, 0f);
 					break;
 				case Direction._right:
-					WindDirection = new Vector3(WindForce, 0f,0f);
+					WindDirection = new Vector3(WindForce, 0f, 0f);
 					break;
 				case Direction._down:
-					WindDirection = new Vector3(0f,-WindForce, 0f);
+					WindDirection = new Vector3(0f, -WindForce, 0f);
 					break;
 				case Direction._up:
 					WindDirection = new Vector3(0f, WindForce, 0f);

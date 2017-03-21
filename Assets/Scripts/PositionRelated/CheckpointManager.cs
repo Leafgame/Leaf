@@ -15,10 +15,16 @@ namespace Assets.Scripts.PositionRelated
         /// </summary>
 		private GameObject _playerReference;
 
+		/// <summary>
+		/// Reference to the controller so we know the player is located in a safe space
+		/// </summary>
+		private Controller2D _controller;
+
 		protected virtual void Start()
 		{
 			_playerReference = GameObject.FindGameObjectWithTag("Player");
 			CurrentCheckpoitPos = _playerReference.transform.position;
+			_controller = _playerReference.GetComponent<Controller2D>();
 		}
 
 		protected virtual void Update()
@@ -27,7 +33,7 @@ namespace Assets.Scripts.PositionRelated
 			{
 				Start();
 			}
-			if ( _playerReference.GetComponent<PlatformerCharacter2D>().Grounded 
+			if ( _controller.collisions.below
 				&& Input.GetButtonDown("Fire1") )
 			{
 				CurrentCheckpoitPos = _playerReference.transform.position;

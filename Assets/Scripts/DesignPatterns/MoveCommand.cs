@@ -5,7 +5,7 @@ using Assets.Scripts.PlayerScripts;
 
 public class MoveCommand : Command
 {
-	private PlatformerCharacter2D _player;
+	private PlayerItemsController _player;
 
 	public override void Execute(GameObject actor)
 	{
@@ -14,8 +14,8 @@ public class MoveCommand : Command
 
 	private void Move(GameObject actor)
 	{
-		if (_player == null) _player = actor.GetComponent<PlatformerCharacter2D>();
+		if (_player == null) _player = actor.GetComponent<PlayerItemsController>();
 		var h = Input.GetAxis("Horizontal");
-		_player.Move(h);
+		_player.FacingDirection(h);
 	}
 }
