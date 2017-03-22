@@ -1,10 +1,15 @@
-﻿using Assets.Scripts.Misc;
+﻿using System.Collections;
+using Assets.Scripts.Misc;
 using UnityEngine;
 
 namespace Assets.Scripts.WindScripts
 {
 	public class FloatingStairs : FloatObject
 	{
+		public Collider2D platform;
+		private int horizontalRayCount;
+		private int topRayCount;
+
 		public virtual float Height
 		{
 			get;
@@ -31,28 +36,64 @@ namespace Assets.Scripts.WindScripts
 		protected new void Start()
 		{
 			IsWindActive = false;
+
 		}
 
-		protected void OnCollisionStay2D(Collision2D col)
+		protected void Update()
 		{
-			foreach (var contact in col.contacts)
+			if (Input.GetAxis("Vertical") > 0.0)
 			{
-				Debug.DrawRay(contact.point, contact.normal, Color.white);
-			}
-			if (col.transform.tag == "Player" && Input.GetAxis("Vertical") > 0.0)
-			{
-				GetComponent<Collider2D>().isTrigger = true;
-			
+				platform.gameObject.layer = 2;
+				var box = GetComponent<BoxCollider2D>();
+				box.enabled = false;
+				StartCoroutine("EnableBox", box);
 			}
 		}
 
+		protected void OnTriggerStay2D(Collider2D col)
+		{
+			if(col.tag == "Player")
+			{
+				var player = col.GetComponent<Player>();
+				player.velocity = new Vector3(player.velocity.x, 7, 0);
+
+			}
+		}
+
+		protected void OnTriggerEnter2D(Collider2D col)
+		{
+			if (col.tag == "Player")
+			{
+				var controller = col.GetComponent<Controller2D>();
+
+				horizontalRayCount = controller.horizontalRayCount;
+				topRayCount = controller.verticalRayCount;
+				controller.horizontalRayCount = 0;
+				if (!controller.collisions.below)
+				{
+					controller.verticalRayCount = 0;
+				}
+			}
+		}
 		protected void OnTriggerExit2D(Collider2D col)
 		{
 			if (col.tag == "Player")
 			{
-				GetComponent<Collider2D>().isTrigger = false;
-			}
-		} 
+				var player = col.GetComponent<Player>();
+				var controller = col.GetComponent<Controller2D>();
+
+				
+				controller.horizontalRayCount = horizontalRayCount;
+				controller.verticalRayCount = topRayCount;
+				platform.gameObject.layer = 0;
+			}	
+		}
+
+		public IEnumerator EnableBox(BoxCollider2D box)
+		{
+			yield return new WaitForSeconds(1);
+			box.enabled = true;
+		}
 	}
 }
 

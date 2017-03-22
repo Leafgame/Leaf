@@ -14,7 +14,7 @@ namespace Assets.Scripts.PlayerScripts
         /// <summary>
         /// The speed at which the linear interpolation happens
         /// </summary>
-        public float LerpTime = 100.0f;
+        public float LerpTime = 1f;
 
         /// <summary>
         /// The speed at which you can manually move the camera
@@ -24,7 +24,7 @@ namespace Assets.Scripts.PlayerScripts
         /// <summary>
         /// The size of the orthographic camera in 16:9 aspect
         /// </summary>
-        public float CameraSize = 15f;
+        public float CameraSize = 8f;
 
         /// <summary>
         /// Maximum radius the camera can be away from the player
@@ -34,7 +34,7 @@ namespace Assets.Scripts.PlayerScripts
         /// <summary>
         /// The amount which the velocty is being extrapolated to put the camera ahead of the player
         /// </summary>
-	    public float ExtrapolationAmout = 10.0f;
+	    public float ExtrapolationAmout = 1f;
 
         /// <summary>
         /// The maximum anmout the player can move vertically before the camera needs to verically reposition
@@ -63,14 +63,14 @@ namespace Assets.Scripts.PlayerScripts
         private bool _freeMovingCamera;
 
         /// <summary>
-        /// Rigidbody2D reference to the player to be able to extrapolate the camera based on velocity
+        /// Player reference to the player to be able to extrapolate the camera based on velocity
         /// </summary>
-		private Rigidbody2D _rigidbody2D;
+		private Player _player;
 
 
 		public void Start()
         {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
+			_player = GetComponent<Player>();
             MainCameraView = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
             MainCameraView.orthographic = true;
             MainCameraView.orthographicSize = CameraSize;
@@ -108,7 +108,7 @@ namespace Assets.Scripts.PlayerScripts
             {
 				_referenceVec = GetCenterOfPlayerWithCorrectZCamPos();
 
-	            var interpolatedVec = new Vector3(_rigidbody2D.velocity.x * ExtrapolationAmout + _referenceVec.x, MainCameraView.transform.position.y, -20);
+	            var interpolatedVec = new Vector3(_player.velocity.x * ExtrapolationAmout + _referenceVec.x, MainCameraView.transform.position.y, -20);
 				MoveObject(MainCameraView.transform, MainCameraView.transform.position, interpolatedVec, LerpTime);
 			}
 
@@ -146,18 +146,18 @@ namespace Assets.Scripts.PlayerScripts
 
 		private bool PlayerNotFallingOrJumping()
 		{
-			return Mathf.Abs(_rigidbody2D.velocity.y) < 0.1f;
+			return Mathf.Abs(_player.velocity.y) < 0.1f;
 		}
 
 		private bool PlayerIsMoving()
 		{
-			return (Math.Abs(_rigidbody2D.velocity.x) > 0.1 || Math.Abs(_rigidbody2D.velocity.y) > 0.1);
+			return (Math.Abs(_player.velocity.x) > 0.1 || Math.Abs(_player.velocity.y) > 0.1);
 		}
 
 		private bool PlayerIsStandingStill()
 		{
-			return (Math.Abs(_rigidbody2D.velocity.x) < 0.1 && 
-					Math.Abs(_rigidbody2D.velocity.y) < 0.1) && 
+			return (Math.Abs(_player.velocity.x) < 0.1 && 
+					Math.Abs(_player.velocity.y) < 0.1) && 
 				   (Math.Abs(Input.GetAxis("VerticalCamera")) > 0.1 || 
 				    Math.Abs(Input.GetAxis("HorizontalCamera")) > 0.1);
 		}

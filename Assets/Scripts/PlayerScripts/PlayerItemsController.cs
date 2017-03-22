@@ -97,7 +97,7 @@ namespace Assets.Scripts.PlayerScripts
 
 		public void CheckDash(DashDirection direction)
 		{
-			if (!_controller.collisions.below && _playerItems.HasAirDashEquipped && !_dashLeft && !_dashRight)
+			if (!_controller.collisions.below && _playerItems.HasAirDashEquipped && !_dashLeft && !_dashRight && !_gliding)
 			{
 				var facing = transform.localScale.x < 0 ? -1 : 1;
 				if (direction == DashDirection.Right)

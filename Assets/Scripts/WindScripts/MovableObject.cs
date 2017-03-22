@@ -2,10 +2,8 @@
 
 namespace Assets.Scripts.Misc
 {
-	[RequireComponent(typeof(CircleCollider2D))]
-	public class MovableWindPad : MonoBehaviour
+	public class MovableObject : MonoBehaviour
 	{
-		public CircleCollider2D GrabCircle;
 		public float GrabRadius = 3f;
 
 		private Transform _playerReference;
@@ -13,18 +11,15 @@ namespace Assets.Scripts.Misc
 
 		public void Start()
 		{
-			GrabCircle = GetComponent<CircleCollider2D>();
-			GrabCircle.radius = GrabRadius;
-			GrabCircle.isTrigger = true;
-            _rigidbody2d = transform.parent.GetComponent<Rigidbody2D>();
-		}
-
-		public void Update()
-		{
+			_rigidbody2d = GetComponentInParent<Rigidbody2D>();
 			if (_playerReference == null)
 			{
 				_playerReference = GameObject.FindGameObjectWithTag("Player").transform;
 			}
+		}
+
+		public void Update()
+		{
 			var diffVec = ( _playerReference.position - transform.position );
 			var distance = diffVec.magnitude;
 

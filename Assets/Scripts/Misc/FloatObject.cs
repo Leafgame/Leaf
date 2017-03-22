@@ -23,6 +23,10 @@ namespace Assets.Scripts.Misc
         /// The rigidbody of the floating object prefferbly its kinematic
         /// </summary>
 		protected Rigidbody2D Rigidbody2D;
+
+		/// <summary>
+		/// If the wind is currently active
+		/// </summary>
 		public bool IsWindActive = true;
 
 		protected virtual void Start()

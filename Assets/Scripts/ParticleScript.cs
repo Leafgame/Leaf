@@ -9,14 +9,13 @@ public class ParticleScript : MonoBehaviour
 	public void Start()
 	{
 		particleSystem = GetComponent<ParticleSystem>();
+		particleSystem.Play();
 	}
 
 	public void Update()
 	{
 		if (!WindObjectRef.IsActive)
 			particleSystem.Pause();
-		else
-			particleSystem.Play();
 	}
 
 }

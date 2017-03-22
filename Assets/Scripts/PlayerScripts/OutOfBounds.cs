@@ -40,8 +40,8 @@ namespace Assets.Scripts.PlayerScripts
         /// <param name="col"></param>
 		public void ResetVelocity(Collider2D col)
 		{
-			var rb = col.GetComponent<Rigidbody2D>();
-			rb.velocity = new Vector2(0, 0);
+			var player = col.GetComponent<Player>();
+			player.velocity = new Vector2(0, 0);
 		}
 	}
 }
