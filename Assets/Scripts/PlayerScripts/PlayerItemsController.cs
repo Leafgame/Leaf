@@ -3,21 +3,59 @@ using UnityEngine;
 
 namespace Assets.Scripts.PlayerScripts
 {
+	/// <summary>
+	/// The controller that handles the game logic for the equippable items
+	/// </summary>
 	public class PlayerItemsController : MonoBehaviour
 	{
+		#region public fields
+
 		[SerializeField] public bool InWindZone;                         // Whether or not the player is in a wind zone
 		[SerializeField] public bool InVerticalWindZone;
 
+		/// <summary>
+		/// The speed of the glider in air x direction
+		/// </summary>
 		public float GlideBoost = 50;
+
+		/// <summary>
+		/// The fallin speed of the gliders y direction
+		/// </summary>
 		public float GlideFallVelocity = 2.0f;
+
+		/// <summary>
+		/// Max amount of dash time (keep this low)
+		/// </summary>
 		public float MaxDashTime;
+
+		/// <summary>
+		/// Dash speed 
+		/// </summary>
 		public float DashSpeed;
+
+		/// <summary>
+		/// How fast the dash will stop must be lower than the dash time
+		/// </summary>
 		public float DashStoppingSpeed;
+
+		/// <summary>
+		/// Max wind negation time
+		/// </summary>
 		public float MaxWindNegationTime;
+
+		/// <summary>
+		/// Cooldown before windnegation can be used again
+		/// </summary>
 		public float WindNegationCooldown;
+
+		/// <summary>
+		/// If the windnegation is active or not
+		/// </summary>
 		public bool WindNegationActive;
 
-		private float _currentJumpTime;
+		#endregion
+
+		#region private fields
 		private float _currentWindNegationTime;
 		private float _currentWindNegCooldown;
 		private bool _canDoubleJump;
@@ -33,7 +71,7 @@ namespace Assets.Scripts.PlayerScripts
 		private bool _fire1;
 		private Controller2D _controller;
 		private Player _player;
-	
+		#endregion
 		protected void Awake()
 		{
 			_animator = GetComponent<Animator>();
@@ -42,10 +80,6 @@ namespace Assets.Scripts.PlayerScripts
 			_player = GetComponentInParent<Player>();
 		}
 
-		protected void Start()
-		{
-			Debug.Log(Environment.Version);
-		}
 
 		protected void Update()
 		{
