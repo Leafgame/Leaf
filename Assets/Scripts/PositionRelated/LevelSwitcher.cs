@@ -58,10 +58,6 @@ namespace Assets.Scripts
 			PlayerPrefs.SetInt("CurrentProgress", SceneManager.GetActiveScene().buildIndex);
 		}
 
-		public void Update()
-		{
-		}
-
 		public void LoadScene(string sceneName)
 		{
             if(UseLoadText)
@@ -87,7 +83,7 @@ namespace Assets.Scripts
 
 		public void OnTriggerStay2D(Collider2D col)
 		{
-			if (!_loading && Input.GetButtonDown("Vertical") && col.tag == "Player")
+			if (!_loading && col.tag == "Player")
 			{
 				LoadScene(NextSceneName);
 				_loading = true;

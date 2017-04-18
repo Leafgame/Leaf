@@ -33,8 +33,7 @@ namespace Assets.Scripts.PositionRelated
 			{
 				Start();
 			}
-			if ( _controller.collisions.below
-				&& Input.GetButtonDown("Fire1") )
+			if (Input.GetButtonDown("Fire1") && _controller.collisions.below )
 			{
 				CurrentCheckpoitPos = _playerReference.transform.position;
 			}
