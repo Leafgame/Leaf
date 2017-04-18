@@ -2,7 +2,7 @@
 {
     public class Selena : Character
     {
-        private float windPower
+        private float WindPower
         {
             get;
             set;

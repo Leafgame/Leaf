@@ -2,7 +2,7 @@
 {
     public class Marisa : Character
     {
-        public virtual int intelligence
+        public virtual int Intelligence
         {
             get;
             set;

@@ -2,6 +2,10 @@
 
 public class HeavyObject : MonoBehaviour
 {
+	/// <summary>
+	/// The initial position of the object when the game starts.
+	/// Use this to reset the postion of the object if it gets out of bounds
+	/// </summary>
 	public Vector3 InitialPosition;
 
 	public void Start()
