@@ -67,11 +67,11 @@ namespace Assets.Scripts.WindScripts
 				var controller = col.GetComponent<Controller2D>();
 
 				horizontalRayCount = controller.horizontalRayCount;
-				topRayCount = controller.verticalRayCount;
-				controller.horizontalRayCount = 0;
+				//topRayCount = controller.verticalRayCount;
+				//controller.horizontalRayCount = 0;
 				if (!controller.collisions.below)
 				{
-					controller.verticalRayCount = 0;
+					//controller.verticalRayCount = 0;
 				}
 			}
 		}
@@ -83,8 +83,8 @@ namespace Assets.Scripts.WindScripts
 				var controller = col.GetComponent<Controller2D>();
 
 				
-				controller.horizontalRayCount = horizontalRayCount;
-				controller.verticalRayCount = topRayCount;
+				//controller.horizontalRayCount = horizontalRayCount;
+				//controller.verticalRayCount = topRayCount;
 				platform.gameObject.layer = 0;
 			}	
 		}
