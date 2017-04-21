@@ -16,7 +16,6 @@ namespace Assets.Scripts.WindScripts
 
 		public void FixedUpdate()
 		{
-			//print("LOW GRAV");
 			var windObjects = GetComponent<WindObject>();
 
 			foreach (var col in windObjects.ObjectsInWindZone)

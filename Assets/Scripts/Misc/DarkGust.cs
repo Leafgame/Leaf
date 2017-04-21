@@ -3,13 +3,20 @@ using UnityEngine;
 
 namespace Assets.Scripts.Misc
 {
+	/// <summary>
+	/// Structure that keeps track of a linear steering model
+	/// </summary>
 	public struct SteeringOutput
 	{
 		public Vector3 Linear;
 		public float Angular;
 	}
 
-    public class DarkGust : Character
+	/// <summary>
+	/// A dark gust is a goasty like creature that uses linear steering 
+	/// between a predefined path to move around the world.
+	/// </summary>
+	public class DarkGust : Character
     {
 		/// <summary>
 		/// The target it's currently following
@@ -72,11 +79,19 @@ namespace Assets.Scripts.Misc
         private float HauntPower;
 
 
+		/// <summary>
+		/// TODO implement this
+		/// </summary>
         public virtual void Haunt()
         {
             
         }
 
+		/// <summary>
+		/// Gets the steering direction to the target transform.
+		/// </summary>
+		/// <param name="target"></param>
+		/// <returns name="SteeringOutput"></returns>
 	    public SteeringOutput GetSteering(Transform target)
 	    {
 			// Get the direction to the target
@@ -115,6 +130,11 @@ namespace Assets.Scripts.Misc
 		    return steering;
 	    }
 
+		/// <summary>
+		/// Gets the orientation to the target transform
+		/// </summary>
+		/// <param name="target"></param>
+		/// <returns></returns>
 	    public SteeringOutput GetOrientation(Transform target)
 	    {
 		    var steering = new SteeringOutput();
@@ -154,7 +174,11 @@ namespace Assets.Scripts.Misc
 		    return steering;
 	    }
 
-		public override void Update()
+
+		/// <summary>
+		/// Applying motion and iterating the path.
+		/// </summary>
+		public void Update()
 	    {
 		    var steering = GetSteering(Target);
 			var orientation = GetOrientation(Target);
@@ -173,16 +197,16 @@ namespace Assets.Scripts.Misc
 				Path.Add(temp);
 		    }
 
-			if (Velocity.x < 0 && _facingRight)
+			if (Velocity.x < 0 && _facing)
 			{
 				Flip();
-			} else if (Velocity.x > 0 && !_facingRight)
+			} else if (Velocity.x > 0 && !_facing)
 			{
 				Flip();
 			}
 	    }
 
-	    public override void Start()
+	    public void Start()
 	    {
 		    Target = Path[0];
 	    }

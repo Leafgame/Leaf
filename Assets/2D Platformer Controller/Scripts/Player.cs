@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private float accelerationTimeGrounded = .1f;
     private float moveSpeed = 6f;
 
+	public bool ToggleWallJump = false;
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour
 
     public void OnJumpInputDown()
     {
-        if (wallSliding)
+        if (wallSliding && ToggleWallJump)
         {
             if (wallDirX == directionalInput.x)
             {

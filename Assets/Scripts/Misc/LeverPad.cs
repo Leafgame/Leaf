@@ -7,16 +7,39 @@ namespace Assets.Scripts.Misc
 	[RequireComponent(typeof(Collider2D))]
 	public class LeverPad : MonoBehaviour
 	{
+		/// <summary>
+		/// The object which is affected by this lever
+		/// </summary>
 		public List<GameObject> LeverConnectedWindObjects = new List<GameObject>();
 
+		/// <summary>
+		/// The lever animator
+		/// </summary>
 	    private Animator _animator;
 
+		/// <summary>
+		/// Player range check bool
+		/// </summary>
 	    private bool _playerInRangeOfLever;
+
+		/// <summary>
+		/// Lever ready check bool
+		/// </summary>
 	    private bool _leverReady;
+
+		/// <summary>
+		/// The radius which to check if the player is inside.
+		/// </summary>
 		public float InteractRadius;
 
+		/// <summary>
+		/// The players world transform
+		/// </summary>
 		private Transform _playerReference;
 
+		/// <summary>
+		/// The lever states
+		/// </summary>
         public enum LeverState
         { 
 			Off,
@@ -62,6 +85,9 @@ namespace Assets.Scripts.Misc
 	        }
         }
 
+		/// <summary>
+		/// Turns the lever on/off based on what it was previously set to
+		/// </summary>
 		public virtual void FlipActiveState()
 		{
 			foreach (var windObject in LeverConnectedWindObjects)
@@ -79,6 +105,10 @@ namespace Assets.Scripts.Misc
 			}
 		}
 
+		/// <summary>
+		/// Swaps the windturn to the next possible wind direction
+		/// </summary>
+		/// <param name="windObject"></param>
         private void SwapWindTurnDirection(GameObject windObject)
         {
             var wturn = windObject.GetComponentInChildren<WindTurn>();
@@ -103,11 +133,17 @@ namespace Assets.Scripts.Misc
             }
         }
 
+		/// <summary>
+		/// Set lever ready
+		/// </summary>
         public void LeverStateOn()
 	    {
 	        _leverReady = true;
 	    }
 
+		/// <summary>
+		/// Set lever not ready
+		/// </summary>
         public void LeverStateOff()
         {
             _leverReady = true;

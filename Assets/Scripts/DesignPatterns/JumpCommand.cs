@@ -10,6 +10,5 @@ public class JumpCommand : Command
 	private void Jump(GameObject actor)
 	{
 		if (_player == null) _player = actor.GetComponent<PlayerItemsController>();
-		//_player.Jump(true);
 	}
 }

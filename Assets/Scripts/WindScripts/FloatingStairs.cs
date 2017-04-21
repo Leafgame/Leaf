@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.WindScripts
 {
+	/// <summary>
+	/// Floating stairs that uses 1 way colliders
+	/// </summary>
 	public class FloatingStairs : FloatObject
 	{
 		public Collider2D platform;
@@ -64,15 +67,6 @@ namespace Assets.Scripts.WindScripts
 		{
 			if (col.tag == "Player")
 			{
-				var controller = col.GetComponent<Controller2D>();
-
-				horizontalRayCount = controller.horizontalRayCount;
-				//topRayCount = controller.verticalRayCount;
-				//controller.horizontalRayCount = 0;
-				if (!controller.collisions.below)
-				{
-					//controller.verticalRayCount = 0;
-				}
 			}
 		}
 		protected void OnTriggerExit2D(Collider2D col)
@@ -81,10 +75,6 @@ namespace Assets.Scripts.WindScripts
 			{
 				var player = col.GetComponent<Player>();
 				var controller = col.GetComponent<Controller2D>();
-
-				
-				//controller.horizontalRayCount = horizontalRayCount;
-				//controller.verticalRayCount = topRayCount;
 				platform.gameObject.layer = 0;
 			}	
 		}

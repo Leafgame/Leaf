@@ -2,6 +2,9 @@
 
 namespace Assets.Scripts.Misc
 {
+	/// <summary>
+	/// An object that will simulate a floating object with Sin/Cos waves.
+	/// </summary>
 	public class FloatObject : MonoBehaviour
 	{
         /// <summary>
@@ -10,7 +13,7 @@ namespace Assets.Scripts.Misc
 	    public float FloatIntensity = 5.0f;
 
         /// <summary>
-        /// The offset of the given air/wind model underneath for so the langing will function properly
+        /// The offset of the given air/wind model underneath for so the landing will function properly
         /// </summary>
 		public float PlatformOffset = 1f;
 
@@ -29,12 +32,16 @@ namespace Assets.Scripts.Misc
 		/// </summary>
 		public bool IsWindActive = true;
 
+
 		protected virtual void Start()
 		{
 			InitalPosition = transform.position;
 			Rigidbody2D = GetComponent<Rigidbody2D>();
 		}
 
+		/// <summary>
+		/// Floating the object by changing the velocity of the rigidbody.
+		/// </summary>
 		public virtual void Float()
 		{
 		    var cosTheta = Mathf.Cos(Time.time) * FloatIntensity;

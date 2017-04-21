@@ -2,9 +2,12 @@
 
 namespace Assets.Scripts.Misc
 {
+	/// <summary>
+	/// Character super class contains the common logic between all characters
+	/// </summary>
     public class Character : MonoBehaviour
     {
-	    protected bool _facingRight;
+	    protected bool _facing;
 
         private int MovementSpeed
         {
@@ -17,18 +20,10 @@ namespace Assets.Scripts.Misc
             throw new System.NotImplementedException();
         }
 
-        public virtual void Update()
-        {
-        }
-
-        public virtual void Start()
-        {
-        }
-
 		protected void Flip( )
 		{
 			// Switch the way the player is labelled as facing.
-			_facingRight = !_facingRight;
+			_facing = !_facing;
 
 			// Multiply the player's x local scale by -1.
 			var theScale = transform.localScale;

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts.PlayerScripts
 {
-
 	[RequireComponent(typeof(BoxCollider2D), typeof(Rigidbody2D))]
 	public class CharacterController2D : MonoBehaviour
 	{
@@ -56,10 +55,10 @@ namespace Assets.Scripts.PlayerScripts
 
 		#region events, properties and fields
 
-		public event Action<RaycastHit2D> onControllerCollidedEvent;
-		public event Action<Collider2D> onTriggerEnterEvent;
-		public event Action<Collider2D> onTriggerStayEvent;
-		public event Action<Collider2D> onTriggerExitEvent;
+		public event Action<RaycastHit2D> OnControllerCollidedEvent;
+		public event Action<Collider2D> OnTriggerEnterEvent;
+		public event Action<Collider2D> OnTriggerStayEvent;
+		public event Action<Collider2D> OnTriggerExitEvent;
 
 
 		/// <summary>
@@ -81,7 +80,7 @@ namespace Assets.Scripts.PlayerScripts
 			set
 			{
 				_skinWidth = value;
-				recalculateDistanceBetweenRays();
+				RecalculateDistanceBetweenRays();
 			}
 		}
 
@@ -151,7 +150,7 @@ namespace Assets.Scripts.PlayerScripts
 		[HideInInspector]
 		[NonSerialized]
 		public Vector3 velocity;
-		public bool isGrounded { get { return collisionState.below; } }
+		public bool IsGrounded { get { return collisionState.below; } }
 
 		const float kSkinWidthFloatFudgeFactor = 0.001f;
 
@@ -210,22 +209,22 @@ namespace Assets.Scripts.PlayerScripts
 
 		public void OnTriggerEnter2D(Collider2D col)
 		{
-			if (onTriggerEnterEvent != null)
-				onTriggerEnterEvent(col);
+			if (OnTriggerEnterEvent != null)
+				OnTriggerEnterEvent(col);
 		}
 
 
 		public void OnTriggerStay2D(Collider2D col)
 		{
-			if (onTriggerStayEvent != null)
-				onTriggerStayEvent(col);
+			if (OnTriggerStayEvent != null)
+				OnTriggerStayEvent(col);
 		}
 
 
 		public void OnTriggerExit2D(Collider2D col)
 		{
-			if (onTriggerExitEvent != null)
-				onTriggerExitEvent(col);
+			if (OnTriggerExitEvent != null)
+				OnTriggerExitEvent(col);
 		}
 
 		#endregion
@@ -245,7 +244,7 @@ namespace Assets.Scripts.PlayerScripts
 		/// stop when run into.
 		/// </summary>
 		/// <param name="deltaMovement">Delta movement.</param>
-		public void move(Vector3 deltaMovement)
+		public void Move(Vector3 deltaMovement)
 		{
 			// save off our current grounded state which we will use for wasGroundedLastFrame and becameGroundedThisFrame
 			collisionState.wasGroundedLastFrame = collisionState.below;
@@ -255,21 +254,21 @@ namespace Assets.Scripts.PlayerScripts
 			_raycastHitsThisFrame.Clear();
 			_isGoingUpSlope = false;
 
-			primeRaycastOrigins();
+			PrimeRaycastOrigins();
 
 
 			// first, we check for a slope below us before moving
 			// only check slopes if we are going down and grounded
 			if (deltaMovement.y < 0f && collisionState.wasGroundedLastFrame)
-				handleVerticalSlope(ref deltaMovement);
+				HandleVerticalSlope(ref deltaMovement);
 
 			// now we check movement in the horizontal dir
 			if (deltaMovement.x != 0f)
-				moveHorizontally(ref deltaMovement);
+				MoveHorizontally(ref deltaMovement);
 
 			// next, check movement in the vertical dir
 			if (deltaMovement.y != 0f)
-				moveVertically(ref deltaMovement);
+				MoveVertically(ref deltaMovement);
 
 			// move then update our state
 			deltaMovement.z = 0;
@@ -288,10 +287,10 @@ namespace Assets.Scripts.PlayerScripts
 				velocity.y = 0;
 
 			// send off the collision events if we have a listener
-			if (onControllerCollidedEvent != null)
+			if (OnControllerCollidedEvent != null)
 			{
 				for (var i = 0; i < _raycastHitsThisFrame.Count; i++)
-					onControllerCollidedEvent(_raycastHitsThisFrame[i]);
+					OnControllerCollidedEvent(_raycastHitsThisFrame[i]);
 			}
 
 			ignoreOneWayPlatformsThisFrame = false;
@@ -301,12 +300,12 @@ namespace Assets.Scripts.PlayerScripts
 		/// <summary>
 		/// moves directly down until grounded
 		/// </summary>
-		public void warpToGrounded()
+		public void WarpToGrounded()
 		{
 			do
 			{
-				move(new Vector3(0, -1f, 0));
-			} while (!isGrounded);
+				Move(new Vector3(0, -1f, 0));
+			} while (!IsGrounded);
 		}
 
 
@@ -314,7 +313,7 @@ namespace Assets.Scripts.PlayerScripts
 		/// this should be called anytime you have to modify the BoxCollider2D at runtime. It will recalculate the distance between the rays used for collision detection.
 		/// It is also used in the skinWidth setter in case it is changed at runtime.
 		/// </summary>
-		public void recalculateDistanceBetweenRays()
+		public void RecalculateDistanceBetweenRays()
 		{
 			// figure out the distance between our rays in both directions
 			// horizontal
@@ -337,7 +336,7 @@ namespace Assets.Scripts.PlayerScripts
 		/// </summary>
 		/// <param name="futurePosition">Future position.</param>
 		/// <param name="deltaMovement">Delta movement.</param>
-		void primeRaycastOrigins()
+		void PrimeRaycastOrigins()
 		{
 			// our raycasts need to be fired from the bounds inset by the skinWidth
 			var modifiedBounds = boxCollider.bounds;
@@ -355,7 +354,7 @@ namespace Assets.Scripts.PlayerScripts
 		/// we have to increase the ray distance skinWidth then remember to remove skinWidth from deltaMovement before
 		/// actually moving the player
 		/// </summary>
-		void moveHorizontally(ref Vector3 deltaMovement)
+		void MoveHorizontally(ref Vector3 deltaMovement)
 		{
 			var isGoingRight = deltaMovement.x > 0;
 			var rayDistance = Mathf.Abs(deltaMovement.x) + _skinWidth;
@@ -378,7 +377,7 @@ namespace Assets.Scripts.PlayerScripts
 				if (_raycastHit)
 				{
 					// the bottom ray can hit a slope but no other ray can so we have special handling for these cases
-					if (i == 0 && handleHorizontalSlope(ref deltaMovement, Vector2.Angle(_raycastHit.normal, Vector2.up)))
+					if (i == 0 && HandleHorizontalSlope(ref deltaMovement, Vector2.Angle(_raycastHit.normal, Vector2.up)))
 					{
 						_raycastHitsThisFrame.Add(_raycastHit);
 						break;
@@ -417,7 +416,7 @@ namespace Assets.Scripts.PlayerScripts
 		/// <returns><c>true</c>, if horizontal slope was handled, <c>false</c> otherwise.</returns>
 		/// <param name="deltaMovement">Delta movement.</param>
 		/// <param name="angle">Angle.</param>
-		bool handleHorizontalSlope(ref Vector3 deltaMovement, float angle)
+		bool HandleHorizontalSlope(ref Vector3 deltaMovement, float angle)
 		{
 			// disregard 90 degree angles (walls)
 			if (Mathf.RoundToInt(angle) == 90)
@@ -472,7 +471,7 @@ namespace Assets.Scripts.PlayerScripts
 		}
 
 
-		void moveVertically(ref Vector3 deltaMovement)
+		private void MoveVertically(ref Vector3 deltaMovement)
 		{
 			var isGoingUp = deltaMovement.y > 0;
 			var rayDistance = Mathf.Abs(deltaMovement.y) + _skinWidth;
@@ -532,7 +531,7 @@ namespace Assets.Scripts.PlayerScripts
 		/// the player stays grounded and the slopeSpeedModifier is taken into account to speed up movement.
 		/// </summary>
 		/// <param name="deltaMovement">Delta movement.</param>
-		private void handleVerticalSlope(ref Vector3 deltaMovement)
+		private void HandleVerticalSlope(ref Vector3 deltaMovement)
 		{
 			// slope check from the center of our collider
 			var centerOfCollider = (_raycastOrigins.bottomLeft.x + _raycastOrigins.bottomRight.x) * 0.5f;
