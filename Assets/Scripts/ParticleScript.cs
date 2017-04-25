@@ -15,7 +15,11 @@ public class ParticleScript : MonoBehaviour
 	public void Update()
 	{
 		if (!WindObjectRef.IsActive)
-			particleSystem.Pause();
+			particleSystem.enableEmission = false;
+		else
+			particleSystem.enableEmission = true;
+
+
 	}
 
 }
