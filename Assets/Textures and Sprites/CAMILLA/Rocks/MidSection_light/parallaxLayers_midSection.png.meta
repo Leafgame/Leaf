@@ -1,9 +1,19 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 0d5ca9db723472b4e91b1d1417f3ef42
+timeCreated: 1493108839
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: parallaxLayers_midSection_0
+    21300002: parallaxLayers_midSection_1
+=======
 guid: 5987173f351cc0648a9b2085189dcba6
 timeCreated: 1493110776
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
+>>>>>>> 53930ba1f03d2555c8061dc48e6e9652990d5e6c
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -34,7 +44,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
+<<<<<<< HEAD
+  spriteMode: 2
+=======
   spriteMode: 1
+>>>>>>> 53930ba1f03d2555c8061dc48e6e9652990d5e6c
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -58,9 +72,57 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+<<<<<<< HEAD
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: parallaxLayers_midSection_0
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 422
+        width: 1370
+        height: 539
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: parallaxLayers_midSection_1
+      rect:
+        serializedVersion: 2
+        x: 1677
+        y: 98
+        width: 809
+        height: 870
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+=======
   spriteSheet:
     serializedVersion: 2
     sprites: []
+>>>>>>> 53930ba1f03d2555c8061dc48e6e9652990d5e6c
     outline: []
   spritePackingTag: 
   userData: 
