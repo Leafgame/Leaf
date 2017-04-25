@@ -151,7 +151,7 @@ namespace Assets.Scripts.PlayerScripts
 		{
 			_animator.SetBool("Ground", _controller.collisions.below);
 			_animator.SetFloat("vSpeed", _player.velocity.y);
-
+			_animator.SetFloat("hSpeed", Mathf.Abs(_player.velocity.x));
 			if(_startGlide)
 				Glide();
 
