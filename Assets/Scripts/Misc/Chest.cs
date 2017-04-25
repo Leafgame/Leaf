@@ -8,9 +8,9 @@ namespace Assets.Scripts.Misc
 	public class Chest : MonoBehaviour
 	{
 		/// <summary>
-		/// Tge animator refence to open the chest
+		/// The animator refence to open the chest
 		/// </summary>
-		private Animator _animator;
+		public Animator Animator;
 
 		/// <summary>
 		/// The chest will open once the player enters the on trigger zone
@@ -18,8 +18,7 @@ namespace Assets.Scripts.Misc
 		/// <param name="col"></param>
 		private void OnTriggerEnter2D(Collider2D col)
 		{
-			_animator = transform.parent.GetComponentInChildren<Animator>();
-			_animator.SetBool("Open", true);
+			Animator.SetBool("Open", true);
 			print("Chest Opens");
 		}
 
@@ -29,7 +28,7 @@ namespace Assets.Scripts.Misc
 		/// <param name="col"></param>
 		private void OnTriggerExit2D(Collider2D col)
 		{
-			_animator.SetBool("Open", false);
+			Animator.SetBool("Open", false);
 			print( "Chest Closes" );
 		}
 

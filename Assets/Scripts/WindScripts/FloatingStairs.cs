@@ -67,7 +67,6 @@ namespace Assets.Scripts.WindScripts
 		{
 			if (col.tag == "Player")
 			{
-
 			}
 		}
 		protected void OnTriggerExit2D(Collider2D col)
@@ -76,7 +75,6 @@ namespace Assets.Scripts.WindScripts
 			{
 				var player = col.GetComponent<Player>();
 				var controller = col.GetComponent<Controller2D>();
-
 				platform.gameObject.layer = 0;
 			}	
 		}

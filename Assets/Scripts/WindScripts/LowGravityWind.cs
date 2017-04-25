@@ -7,7 +7,9 @@ namespace Assets.Scripts.WindScripts
 	/// <summary>
 	/// Purpose of this class is to lower the acceleration of gravity in a windzone so that 
 	/// the wind can make the player fly around in the wind stream.
+	/// Depricated
 	/// </summary>
+	/* DEPRICATED
 	public class LowGravityWind : WindObject
 	{
 		private Vector3 _windDirection;
@@ -52,4 +54,5 @@ namespace Assets.Scripts.WindScripts
 			}
 		}
 	}
+	*/
 }
