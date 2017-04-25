@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: a1959cde4b34f17459c6fd0ccab640d4
-timeCreated: 1493108791
+guid: 0d5ca9db723472b4e91b1d1417f3ef42
+timeCreated: 1493108839
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: weee_0
-    21300002: weee_1
+    21300000: parallaxLayers_midSection_0
+    21300002: parallaxLayers_midSection_1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -80,26 +80,26 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: weee_0
+      name: parallaxLayers_midSection_0
       rect:
         serializedVersion: 2
-        x: 89
-        y: 23
-        width: 1350
-        height: 801
+        x: 212
+        y: 422
+        width: 1370
+        height: 539
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: weee_1
+      name: parallaxLayers_midSection_1
       rect:
         serializedVersion: 2
-        x: 1439
-        y: 20
-        width: 1072
-        height: 895
+        x: 1677
+        y: 98
+        width: 809
+        height: 870
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
