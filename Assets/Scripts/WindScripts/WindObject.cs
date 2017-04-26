@@ -41,7 +41,7 @@ namespace Assets.Scripts.WindScripts
 			WindDirection.Normalize();
 			Vector2 velocity = 
 				WindDirection * WindForce * Time.deltaTime +
-				direction * Mathf.PerlinNoise(direction.x, direction.y) * Time.deltaTime;
+				direction * Time.deltaTime;
 
 			return velocity;
 		}
@@ -160,7 +160,7 @@ namespace Assets.Scripts.WindScripts
 			else
 			{
 				var rb = col.GetComponent<Rigidbody2D>();
-				rb.velocity = (direction * ExitForce);
+				rb.velocity = (direction * ExitForce) * Time.deltaTime;
 			}
 		}
 
