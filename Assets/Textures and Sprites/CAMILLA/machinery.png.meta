@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 0d5ca9db723472b4e91b1d1417f3ef42
-timeCreated: 1493194986
+guid: 28bf618d817494b46a9267adafc2b64e
+timeCreated: 1493197790
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: parallaxLayers_midSection_0
-    21300002: parallaxLayers_midSection_1
+    21300000: machinery_0
+    21300002: machinery_1
+    21300004: machinery_2
+    21300006: machinery_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -80,26 +82,52 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: parallaxLayers_midSection_0
+      name: machinery_0
       rect:
         serializedVersion: 2
-        x: 212
-        y: 422
-        width: 1370
-        height: 539
+        x: 72
+        y: 54
+        width: 459
+        height: 332
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: parallaxLayers_midSection_1
+      name: machinery_1
       rect:
         serializedVersion: 2
-        x: 1677
-        y: 98
-        width: 809
-        height: 870
+        x: 811
+        y: 372
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: machinery_2
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 95
+        width: 411
+        height: 317
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: machinery_3
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 241
+        width: 8
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
