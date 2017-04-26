@@ -18,6 +18,7 @@ namespace Assets.Scripts.Misc
 		/// <param name="col"></param>
 		private void OnTriggerEnter2D(Collider2D col)
 		{
+			if (col.tag != "Player") return;
 			Animator.SetBool("Open", true);
 			print("Chest Opens");
 		}
@@ -28,6 +29,7 @@ namespace Assets.Scripts.Misc
 		/// <param name="col"></param>
 		private void OnTriggerExit2D(Collider2D col)
 		{
+			if (col.tag != "Player") return;
 			Animator.SetBool("Open", false);
 			print( "Chest Closes" );
 		}

@@ -12,7 +12,7 @@ namespace Assets.Scripts.WindScripts
 	public class WindObject : MonoBehaviour
 	{
 		public int ModelOffset = 5;
-		[Range(5f, 50f)]
+		[Range(1f, 50f)]
 		public float WindForce;
 		public float ExitForce = 20f;
 		public Vector3 WindDirection = Vector3.up;
