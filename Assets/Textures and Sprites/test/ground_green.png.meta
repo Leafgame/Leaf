@@ -1,12 +1,13 @@
 fileFormatVersion: 2
 guid: 488a0f7052671784681678a3a11c4d0d
-timeCreated: 1493213861
+timeCreated: 1493288587
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: ground_green_0
     21300002: ground_green_1
     21300004: ground_green_2
+    21300006: ground_green_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -84,12 +85,12 @@ TextureImporter:
       name: ground_green_0
       rect:
         serializedVersion: 2
-        x: 87
+        x: 262
         y: 741
-        width: 556
+        width: 381
         height: 66
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -116,6 +117,19 @@ TextureImporter:
         height: 277
       alignment: 0
       pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ground_green_3
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 742
+        width: 174
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
