@@ -17,7 +17,8 @@ namespace Assets.Scripts.UI
 
 		public void CreateContinueButton()
 		{
-			var button = Instantiate(ButtonGameObject, transform.position + new Vector3(0,60,0), Quaternion.identity, transform);
+			var button = Instantiate(ButtonGameObject, transform.position, Quaternion.identity, transform);
+			button.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, 60, 0);
 			button.GetComponentInChildren<Text>().text = "Continue";
 			var uiButton = button.GetComponent<Button>();
 			uiButton.onClick.AddListener(ButtonClickEvents.ContinueButtonClicked);

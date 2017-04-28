@@ -389,39 +389,39 @@ PolygonCollider2D:
       - {x: 0, y: 6}
       - {x: 0, y: 24}
       - {x: 5, y: 24}
-      - {x: 6, y: 24.58}
+      - {x: 6, y: 24.48}
       - {x: 7, y: 25}
-      - {x: 8, y: 25.58}
+      - {x: 8, y: 25.48}
       - {x: 9, y: 26}
-      - {x: 10, y: 26.58}
+      - {x: 10, y: 26.48}
       - {x: 11, y: 27}
       - {x: 15, y: 31}
-      - {x: 16, y: 31.58}
+      - {x: 16, y: 31.48}
       - {x: 17, y: 32}
-      - {x: 18, y: 32.58}
+      - {x: 18, y: 32.48}
       - {x: 19, y: 33}
       - {x: 22, y: 33}
-      - {x: 23, y: 32.58}
+      - {x: 23, y: 32.48}
       - {x: 24, y: 32}
-      - {x: 25, y: 32.58}
+      - {x: 25, y: 32.48}
       - {x: 26, y: 33}
       - {x: 31, y: 33}
-      - {x: 32, y: 33.58}
+      - {x: 32, y: 33.48}
       - {x: 33, y: 34}
       - {x: 36, y: 37}
-      - {x: 37, y: 37.58}
+      - {x: 37, y: 37.48}
       - {x: 38, y: 38}
       - {x: 45, y: 38}
       - {x: 45, y: 31}
       - {x: 50, y: 31}
       - {x: 50, y: 38}
       - {x: 52, y: 38}
-      - {x: 53, y: 38.58}
+      - {x: 53, y: 38.48}
       - {x: 54, y: 39}
       - {x: 57, y: 39}
-      - {x: 58, y: 39.58}
+      - {x: 58, y: 39.48}
       - {x: 59, y: 40}
-      - {x: 60, y: 40.58}
+      - {x: 60, y: 40.48}
       - {x: 60, y: 36}
 --- !u!114 &11579279
 MonoBehaviour:
@@ -4728,23 +4728,23 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 31, y: 3}
-      - {x: 32, y: 2.58}
+      - {x: 32, y: 2.48}
       - {x: 33, y: 2}
-      - {x: 34, y: 1.5799999}
+      - {x: 34, y: 1.48}
       - {x: 35, y: 1}
-      - {x: 36, y: 0.58}
+      - {x: 36, y: 0.48}
       - {x: 37, y: 0}
       - {x: 0, y: 0}
       - {x: 0, y: 1}
       - {x: 20, y: 1}
-      - {x: 21, y: 1.5799999}
+      - {x: 21, y: 1.48}
       - {x: 22, y: 2}
-      - {x: 23, y: 2.58}
+      - {x: 23, y: 2.48}
       - {x: 24, y: 3}
-      - {x: 25, y: 3.58}
+      - {x: 25, y: 3.48}
       - {x: 26, y: 4}
       - {x: 29, y: 4}
-      - {x: 30, y: 3.58}
+      - {x: 30, y: 3.48}
       - {x: 31, y: 3}
 --- !u!114 &103244527
 MonoBehaviour:
@@ -5433,23 +5433,23 @@ PolygonCollider2D:
       - {x: 7, y: 28}
       - {x: 7, y: 41}
       - {x: 9, y: 41}
-      - {x: 10, y: 41.58}
+      - {x: 10, y: 41.48}
       - {x: 11, y: 42}
-      - {x: 12, y: 42.58}
+      - {x: 12, y: 42.48}
       - {x: 13, y: 43}
-      - {x: 14, y: 43.58}
+      - {x: 14, y: 43.48}
       - {x: 15, y: 44}
       - {x: 19, y: 44}
-      - {x: 20, y: 44.58}
+      - {x: 20, y: 44.48}
       - {x: 21, y: 45}
-      - {x: 22, y: 45.58}
+      - {x: 22, y: 45.48}
       - {x: 23, y: 46}
-      - {x: 24, y: 46.58}
+      - {x: 24, y: 46.48}
       - {x: 25, y: 47}
       - {x: 36, y: 47}
-      - {x: 37, y: 46.58}
+      - {x: 37, y: 46.48}
       - {x: 38, y: 46}
-      - {x: 39, y: 45.58}
+      - {x: 39, y: 45.48}
       - {x: 40, y: 45}
       - {x: 48, y: 45}
       - {x: 48, y: 60}
@@ -5473,7 +5473,7 @@ PolygonCollider2D:
       - {x: 1, y: 28}
       - {x: 1, y: 36}
       - {x: 0, y: 36}
-      - {x: 0, y: 40.58}
+      - {x: 0, y: 40.48}
       - {x: 1, y: 41}
       - {x: 3, y: 41}
       - {x: 3, y: 28}
@@ -9584,17 +9584,17 @@ PolygonCollider2D:
       - {x: 41, y: 24}
       - {x: 41, y: 36}
       - {x: 45, y: 36}
-      - {x: 46, y: 36.58}
+      - {x: 46, y: 36.48}
       - {x: 47, y: 37}
       - {x: 49, y: 37}
-      - {x: 50, y: 37.58}
+      - {x: 50, y: 37.48}
       - {x: 51, y: 38}
-      - {x: 52, y: 38.58}
+      - {x: 52, y: 38.48}
       - {x: 53, y: 39}
       - {x: 57, y: 43}
-      - {x: 58, y: 43.58}
+      - {x: 58, y: 43.48}
       - {x: 59, y: 44}
-      - {x: 60, y: 44.58}
+      - {x: 60, y: 44.48}
       - {x: 60, y: 40}
 --- !u!60 &245193008
 PolygonCollider2D:
@@ -9618,11 +9618,11 @@ PolygonCollider2D:
       - {x: 0, y: 13}
       - {x: 0, y: 17}
       - {x: 5, y: 17}
-      - {x: 6, y: 17.58}
+      - {x: 6, y: 17.48}
       - {x: 7, y: 18}
-      - {x: 8, y: 18.58}
+      - {x: 8, y: 18.48}
       - {x: 9, y: 19}
-      - {x: 10, y: 19.58}
+      - {x: 10, y: 19.48}
       - {x: 11, y: 20}
       - {x: 18, y: 20}
       - {x: 18, y: 14}
@@ -13242,7 +13242,7 @@ PolygonCollider2D:
       - {x: 56, y: 55}
       - {x: 56, y: 57}
       - {x: 59, y: 57}
-      - {x: 60, y: 57.58}
+      - {x: 60, y: 57.48}
       - {x: 60, y: 56}
 --- !u!60 &289149832
 PolygonCollider2D:
@@ -13266,20 +13266,20 @@ PolygonCollider2D:
       - {x: 1, y: 42}
       - {x: 1, y: 41}
       - {x: 0, y: 41}
-      - {x: 0, y: 44.58}
+      - {x: 0, y: 44.48}
       - {x: 1, y: 45}
       - {x: 4, y: 45}
-      - {x: 5, y: 45.58}
+      - {x: 5, y: 45.48}
       - {x: 6, y: 46}
       - {x: 9, y: 46}
       - {x: 9, y: 51}
       - {x: 10, y: 52}
       - {x: 17, y: 52}
-      - {x: 18, y: 52.58}
+      - {x: 18, y: 52.48}
       - {x: 19, y: 53}
-      - {x: 20, y: 53.58}
+      - {x: 20, y: 53.48}
       - {x: 21, y: 54}
-      - {x: 22, y: 54.58}
+      - {x: 22, y: 54.48}
       - {x: 23, y: 55}
       - {x: 45, y: 55}
       - {x: 45, y: 45}
@@ -15277,9 +15277,9 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 52, y: 56}
       - {x: 0, y: 56}
-      - {x: 0, y: 57.58}
+      - {x: 0, y: 57.48}
       - {x: 1, y: 58}
-      - {x: 2, y: 58.58}
+      - {x: 2, y: 58.48}
       - {x: 3, y: 59}
       - {x: 48, y: 59}
       - {x: 48, y: 60}
@@ -31490,17 +31490,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4161701922147932, guid: 9335e728be6c66b4495734bbb0ad7544, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.3157895
-      objectReference: {fileID: 0}
     - target: {fileID: 1199052190629600, guid: 9335e728be6c66b4495734bbb0ad7544, type: 2}
       propertyPath: m_Name
       value: Stairs (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4161701922147932, guid: 9335e728be6c66b4495734bbb0ad7544, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.3157895
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9335e728be6c66b4495734bbb0ad7544, type: 2}
@@ -32551,17 +32543,17 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 44, y: 18}
-      - {x: 45, y: 17.58}
+      - {x: 45, y: 17.48}
       - {x: 46, y: 17}
-      - {x: 47, y: 16.58}
+      - {x: 47, y: 16.48}
       - {x: 48, y: 16}
       - {x: 52, y: 16}
       - {x: 55, y: 13}
-      - {x: 56, y: 12.58}
+      - {x: 56, y: 12.48}
       - {x: 57, y: 12}
-      - {x: 58, y: 11.58}
+      - {x: 58, y: 11.48}
       - {x: 59, y: 11}
-      - {x: 60, y: 10.58}
+      - {x: 60, y: 10.48}
       - {x: 60, y: 7}
       - {x: 54, y: 7}
       - {x: 54, y: 8}
@@ -32593,11 +32585,11 @@ PolygonCollider2D:
       - {x: 28, y: 11}
       - {x: 0, y: 11}
       - {x: 0, y: 16}
-      - {x: 1, y: 15.58}
+      - {x: 1, y: 15.48}
       - {x: 2, y: 15}
-      - {x: 3, y: 14.58}
+      - {x: 3, y: 14.48}
       - {x: 4, y: 14}
-      - {x: 5, y: 13.58}
+      - {x: 5, y: 13.48}
       - {x: 6, y: 13}
       - {x: 7, y: 13}
       - {x: 7, y: 14}
@@ -32606,16 +32598,16 @@ PolygonCollider2D:
       - {x: 23, y: 13}
       - {x: 23, y: 15}
       - {x: 25, y: 15}
-      - {x: 26, y: 15.58}
+      - {x: 26, y: 15.48}
       - {x: 27, y: 16}
-      - {x: 28, y: 16.58}
+      - {x: 28, y: 16.48}
       - {x: 29, y: 17}
-      - {x: 30, y: 17.58}
+      - {x: 30, y: 17.48}
       - {x: 31, y: 18}
-      - {x: 32, y: 18.58}
+      - {x: 32, y: 18.48}
       - {x: 33, y: 19}
       - {x: 42, y: 19}
-      - {x: 43, y: 18.58}
+      - {x: 43, y: 18.48}
       - {x: 44, y: 18}
 --- !u!114 &826234796
 MonoBehaviour:
@@ -33713,7 +33705,7 @@ PolygonCollider2D:
       - {x: 0, y: 46}
       - {x: 0, y: 60}
       - {x: 37, y: 60}
-      - {x: 38, y: 59.58}
+      - {x: 38, y: 59.48}
       - {x: 39, y: 59}
       - {x: 45, y: 59}
       - {x: 45, y: 60}
@@ -33954,34 +33946,34 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 9, y: 59}
-      - {x: 10, y: 58.58}
+      - {x: 10, y: 58.48}
       - {x: 11, y: 58}
-      - {x: 12, y: 57.58}
+      - {x: 12, y: 57.48}
       - {x: 13, y: 57}
       - {x: 17, y: 57}
-      - {x: 18, y: 56.58}
+      - {x: 18, y: 56.48}
       - {x: 19, y: 56}
-      - {x: 20, y: 55.58}
+      - {x: 20, y: 55.48}
       - {x: 21, y: 55}
-      - {x: 22, y: 54.58}
+      - {x: 22, y: 54.48}
       - {x: 23, y: 54}
-      - {x: 24, y: 53.58}
+      - {x: 24, y: 53.48}
       - {x: 25, y: 53}
-      - {x: 26, y: 52.58}
+      - {x: 26, y: 52.48}
       - {x: 27, y: 52}
-      - {x: 28, y: 51.58}
+      - {x: 28, y: 51.48}
       - {x: 29, y: 51}
-      - {x: 30, y: 50.58}
+      - {x: 30, y: 50.48}
       - {x: 31, y: 50}
-      - {x: 32, y: 49.58}
+      - {x: 32, y: 49.48}
       - {x: 33, y: 49}
       - {x: 48, y: 49}
-      - {x: 49, y: 49.58}
+      - {x: 49, y: 49.48}
       - {x: 50, y: 50}
       - {x: 53, y: 50}
-      - {x: 54, y: 49.58}
+      - {x: 54, y: 49.48}
       - {x: 55, y: 49}
-      - {x: 56, y: 48.58}
+      - {x: 56, y: 48.48}
       - {x: 57, y: 48}
       - {x: 60, y: 48}
       - {x: 60, y: 46}
@@ -34006,7 +33998,7 @@ PolygonCollider2D:
       - {x: 0, y: 57}
       - {x: 0, y: 60}
       - {x: 7, y: 60}
-      - {x: 8, y: 59.58}
+      - {x: 8, y: 59.48}
       - {x: 9, y: 59}
 --- !u!114 &876386788
 MonoBehaviour:
@@ -38152,7 +38144,7 @@ PolygonCollider2D:
       - {x: 34, y: 51}
       - {x: 38, y: 51}
       - {x: 40, y: 49}
-      - {x: 41, y: 48.58}
+      - {x: 41, y: 48.48}
       - {x: 42, y: 48}
       - {x: 59, y: 48}
       - {x: 59, y: 60}
@@ -42943,7 +42935,7 @@ PolygonCollider2D:
       - {x: 6, y: 3}
       - {x: 0, y: 3}
       - {x: 0, y: 6}
-      - {x: 1, y: 6.58}
+      - {x: 1, y: 6.48}
       - {x: 2, y: 6}
 --- !u!114 &1100511698
 MonoBehaviour:
@@ -43021,22 +43013,22 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 33, y: 21}
       - {x: 36, y: 21}
-      - {x: 37, y: 20.58}
+      - {x: 37, y: 20.48}
       - {x: 38, y: 20}
-      - {x: 39, y: 19.58}
+      - {x: 39, y: 19.48}
       - {x: 40, y: 19}
-      - {x: 41, y: 18.58}
+      - {x: 41, y: 18.48}
       - {x: 42, y: 18}
-      - {x: 43, y: 17.58}
+      - {x: 43, y: 17.48}
       - {x: 44, y: 17}
       - {x: 52, y: 17}
-      - {x: 53, y: 17.58}
+      - {x: 53, y: 17.48}
       - {x: 54, y: 18}
-      - {x: 55, y: 18.58}
+      - {x: 55, y: 18.48}
       - {x: 56, y: 18}
-      - {x: 57, y: 17.58}
+      - {x: 57, y: 17.48}
       - {x: 58, y: 17}
-      - {x: 59, y: 16.58}
+      - {x: 59, y: 16.48}
       - {x: 60, y: 16}
       - {x: 60, y: 11}
       - {x: 34, y: 11}
@@ -47370,6 +47362,91 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &1189791192
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1189791195}
+  - component: {fileID: 1189791194}
+  - component: {fileID: 1189791193}
+  m_Layer: 0
+  m_Name: Brush
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1189791193
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1189791192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860611cc84144924c8a95e2a1670d236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: {x: 0, y: 0}
+  IsUndoEnabled: 1
+  m_brushTilemap: {fileID: 1189791194}
+--- !u!114 &1189791194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1189791192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dec3ca0fe88506448df84e8bf55b2dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowGrid: 1
+  InnerPadding: 0.1
+  ColliderDepth: 0.1
+  ColliderType: 0
+  Collider2DType: 0
+  ShowColliderNormals: 1
+  IsUndoEnabled: 0
+  m_sortingLayer: 0
+  m_sortingLayerName: Default
+  m_orderInLayer: 0
+  m_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_tintColor: {r: 0.7, g: 0.7, b: 0.7, a: 0.17289999}
+  m_pixelSnap: 0
+  m_isVisible: 0
+  m_allowPaintingOutOfBounds: 1
+  m_autoShrink: 0
+  m_enableUndoWhilePainting: 1
+  m_isTrigger: 0
+  m_physicMaterial: {fileID: 0}
+  m_physicMaterial2D: {fileID: 0}
+  m_cellSize: {x: 1, y: 1}
+  m_mapBounds:
+    m_Center: {x: 0.5, y: 0.5, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0}
+  m_tileset: {fileID: 11400000, guid: 8a62d3d85ade2004eb7f5bebe3105ff8, type: 2}
+  m_minGridX: 0
+  m_minGridY: 0
+  m_maxGridX: 0
+  m_maxGridY: 0
+  m_parentTilemapGroup: {fileID: 0}
+--- !u!4 &1189791195
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1189791192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 94, y: -9, z: -0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1191151818
 GameObject:
   m_ObjectHideFlags: 1
@@ -50403,7 +50480,7 @@ PolygonCollider2D:
       - {x: 48, y: 0}
       - {x: 48, y: 6}
       - {x: 56, y: 6}
-      - {x: 57, y: 6.58}
+      - {x: 57, y: 6.48}
       - {x: 58, y: 6}
 --- !u!114 &1197645932
 MonoBehaviour:
@@ -60395,7 +60472,7 @@ Prefab:
     - target: {fileID: 114982663568430420, guid: 65f00e0672cc4ed48abd83ea84ff7982,
         type: 2}
       propertyPath: WindForce
-      value: 30
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114982663568430420, guid: 65f00e0672cc4ed48abd83ea84ff7982,
         type: 2}
@@ -70698,7 +70775,7 @@ PolygonCollider2D:
     - - {x: 0, y: 0}
       - {x: 0, y: 1}
       - {x: 5, y: 1}
-      - {x: 6, y: 0.58}
+      - {x: 6, y: 0.48}
       - {x: 7, y: 0}
       - {x: 0, y: 0}
 --- !u!114 &1628830420
@@ -77501,27 +77578,27 @@ PolygonCollider2D:
       - {x: 28, y: 11}
       - {x: 28, y: 7}
       - {x: 0, y: 7}
-      - {x: 0, y: 10.58}
+      - {x: 0, y: 10.48}
       - {x: 1, y: 10}
-      - {x: 2, y: 9.58}
+      - {x: 2, y: 9.48}
       - {x: 3, y: 9}
       - {x: 16, y: 9}
-      - {x: 17, y: 9.58}
+      - {x: 17, y: 9.48}
       - {x: 18, y: 10}
-      - {x: 19, y: 10.58}
+      - {x: 19, y: 10.48}
       - {x: 20, y: 11}
       - {x: 22, y: 11}
-      - {x: 23, y: 11.58}
+      - {x: 23, y: 11.48}
       - {x: 24, y: 12}
       - {x: 26, y: 12}
-      - {x: 27, y: 12.58}
+      - {x: 27, y: 12.48}
       - {x: 28, y: 13}
       - {x: 45, y: 13}
       - {x: 45, y: 15}
       - {x: 54, y: 15}
-      - {x: 55, y: 15.58}
+      - {x: 55, y: 15.48}
       - {x: 56, y: 16}
-      - {x: 57, y: 16.58}
+      - {x: 57, y: 16.48}
       - {x: 58, y: 17}
       - {x: 60, y: 17}
       - {x: 60, y: 13}
@@ -77624,7 +77701,7 @@ PolygonCollider2D:
       - {x: 42, y: 18}
       - {x: 42, y: 19}
       - {x: 48, y: 19}
-      - {x: 49, y: 19.58}
+      - {x: 49, y: 19.48}
       - {x: 50, y: 20}
       - {x: 51, y: 21}
       - {x: 53, y: 21}
@@ -89146,12 +89223,12 @@ Prefab:
     - target: {fileID: 114982663568430420, guid: 65f00e0672cc4ed48abd83ea84ff7982,
         type: 2}
       propertyPath: WindForce
-      value: 30
+      value: 9.1
       objectReference: {fileID: 0}
     - target: {fileID: 114982663568430420, guid: 65f00e0672cc4ed48abd83ea84ff7982,
         type: 2}
       propertyPath: ExitForce
-      value: 20
+      value: 19.7
       objectReference: {fileID: 0}
     - target: {fileID: 50929271288659330, guid: 65f00e0672cc4ed48abd83ea84ff7982,
         type: 2}

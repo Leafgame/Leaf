@@ -11,49 +11,58 @@ namespace Assets.Scripts.UI
         /// </summary>
 		public GameObject OptionsPanel;
 
-		/*
-		 * Called when the user clicks GUI button Start
-		 */
+		/// <summary>
+		/// Called when the user clicks GUI button Start
+		/// </summary>
 		public void GameStartButtonClicked()
 		{
 			SceneManager.LoadScene(1);
 		}
 
-		/*
-		 * Called when the user clicks GUI button Credits
-		 */
+		/// <summary>
+		/// Called when the user clicks GUI button Credits
+		/// </summary>
 		public void CreditsButtonClicked()
 		{
 			print("TODO credits scene");
 		}
 
-		/*
-		 * Called when the user clicks GUI button Options
-		 */
+		/// <summary>
+		/// Called when the user clicks GUI button Options
+		/// </summary>
 		public void OptionsButtonClicked()
 		{
 			OptionsPanel.SetActive(!OptionsPanel.activeSelf);
 		}
 
-		/*
-		 * Called when the user clicks GUI button Quit
-		 */
+		/// <summary>
+		/// Called when the user clicks GUI button Quit
+		/// </summary>
 		public void ExitButtonClicked()
 		{
 			Application.Quit();
 		}
 
+		/// <summary>
+		/// Resets the currently active scene
+		/// </summary>
 	    public void ResetLevelButtonClicked()
 	    {
 	        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             
 	    }
 
+		/// <summary>
+		/// Opens the settings menu
+		/// </summary>
 	    public void SettingsButtonClicked()
 	    {
             print("TODO options screen");
         }
 
+		/// <summary>
+		/// Loads the scene that is saved in the current proggres playerprefs.
+		/// </summary>
 		public static void ContinueButtonClicked()
 		{
 			SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentProgress"));

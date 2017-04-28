@@ -91,7 +91,7 @@ MonoBehaviour:
     collData:
       vertices:
       - {x: 0, y: 0}
-      - {x: 1, y: 0.58}
+      - {x: 1, y: 0.48}
       - {x: 1, y: 0}
       type: 2
     paramContainer:
@@ -110,7 +110,7 @@ MonoBehaviour:
     collData:
       vertices:
       - {x: 0, y: 0}
-      - {x: 0, y: 0.58}
+      - {x: 0, y: 0.48}
       - {x: 1, y: 1}
       - {x: 1, y: 0}
       type: 2
