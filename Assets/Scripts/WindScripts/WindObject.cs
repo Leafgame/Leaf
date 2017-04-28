@@ -39,10 +39,10 @@ namespace Assets.Scripts.WindScripts
 			Vector3 direction = targetPosition - position;
 			direction.Normalize();
 			WindDirection.Normalize();
-			Vector2 velocity = 
+			Vector2 velocity =
 				WindDirection * WindForce * Time.deltaTime +
-				direction * Time.deltaTime;
-
+				new Vector3(-1 * direction.x, direction.y) * Time.deltaTime;
+			
 			return velocity;
 		}
 

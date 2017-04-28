@@ -72,6 +72,7 @@ namespace Assets.Scripts.PlayerScripts
 		private Controller2D _controller;
 		private Player _player;
 		#endregion
+
 		protected void Awake()
 		{
 			_animator = GetComponent<Animator>();
