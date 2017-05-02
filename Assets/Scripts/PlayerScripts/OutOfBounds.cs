@@ -30,12 +30,22 @@ namespace Assets.Scripts.PlayerScripts
 			else if (col.tag == "HeavyObject")
 			{
 				col.transform.position = col.GetComponent<HeavyObject>().InitialPosition;
-				ResetVelocity(col);
+				ResetRbVelocity(col);
 			}
 		}
 
-        /// <summary>
-        /// Resets the velicty of the rigidbody to 0
+		/// <summary>
+		/// Resets the velocty of the rigidbody to 0
+		/// </summary>
+		/// <param name="col"></param>
+		private void ResetRbVelocity(Collider2D col)
+		{
+			var rb = col.GetComponent<Rigidbody2D>();
+			rb.velocity = new Vector2(0, 0);
+		}
+
+		/// <summary>
+        /// Resets the velocity of the player to 0
         /// </summary>
         /// <param name="col"></param>
 		public void ResetVelocity(Collider2D col)
