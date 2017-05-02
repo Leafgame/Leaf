@@ -14,6 +14,8 @@ namespace Assets.Scripts.WindScripts
 		public int ModelOffset = 5;
 		[Range(1f, 50f)]
 		public float WindForce;
+		[Range(0f, 0.1f)]
+		public float HorizontalControll = 0.5f;
 		public float ExitForce = 20f;
 		public Vector3 WindDirection = Vector3.up;
 		public BoxCollider2D WindTrigger;
@@ -73,7 +75,7 @@ namespace Assets.Scripts.WindScripts
 		private void ApplyPlayerWind(Player player)
 		{
 			var velocity = CalculateVelocity(player.transform);
-			player.velocity = (velocity*100);
+			player.velocity = new Vector2(velocity.x + Input.GetAxis("Horizontal") * HorizontalControll, velocity.y) * 100;
 		}
 
 		protected virtual void EnableTrigger()

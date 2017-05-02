@@ -37,6 +37,7 @@ namespace Assets.Scripts.Settings
 				ResolutionDropdown.options.Add(new Dropdown.OptionData(resolution.ToString()));
 			}
 			ResolutionDropdown.options.Reverse();
+			//File.Create(Application.persistentDataPath + "/gamesettings.json");
 			LoadSettings();
 		}
 
