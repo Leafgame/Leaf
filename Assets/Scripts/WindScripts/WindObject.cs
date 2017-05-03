@@ -42,8 +42,8 @@ namespace Assets.Scripts.WindScripts
 			direction.Normalize();
 			WindDirection.Normalize();
 			Vector2 velocity =
-				WindDirection * WindForce * Time.deltaTime +
-				new Vector3(-1 * direction.x, direction.y) * Time.deltaTime;
+				WindDirection * WindForce +
+				new Vector3(-1 * direction.x, direction.y);
 			
 			return velocity;
 		}
@@ -75,7 +75,9 @@ namespace Assets.Scripts.WindScripts
 		private void ApplyPlayerWind(Player player)
 		{
 			var velocity = CalculateVelocity(player.transform);
-			player.velocity = new Vector2(velocity.x + Input.GetAxis("Horizontal") * HorizontalControll, velocity.y) * 100;
+			player.velocity = new Vector2(
+				velocity.x + Input.GetAxis("Horizontal") * 
+				HorizontalControll, velocity.y) * 100 * Time.deltaTime;
 		}
 
 		protected virtual void EnableTrigger()
