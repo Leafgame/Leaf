@@ -15,7 +15,7 @@ namespace Assets.Scripts.WindScripts
 		[Range(1f, 50f)]
 		public float WindForce;
 		[Range(0f, 0.1f)]
-		public float HorizontalControll = 0.5f;
+		public float HorizontalControll = 0.05f;
 		public float ExitForce = 20f;
 		public Vector3 WindDirection = Vector3.up;
 		public BoxCollider2D WindTrigger;
