@@ -49,16 +49,15 @@ namespace Assets.Scripts.UI
 	    public void ResetLevelButtonClicked()
 	    {
 	        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            
 	    }
 
 		/// <summary>
 		/// Opens the settings menu
 		/// </summary>
-	    public void SettingsButtonClicked()
+	    public void ResumeGameButtonClicked()
 	    {
-            print("TODO options screen");
-        }
+			GetComponent<InGameMenu>().Unpause();
+		}
 
 		/// <summary>
 		/// Loads the scene that is saved in the current proggres playerprefs.
