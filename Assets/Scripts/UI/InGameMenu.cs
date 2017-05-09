@@ -15,10 +15,9 @@ namespace Assets.Scripts.UI
 
 		private void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Escape))
+			if (Input.GetButtonDown("Menu"))
 			{
-				InGameMenuObject.SetActive(!InGameMenuObject.activeSelf);
-				if (InGameMenuObject.activeSelf)
+				if (!InGameMenuObject.activeSelf)
 				{
 					Pause();
 				}
@@ -31,11 +30,13 @@ namespace Assets.Scripts.UI
 
 		public void Pause()
 		{
+			InGameMenuObject.SetActive(true);
 			Time.timeScale = 0.0f;
 		}
 
 		public void Unpause()
 		{
+			InGameMenuObject.SetActive(false);
 			Time.timeScale = 1;
 			GetComponentInChildren<SettingsManager>().SaveChanges();
 			GetComponent<ButtonClickEvents>().OptionsPanel.SetActive(false);
