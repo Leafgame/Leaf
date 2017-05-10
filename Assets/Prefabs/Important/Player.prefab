@@ -248,6 +248,9 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 513
+  oneWayCollider:
+    serializedVersion: 2
+    m_Bits: 0
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0
@@ -336,8 +339,8 @@ MonoBehaviour:
   wallLeap: {x: 18, y: 17}
   canDoubleJump: 1
   gravity: 0
-  wallSlideSpeedMax: 3
-  wallStickTime: 0.25
+  wallSlideSpeedMax: 32
+  wallStickTime: 0
   velocity: {x: 0, y: 0, z: 0}
 --- !u!212 &212033640774925412
 SpriteRenderer:

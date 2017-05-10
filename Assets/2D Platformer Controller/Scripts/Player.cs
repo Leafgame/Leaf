@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private bool isDoubleJumping = false;
 
 	public float gravity;
-	public float wallSlideSpeedMax = 3f;
+	public float wallSlideSpeedMax = 32f;
     public float wallStickTime = .25f;
     private float timeToWallUnstick;
 

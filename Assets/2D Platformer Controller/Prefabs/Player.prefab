@@ -213,13 +213,13 @@ MonoBehaviour:
   minJumpHeight: 1
   timeToJumpApex: 0.4
   ToggleWallJump: 0
-  wallJumpClimb: {x: 7.5, y: 16}
-  wallJumpOff: {x: 8.5, y: 7}
-  wallLeap: {x: 18, y: 17}
+  wallJumpClimb: {x: 0, y: 0}
+  wallJumpOff: {x: 0, y: 0}
+  wallLeap: {x: 0, y: 0}
   canDoubleJump: 1
   gravity: 0
-  wallSlideSpeedMax: 3
-  wallStickTime: 0.25
+  wallSlideSpeedMax: 32
+  wallStickTime: 0
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &114000014168620116
 MonoBehaviour:
@@ -235,6 +235,9 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 513
+  oneWayCollider:
+    serializedVersion: 2
+    m_Bits: 8192
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0

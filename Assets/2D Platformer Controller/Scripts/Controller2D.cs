@@ -74,12 +74,23 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
-                if (hit.distance == 0)
+				float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+				if (hit.distance == 0)
                 {
                     continue;
                 }
+				if (hit.collider.tag == "Stairs")
+				{
+					// Take the dot product of the normal and the pal
+					var dot = Vector3.Dot(hit.normal, (Vector3.up + transform.position) - transform.position);
+					var under = Vector2.Dot(hit.normal, moveAmount);
 
-                float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+					if (hit.distance == 0  || dot < 0.0f || Mathf.Abs(under) < 0.01f)
+					{
+						continue;
+					}
+				}
 
                 if (i == 0 && slopeAngle <= maxClimbAngle)
                 {
@@ -175,20 +186,15 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
-                if (hit.collider.tag == "Through")
+                if (hit.collider.tag == "Stairs")
                 {
-                    if (directionY == 1 || hit.distance == 0)
+					if (playerInput.y == -1 || playerInput.y == 1)
+					{
+						continue;
+					}
+
+					if (directionY == 1 || hit.distance == 0)
                     {
-                        continue;
-                    }
-                    if (collisions.fallingThroughPlatform)
-                    {
-                        continue;
-                    }
-                    if (playerInput.y == -1)
-                    {
-                        collisions.fallingThroughPlatform = true;
-                        Invoke("ResetFallingThroughPlatform", fallingThroughPlatformResetTimer);
                         continue;
                     }
                 }
