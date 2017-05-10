@@ -8,9 +8,15 @@ public class HeavyObject : MonoBehaviour
 	/// </summary>
 	public Vector3 InitialPosition;
 
+	[Range(0f, 1f)]
+	public float PushFactor = .25f;
+
+	private Rigidbody2D _rigidbody;
+
 	public void Start()
 	{
 		InitialPosition = transform.position;
+		_rigidbody = GetComponent<Rigidbody2D>();
 	}
 
 	public virtual BoxCollider2D WindBlockZone
@@ -28,7 +34,8 @@ public class HeavyObject : MonoBehaviour
 	{
 		if (col.transform.tag == "Player")
 		{
-			print(col.relativeVelocity.x);
+			var colrb = col.gameObject.GetComponent<Player>();
+			_rigidbody.velocity = colrb.velocity * PushFactor;
 		}
 	}
 
