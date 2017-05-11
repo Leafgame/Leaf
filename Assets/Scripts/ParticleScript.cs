@@ -24,9 +24,9 @@ namespace Assets.Scripts
 				particleSystem.enableEmission = true;
 
 			if(_windZoneBox.size.y > _windZoneBox.size.x)
-				particleSystem.startLifetime = ( _windZoneBox.size.y - 2.08f) / 5.4f; 
+				particleSystem.startLifetime = ( _windZoneBox.size.y - 2.08f) / 5.8f; 
 			else
-				particleSystem.startLifetime = ( _windZoneBox.size.x - 2.08f) / 5.4f;
+				particleSystem.startLifetime = ( _windZoneBox.size.x - 2.08f) / 5.8f;
 
 		}
 
