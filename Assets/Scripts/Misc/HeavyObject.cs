@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.PlayerScripts;
+using UnityEngine;
 
 public class HeavyObject : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class HeavyObject : MonoBehaviour
 		if (col.transform.tag == "Player")
 		{
 			var colrb = col.gameObject.GetComponent<Player>();
+			var playerwind = col.gameObject.GetComponentInChildren<PlayerItemsController>();
+			if (playerwind.InWindZone)
+			{
+				colrb.velocity = new Vector2(0, 1) * 30f;
+			}
 			_rigidbody.velocity = colrb.velocity * PushFactor;
 		}
 	}

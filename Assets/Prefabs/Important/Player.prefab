@@ -229,11 +229,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c362dda42a3964aa9b92cb426a5920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HasGliderEquipped: 1
-  HasAirDashEquipped: 1
+  HasGliderEquipped: 0
+  HasAirDashEquipped: 0
   HasUmbrellaEquipped: 0
-  HasDoubleJumpEquipped: 1
-  HasWindNegationEquipped: 1
+  HasDoubleJumpEquipped: 0
+  HasWindNegationEquipped: 0
 --- !u!114 &114229263780142096
 MonoBehaviour:
   m_ObjectHideFlags: 1

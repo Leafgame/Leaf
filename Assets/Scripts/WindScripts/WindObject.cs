@@ -24,6 +24,8 @@ namespace Assets.Scripts.WindScripts
 		public List<GameObject> ObjectsInWindZone = new List<GameObject>();
 
 		private float _maxBoxSize;
+		private Vector2 size;
+		private Vector2 offset;
 
 		public virtual void ApplyWindPhysics(GameObject actor)
 		{
@@ -89,6 +91,8 @@ namespace Assets.Scripts.WindScripts
 			WindTrigger.isTrigger = true;
             gameObject.tag = "WindZone";
 			WindDirection.Normalize();
+			size = WindTrigger.size;
+			offset = WindTrigger.offset;
 		}
 
 		public void OnTriggerEnter2D(Collider2D col)
@@ -137,6 +141,8 @@ namespace Assets.Scripts.WindScripts
 			{
 				var box = GetComponent<BoxCollider2D>();
 				FixWindZoneArea( col , new Vector2( box.size.x - 2f, box.size.y ));
+				box.size = size;
+				box.offset = offset;
 			}
 
 			// No Rigidbody2D on object: return
