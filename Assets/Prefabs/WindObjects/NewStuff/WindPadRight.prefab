@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 114149409779956050}
   m_Layer: 11
   m_Name: WindVisual
-  m_TagString: Untagged
+  m_TagString: Particles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,9 +114,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1018496757999396}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.73, y: -17.697376, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -39.307125, y: -14.431694, z: 0}
+  m_LocalScale: {x: 1.3157896, y: 1.3157896, z: 1}
   m_Children:
   - {fileID: 4134418396570096}
   - {fileID: 4950504859631456}
@@ -209,7 +209,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 4.225231, y: 0}
+  m_Offset: {x: 4.98, y: 0}
   serializedVersion: 2
   m_Size: {x: 8.450542, y: 2}
 --- !u!61 &61831195447718942
@@ -250,11 +250,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModelOffset: 1
-  WindForce: 11.8
-  HorizontalControll: 0.0061
-  ExitForce: 1.8
+  WindForce: 8.3
+  HorizontalControll: 0.0248
+  ExitForce: 17.47
   WindDirection: {x: 1, y: 0, z: 0}
-  WindTrigger: {fileID: 0}
+  WindTrigger: {fileID: 61641872854757126}
   IsActive: 1
   ObjectsInWindZone: []
 --- !u!198 &198133505088650652
@@ -312,7 +312,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1428841937
+  randomSeed: -548899449
   InitialModule:
     serializedVersion: 3
     enabled: 1

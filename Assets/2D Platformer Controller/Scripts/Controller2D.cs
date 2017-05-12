@@ -45,7 +45,7 @@ public class Controller2D : RaycastController
 		{
 			collisionMask.value += oneWayCollider;
 			walkingOnStaris = true;
-			print("Turns ON StairWalk");
+			//print("Turns ON StairWalk");
 		}
 
 		HorizontalCollisions(ref moveAmount);
@@ -238,7 +238,7 @@ public class Controller2D : RaycastController
 		{
 			collisionMask.value -= oneWayCollider;
 			walkingOnStaris = false;
-			print("Turns OFF StairWalk");
+			//print("Turns OFF StairWalk");
 		}
 	}
 

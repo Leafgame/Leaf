@@ -12,6 +12,7 @@ public class HeavyObject : MonoBehaviour
 	[Range(0f, 1f)]
 	public float PushFactor = .25f;
 
+	private int pushMultiplier = 100;
 	private Rigidbody2D _rigidbody;
 
 	public void Start()
@@ -41,7 +42,7 @@ public class HeavyObject : MonoBehaviour
 			{
 				colrb.velocity = new Vector2(0, 1) * 30f;	
 			}
-			_rigidbody.velocity = colrb.velocity * PushFactor;
+			_rigidbody.velocity = new Vector2(colrb.velocity.x * PushFactor, 0);
 		}
 	}
 
