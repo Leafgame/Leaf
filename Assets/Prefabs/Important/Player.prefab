@@ -250,7 +250,7 @@ MonoBehaviour:
     m_Bits: 513
   oneWayCollider:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0

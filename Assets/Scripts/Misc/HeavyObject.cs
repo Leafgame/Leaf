@@ -39,7 +39,7 @@ public class HeavyObject : MonoBehaviour
 			var playerwind = col.gameObject.GetComponentInChildren<PlayerItemsController>();
 			if (playerwind.InWindZone)
 			{
-				colrb.velocity = new Vector2(0, 1) * 30f;
+				colrb.velocity = new Vector2(0, 1) * 30f;	
 			}
 			_rigidbody.velocity = colrb.velocity * PushFactor;
 		}
