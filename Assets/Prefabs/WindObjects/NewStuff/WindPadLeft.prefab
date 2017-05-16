@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 114611297257674586}
   m_Layer: 9
   m_Name: WindVisual
-  m_TagString: Untagged
+  m_TagString: Particles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -324,9 +324,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1033489380290786}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 595.9897, y: 116.31, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 28.718971, y: -22.296135, z: 0}
+  m_LocalScale: {x: 1.3157896, y: 1.3157896, z: 1}
   m_Children:
   - {fileID: 4624658727420632}
   - {fileID: 4140483663270006}
@@ -606,9 +606,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: -5, y: -0.47}
+  m_Offset: {x: -6.961868, y: -0.8100048}
   serializedVersion: 2
-  m_Size: {x: 6.83, y: 1.5}
+  m_Size: {x: 10.573619, y: 2.3}
 --- !u!61 &61215424312903168
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -829,7 +829,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1430154531
+  randomSeed: -539773334
   InitialModule:
     serializedVersion: 3
     enabled: 1

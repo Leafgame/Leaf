@@ -4,6 +4,7 @@
 public class RaycastController : MonoBehaviour
 {
     public LayerMask collisionMask;
+	public LayerMask oneWayCollider;
 
     public const float skinWidth = .015f;
     private const float dstBetweenRays = .25f;

@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 114493024844475790}
   m_Layer: 9
   m_Name: WindVisual
-  m_TagString: Untagged
+  m_TagString: Particles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 33139495474443864}
   - component: {fileID: 64191576704780450}
   - component: {fileID: 23497895761712418}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 4555930111480384}
   - component: {fileID: 212075912492112578}
   - component: {fileID: 61562549510183230}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: machinery_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,12 +271,12 @@ Transform:
   m_GameObject: {fileID: 1590494277708978}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -623.829, y: -192.31581, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3157897, y: 1.3157897, z: 1}
   m_Children:
   - {fileID: 4555930111480384}
   - {fileID: 4595646676051726}
-  - {fileID: 4230067289499620}
   - {fileID: 4236888324353166}
+  - {fileID: 4230067289499620}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -308,7 +308,7 @@ Transform:
   - {fileID: 4524571915351536}
   - {fileID: 4511608744684842}
   m_Father: {fileID: 4103187878327696}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4235798473277714
 Transform:
@@ -334,7 +334,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4103187878327696}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4255448901584928
 Transform:
@@ -437,8 +437,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1848291636272494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.011, y: -0.45, z: -1}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: 0.011, y: -0.022, z: -1}
+  m_LocalScale: {x: 61.66899, y: 66.76241, z: 100}
   m_Children:
   - {fileID: 4255448901584928}
   - {fileID: 4008810003611572}
@@ -5900,7 +5900,7 @@ ParticleSystem:
   speed: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   autoRandomSeed: 1
   startDelay:
     scalar: 0
@@ -5944,7 +5944,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1430154531
+  randomSeed: -1863380703
   InitialModule:
     serializedVersion: 3
     enabled: 1

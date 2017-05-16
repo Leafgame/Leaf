@@ -13,6 +13,7 @@ TagManager:
   - SteerTarget
   - HeavyObject
   - Particles
+  - Stairs
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Parallax
   - WindZone
   - Interactables
-  - 
+  - OneWayCollider
   - 
   - 
   - 

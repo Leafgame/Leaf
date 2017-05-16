@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9e67815af8f61d642853128749a9b59c
-timeCreated: 1493889461
+guid: 21b868ef7094518438c0555dda71d90a
+timeCreated: 1494319285
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -10,6 +10,8 @@ TextureImporter:
     21300006: Lever_3
     21300008: Lever_4
     21300010: Lever_5
+    21300012: Lever_6
+    21300014: Lever_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -72,27 +74,45 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: Android
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+      name: Lever_6
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 38
+        width: 309
+        height: 284
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Lever_7
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 38
+        width: 309
+        height: 284
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
       name: Lever_0
       rect:
         serializedVersion: 2
-        x: 113
-        y: 40
-        width: 281
+        x: 504
+        y: 38
+        width: 309
         height: 284
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -100,64 +120,12 @@ TextureImporter:
       name: Lever_1
       rect:
         serializedVersion: 2
-        x: 463
-        y: 76
-        width: 10
-        height: 14
+        x: 85
+        y: 39
+        width: 309
+        height: 284
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Lever_2
-      rect:
-        serializedVersion: 2
-        x: 517
-        y: 40
-        width: 298
-        height: 239
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Lever_3
-      rect:
-        serializedVersion: 2
-        x: 884
-        y: 76
-        width: 10
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Lever_4
-      rect:
-        serializedVersion: 2
-        x: 932
-        y: 40
-        width: 308
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Lever_5
-      rect:
-        serializedVersion: 2
-        x: 1309
-        y: 76
-        width: 10
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

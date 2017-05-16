@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 114476115823111810}
   - component: {fileID: 114924557069327216}
   m_Layer: 5
-  m_Name: Help
+  m_Name: ReturnToGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4639,17 +4639,17 @@ MonoBehaviour:
   m_Value: 5
   m_Options:
     m_Options:
-    - m_Text: Fastest
+    - m_Text: Poor
       m_Image: {fileID: 0}
-    - m_Text: Fast
+    - m_Text: Low
       m_Image: {fileID: 0}
-    - m_Text: Simple
+    - m_Text: Medium
       m_Image: {fileID: 0}
-    - m_Text: Good
+    - m_Text: High
       m_Image: {fileID: 0}
-    - m_Text: Beautiful
+    - m_Text: Ultra
       m_Image: {fileID: 0}
-    - m_Text: Fantastic
+    - m_Text: Epic
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4863,7 +4863,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Help
+  m_Text: Return to Game
 --- !u!114 &114795351639947812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5334,7 +5334,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114388913167449600}
-        m_MethodName: CreditsButtonClicked
+        m_MethodName: ResumeGameButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5378,7 +5378,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fantastic
+  m_Text: Epic
 --- !u!114 &114969338206426436
 MonoBehaviour:
   m_ObjectHideFlags: 1
