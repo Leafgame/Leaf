@@ -93,7 +93,7 @@ namespace Assets.Scripts.PlayerScripts
 			{
 				_startGlide = true;
 			}
-			else if ( _controller.collisions.below )
+			if ( _controller.collisions.below )
 			{
 				_startGlide = false;
 			}
@@ -155,6 +155,8 @@ namespace Assets.Scripts.PlayerScripts
 			_animator.SetFloat("hSpeed", Mathf.Abs(_player.velocity.x));
 			if(_startGlide)
 				Glide();
+			else
+				DisableGlider();
 
 			Dash();
 		}
@@ -170,14 +172,18 @@ namespace Assets.Scripts.PlayerScripts
 			}
 			else if (InWindZone && _fire1 && _playerItems.HasGliderEquipped)
 			{
-				transform.GetChild(2).gameObject.SetActive(true);
-				_gliding = true;
+				DisableGlider();
 			}
 			else
 			{
-				transform.GetChild(2).gameObject.SetActive(false);
-				_gliding = false;
+				DisableGlider();
 			}
+		}
+
+		private void DisableGlider()
+		{
+			transform.GetChild(2).gameObject.SetActive(false);
+			_gliding = false;
 		}
 
 		public void FacingDirection(float move)
