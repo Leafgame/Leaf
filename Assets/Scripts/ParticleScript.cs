@@ -28,9 +28,9 @@ namespace Assets.Scripts
 			if (tag != "Particles") return;
 
 			if(_windZoneBox.size.y > _windZoneBox.size.x)
-				particleSystem.startLifetime = ( _windZoneBox.size.y - 2.08f) / 5.5f; 
+				particleSystem.startLifetime = ( _windZoneBox.size.y - 2.58f) / 6.5f; 
 			else
-				particleSystem.startLifetime = ( _windZoneBox.size.x - 2.08f) / 5.5f;
+				particleSystem.startLifetime = ( _windZoneBox.size.x - 2.58f) / 6.5f;
 
 		}
 
