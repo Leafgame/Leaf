@@ -40,12 +40,12 @@ public class Controller2D : RaycastController
 		{
 			DescendSlope(ref moveAmount);
 		}
-
-		if (moveAmount.y < -0.1f && !walkingOnStaris)
+		print("Move amout " + moveAmount);
+		if (!walkingOnStaris && moveAmount.y < -0.05f)
 		{
 			collisionMask.value += oneWayCollider;
 			walkingOnStaris = true;
-			//print("Turns ON StairWalk");
+			print("Turns ON StairWalk");
 		}
 
 		HorizontalCollisions(ref moveAmount);
@@ -238,7 +238,7 @@ public class Controller2D : RaycastController
 		{
 			collisionMask.value -= oneWayCollider;
 			walkingOnStaris = false;
-			//print("Turns OFF StairWalk");
+			print("Turns OFF StairWalk");
 		}
 	}
 
