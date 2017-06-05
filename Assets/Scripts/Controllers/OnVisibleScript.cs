@@ -5,6 +5,7 @@ namespace Assets.Scripts.Controllers
 {
 	public class OnVisibleScript : MonoBehaviour
 	{
+		/*
 		private List<GameObject> _gameObjects = new List<GameObject>();
 
 		private void Start()
@@ -24,6 +25,6 @@ namespace Assets.Scripts.Controllers
 			gameObject.SetActive(false);
 			print("Called invisible");
 		}
-		
+		*/
 	}
 }
