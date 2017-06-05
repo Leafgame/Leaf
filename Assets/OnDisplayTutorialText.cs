@@ -8,19 +8,26 @@ public class OnDisplayTutorialText : MonoBehaviour
 	public string Key = "Key";
 	public string Action = "Action";
 	public Text Text;
+    public GameObject testObject;
 
 	void Start ()
 	{
 		Text = transform.parent.GetComponent<Text>();
 		Text.text = "Press " + Key + " to " + Action;
-		StartCoroutine(DisableText(0.1f, 0f));
+	//	StartCoroutine(DisableText(0.1f, 0f));
 	}
 
 	void Update () {
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(DisableText(0.1f, 1f));
+        }
+
 		
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+/*	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.tag != "Player") return;
 		StartCoroutine(EnableText(1f));
@@ -32,8 +39,8 @@ public class OnDisplayTutorialText : MonoBehaviour
 		StartCoroutine(DisableText(1f, 3f));
 
 
-	}
-
+	} */
+ 
 	private IEnumerator DisableText(float fadeTime, float extraDelay)
 	{
 		yield return new WaitForSeconds(extraDelay);
@@ -43,6 +50,7 @@ public class OnDisplayTutorialText : MonoBehaviour
 			Text.color = new Color(Text.color.r, Text.color.g, Text.color.b, Text.color.a - (Time.deltaTime / fadeTime));
 			yield return null;
 		}
+        testObject.SetActive(false);
 	}
 
 	private IEnumerator EnableText(float fadeTime)
